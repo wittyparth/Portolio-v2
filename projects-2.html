@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>All Projects - Partha Saradhi</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111318",
+                        "surface-dark": "#1c2029",
+                        "border-dark": "#282e39",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Noto Sans", sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Space Grotesk", sans-serif;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#111318] text-white overflow-x-hidden min-h-screen flex flex-col">
+<!-- Navbar -->
+<nav class="sticky top-0 z-50 border-b border-[#282e39] bg-[#111318]/90 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<span class="material-symbols-outlined text-[32px]">terminal</span>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight">Partha.dev</h2>
+</div>
+<!-- Desktop Menu -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary font-medium text-sm border-b-2 border-primary py-1" href="#">Projects</a>
+<a class="text-[#9da6b9] hover:text-white transition-colors text-sm font-medium" href="#">Anime</a>
+<a class="text-[#9da6b9] hover:text-white transition-colors text-sm font-medium" href="#">Books</a>
+<a class="text-[#9da6b9] hover:text-white transition-colors text-sm font-medium" href="#">Failures</a>
+<a class="text-[#9da6b9] hover:text-white transition-colors text-sm font-medium" href="#">Recommendations</a>
+</div>
+<!-- CTA -->
+<div class="hidden md:flex">
+<button class="flex items-center gap-2 bg-primary hover:bg-blue-600 transition-all text-white px-5 py-2 rounded-lg text-sm font-bold tracking-wide shadow-[0_0_15px_rgba(43,108,238,0.3)]">
+<span>Contact Me</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Mobile Menu Button -->
+<div class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Layout -->
+<main class="flex-grow flex flex-col items-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+<!-- Hero Section: Heading + Stats -->
+<section class="w-full flex flex-col lg:flex-row gap-8 justify-between items-start lg:items-end border-b border-[#282e39] pb-10">
+<div class="flex-1 space-y-4 max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#282e39]/50 border border-[#282e39] text-xs font-mono text-primary">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    SYSTEMS OPERATIONAL
+                </div>
+<h1 class="text-5xl md:text-6xl font-black tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-gray-500">
+                    Engineering <br/> Archive
+                </h1>
+<p class="text-[#9da6b9] text-lg max-w-lg leading-relaxed">
+                    A collection of backend systems, distributed architectures, and experimental code. Designed for scale, built for performance.
+                </p>
+<div class="pt-4 flex gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-[#282e39] hover:bg-[#3b4354] transition-colors rounded-lg text-sm font-bold border border-[#3b4354]">
+<span class="material-symbols-outlined text-[20px]">code</span>
+                        View Github Profile
+                    </button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-3 gap-4 w-full lg:w-auto">
+<div class="bg-surface-dark border border-[#282e39] p-4 rounded-xl flex flex-col items-center justify-center min-w-[100px] hover:border-primary/50 transition-colors cursor-default group">
+<span class="text-3xl font-bold font-mono group-hover:text-primary transition-colors">12</span>
+<span class="text-xs text-[#9da6b9] uppercase tracking-wider font-semibold">Projects</span>
+</div>
+<div class="bg-surface-dark border border-[#282e39] p-4 rounded-xl flex flex-col items-center justify-center min-w-[100px] hover:border-primary/50 transition-colors cursor-default group">
+<span class="text-3xl font-bold font-mono group-hover:text-primary transition-colors">45k</span>
+<span class="text-xs text-[#9da6b9] uppercase tracking-wider font-semibold">LOC</span>
+</div>
+<div class="bg-surface-dark border border-[#282e39] p-4 rounded-xl flex flex-col items-center justify-center min-w-[100px] hover:border-primary/50 transition-colors cursor-default group">
+<span class="text-3xl font-bold font-mono group-hover:text-primary transition-colors">3</span>
+<span class="text-xs text-[#9da6b9] uppercase tracking-wider font-semibold">Active</span>
+</div>
+</div>
+</section>
+<!-- Search & Filter Controls -->
+<section class="w-full sticky top-[64px] z-40 bg-[#111318]/80 backdrop-blur-xl py-4 border-b border-[#282e39]/50 -mx-4 px-4 md:px-0 md:mx-0">
+<div class="flex flex-col md:flex-row gap-4 justify-between items-center w-full">
+<!-- Search Input -->
+<div class="relative w-full md:w-96 group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#9da6b9] group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border border-[#282e39] rounded-lg leading-5 bg-[#1c2029] text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm transition-all shadow-lg" placeholder="Search by tech stack, name, complexity..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2 flex items-center">
+<span class="text-xs text-[#586070] border border-[#3b4354] rounded px-1.5 py-0.5">⌘K</span>
+</div>
+</div>
+<!-- Scrollable Chips -->
+<div class="flex-1 w-full overflow-x-auto scrollbar-hide">
+<div class="flex gap-2 min-w-max px-1">
+<button class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium shadow-[0_0_10px_rgba(43,108,238,0.2)]">All Systems</button>
+<button class="px-4 py-2 rounded-lg bg-[#1c2029] border border-[#282e39] hover:border-[#586070] text-[#9da6b9] hover:text-white transition-all text-sm font-medium">Distributed</button>
+<button class="px-4 py-2 rounded-lg bg-[#1c2029] border border-[#282e39] hover:border-[#586070] text-[#9da6b9] hover:text-white transition-all text-sm font-medium">Full Stack</button>
+<button class="px-4 py-2 rounded-lg bg-[#1c2029] border border-[#282e39] hover:border-[#586070] text-[#9da6b9] hover:text-white transition-all text-sm font-medium">Cloud Native</button>
+<button class="px-4 py-2 rounded-lg bg-[#1c2029] border border-[#282e39] hover:border-[#586070] text-[#9da6b9] hover:text-white transition-all text-sm font-medium">Golang</button>
+<button class="px-4 py-2 rounded-lg bg-[#1c2029] border border-[#282e39] hover:border-[#586070] text-[#9da6b9] hover:text-white transition-all text-sm font-medium">Rust</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Grid (Bento Box Style) -->
+<section class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+<!-- Featured Project (Spans 2 cols on LG) -->
+<div class="group relative md:col-span-2 lg:col-span-2 bg-[#1c2029] rounded-2xl border border-[#282e39] overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(43,108,238,0.1)] flex flex-col md:flex-row h-full">
+<!-- Image Side -->
+<div class="relative w-full md:w-1/2 overflow-hidden h-64 md:h-auto">
+<img alt="Server dashboard interface with graphs" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="Dark stylized dashboard UI showing server metrics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRabyJ2No8pXUQE18kSMvabzKgpoLAVtiLzqHzXKDBFKjo4zZSY6-Msh3zqDY5XM21gDfceb5evFbBUJfYpth1hFU1zepP0zIwqjhcdt7sCA85S7aaCRXqNG1NRyDf7epyKo2QR-UdVz1zyd9d93kGhZcC6e5plJKKyxLmzB-hoajY1PqmDrENq27H0sDjVd-iKXxlrTATFCmWBY03bkiZTOjgTyMuHyDCmBlaKH7TrlELsObKAyuG4VnFfY02INKUxm2l0oZDPden"/>
+<div class="absolute inset-0 bg-gradient-to-r from-[#1c2029] via-transparent to-transparent md:bg-gradient-to-l opacity-90"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-sm">
+<button class="bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full p-4 hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">play_circle</span>
+</button>
+</div>
+</div>
+<!-- Content Side -->
+<div class="flex-1 p-8 flex flex-col justify-between relative">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="px-2 py-1 bg-primary/20 text-primary text-xs font-mono font-bold rounded uppercase tracking-wider">Featured</span>
+<span class="text-[#586070] text-sm font-mono">v2.4.0</span>
+</div>
+<h3 class="text-3xl font-bold text-white mb-2 font-display group-hover:text-primary transition-colors">Vortex Stream</h3>
+<p class="text-[#9da6b9] mb-6 leading-relaxed">
+                            A high-throughput event streaming platform capable of handling 1M+ events/sec. Built with Go and Apache Kafka, featuring real-time analytics dashboard and gRPC communication layers.
+                        </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">Golang</span>
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">Kafka</span>
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">Docker</span>
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">gRPC</span>
+</div>
+</div>
+<div class="flex gap-4 mt-auto border-t border-[#282e39] pt-6">
+<a class="flex items-center gap-2 text-white hover:text-primary transition-colors text-sm font-bold" href="#">
+<span class="material-symbols-outlined text-[18px]">code</span>
+                            Source Code
+                        </a>
+<a class="flex items-center gap-2 text-white hover:text-primary transition-colors text-sm font-bold" href="#">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+                            Live Demo
+                        </a>
+</div>
+</div>
+</div>
+<!-- Standard Card 1 -->
+<div class="group relative bg-[#1c2029] rounded-2xl border border-[#282e39] overflow-hidden hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col">
+<div class="relative h-48 overflow-hidden border-b border-[#282e39]">
+<img alt="Code editor with colourful syntax highlighting" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100" data-alt="IDE screen with Python code" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3hSXYdaA1rj6gxrOquecveCuP65Gg3PMi6ovHUFU2ZdGX1oqkGD6-DKDh9VMyQm0i6XZyC4DkJgTBaGmITymofcvsAkdzf_L9yu9bV8CN-THfGvYtUddY6Ee3MzHp81q0sfS_wBOGbf0i0EdHoKeQWRFDX5fv6xAZhYN6qADxDaGrGVIAWUFiNcUuN6eNhGH7XW34yVr3nKaVruPcekXJ0FJYEyFjANZE0_tPSm8VoNcdi1bfdxtzmtHFvNpXsLcnRpaqCojiltzX"/>
+<div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur px-2 py-1 rounded text-xs font-mono text-white">Full Stack</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-white mb-2 font-display">AuthMatrix</h3>
+<p class="text-[#9da6b9] text-sm mb-4 line-clamp-3">
+                        Centralized authentication microservice supporting OAuth2, JWT, and MFA. Designed to be plug-and-play for any distributed architecture.
+                    </p>
+<div class="flex flex-wrap gap-2 mb-6 mt-auto">
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">Python</span>
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">FastAPI</span>
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">Redis</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-[#282e39]">
+<span class="text-xs text-[#586070]">Last updated: 2d ago</span>
+<div class="flex gap-3">
+<a class="text-white hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">code</span></a>
+<a class="text-white hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">visibility</span></a>
+</div>
+</div>
+</div>
+</div>
+<!-- Standard Card 2 -->
+<div class="group relative bg-[#1c2029] rounded-2xl border border-[#282e39] overflow-hidden hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col">
+<div class="relative h-48 overflow-hidden border-b border-[#282e39]">
+<img alt="Cybersecurity lock concept" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100" data-alt="Abstract cyber security lock visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPGUEtGaWnPprZuN5tEdSsfuB9cKXEhulX63vWvr8Dnwbme0wtqA4q31crfbXBT_5rSQyvP_5u5nw-6NGphZbUkSYYaSkYHWMISN39bVbaWzdITatxJs93G7dqmiRMNNBh-mqGoAq9xVwdu_qTP9cD1oX0DgxPW0KbtNDdPthep2ALM7wzqW1wEdt1jcPz-jAafsJLVvbdgfAHfJcb20xMxsLsVSMntTeksl6-3cCnxCmqhMc62JeDX_DgTmicYoe3M_WzaK7BVbXu"/>
+<div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur px-2 py-1 rounded text-xs font-mono text-white">Security</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-white mb-2 font-display">Sentinel CI</h3>
+<p class="text-[#9da6b9] text-sm mb-4 line-clamp-3">
+                        A custom CI/CD pipeline tool that scans commits for secrets and vulnerabilities before allowing merge requests.
+                    </p>
+<div class="flex flex-wrap gap-2 mb-6 mt-auto">
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">Rust</span>
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">WebAssembly</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-[#282e39]">
+<span class="text-xs text-[#586070]">Last updated: 1w ago</span>
+<div class="flex gap-3">
+<a class="text-white hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">code</span></a>
+<a class="text-white hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">visibility</span></a>
+</div>
+</div>
+</div>
+</div>
+<!-- Standard Card 3 -->
+<div class="group relative bg-[#1c2029] rounded-2xl border border-[#282e39] overflow-hidden hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col">
+<div class="relative h-48 overflow-hidden border-b border-[#282e39]">
+<img alt="Abstract network nodes connecting" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100" data-alt="Network connections map visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_Ugo7lx3II_MvDxgLywaoU6Ry0cfTanvHZioJ6yjjFFaUISBke5Kxu2SD-mavs4hz1Sr-J6HNe1aHpkfBVfzfk_GlT-BTvMUvaL4RJIhTJqzkzxj2DnWsWnn8fjOB4Z4UfPty5PUFjeqqCGbE1VqfdsjGHVVh0TsEy4Y-_Lzw2gh0yilviSBV2nLSfRC1B6WmdFTVStsF7gSCG-t9aBL9d8cuATGqUM7jS2IpPE5Wah33328Rtp6A8v72-wGecjX718sxi85jJAkJ"/>
+<div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur px-2 py-1 rounded text-xs font-mono text-white">Networking</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-white mb-2 font-display">MeshConnect</h3>
+<p class="text-[#9da6b9] text-sm mb-4 line-clamp-3">
+                        Peer-to-peer file sharing protocol implemented over WebRTC. Focusing on privacy and ephemeral data transfer.
+                    </p>
+<div class="flex flex-wrap gap-2 mb-6 mt-auto">
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">Node.js</span>
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">WebRTC</span>
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">Socket.io</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-[#282e39]">
+<span class="text-xs text-[#586070]">Last updated: 1mo ago</span>
+<div class="flex gap-3">
+<a class="text-white hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">code</span></a>
+<a class="text-white hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">visibility</span></a>
+</div>
+</div>
+</div>
+</div>
+<!-- Standard Card 4 -->
+<div class="group relative bg-[#1c2029] rounded-2xl border border-[#282e39] overflow-hidden hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col">
+<div class="relative h-48 overflow-hidden border-b border-[#282e39]">
+<img alt="3D abstract cubes" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100" data-alt="Abstract 3D data visualization cubes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeCfyWBM5wEwvaIbm-o0YX0RNFgdjNzshbydOkIrx77fg4mRZw6bFB03n-0TZrRLy0DQ_7BTfVwNwNesde_kPEYRyAYL524NQrbtokD6AIgJs1JiaKu9mhqCsrVVt9LJ7AQuSHlsnx4YrRH6xH-JON0H8GgDNqEyve3dFJQngs7KxLMfNV-YLbPGSJGOkjSb2cCxEn-DGXDxHfijyQTZM36qjlg8WFkkjXVsOeygIMB04d4_IBeqvmBfBUMlDYJZLD6WK49zjVCe2e"/>
+<div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur px-2 py-1 rounded text-xs font-mono text-white">Algorithms</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-white mb-2 font-display">PathFinder Visualizer</h3>
+<p class="text-[#9da6b9] text-sm mb-4 line-clamp-3">
+                        Interactive tool to visualize Dijkstra, A*, and BFS algorithms on a 3D grid. Built to teach graph theory concepts.
+                    </p>
+<div class="flex flex-wrap gap-2 mb-6 mt-auto">
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">React</span>
+<span class="px-2 py-1 bg-[#111318] border border-[#282e39] rounded text-xs text-[#9da6b9] font-mono">Three.js</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-[#282e39]">
+<span class="text-xs text-[#586070]">Last updated: 2mo ago</span>
+<div class="flex gap-3">
+<a class="text-white hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">code</span></a>
+<a class="text-white hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">visibility</span></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Micro Projects / Archive Section -->
+<section class="w-full py-8">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="text-2xl font-bold text-white">The Junkyard</h2>
+<div class="h-px bg-[#282e39] flex-1"></div>
+<span class="text-xs text-[#9da6b9] uppercase tracking-widest">Experimental / Scripts / Gists</span>
+</div>
+<div class="bg-[#1c2029] border border-[#282e39] rounded-xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#111318] border-b border-[#282e39]">
+<th class="p-4 text-xs font-mono text-[#586070] uppercase">Project Name</th>
+<th class="p-4 text-xs font-mono text-[#586070] uppercase">Tech</th>
+<th class="p-4 text-xs font-mono text-[#586070] uppercase w-1/2">Description</th>
+<th class="p-4 text-xs font-mono text-[#586070] uppercase text-right">Link</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="group hover:bg-[#282e39]/30 transition-colors border-b border-[#282e39]">
+<td class="p-4 font-bold text-white group-hover:text-primary transition-colors">cli-todo-rust</td>
+<td class="p-4"><span class="text-[#9da6b9] font-mono text-xs">Rust</span></td>
+<td class="p-4 text-[#9da6b9] truncate max-w-xs">Blazingly fast terminal based todo manager storing data in JSON.</td>
+<td class="p-4 text-right"><a class="text-white hover:text-primary" href="#"><span class="material-symbols-outlined text-sm">north_east</span></a></td>
+</tr>
+<tr class="group hover:bg-[#282e39]/30 transition-colors border-b border-[#282e39]">
+<td class="p-4 font-bold text-white group-hover:text-primary transition-colors">scraper-bot-v1</td>
+<td class="p-4"><span class="text-[#9da6b9] font-mono text-xs">Python</span></td>
+<td class="p-4 text-[#9da6b9] truncate max-w-xs">Automated price tracking script for e-commerce sites using Selenium.</td>
+<td class="p-4 text-right"><a class="text-white hover:text-primary" href="#"><span class="material-symbols-outlined text-sm">north_east</span></a></td>
+</tr>
+<tr class="group hover:bg-[#282e39]/30 transition-colors border-b border-[#282e39]">
+<td class="p-4 font-bold text-white group-hover:text-primary transition-colors">docker-postgres-backup</td>
+<td class="p-4"><span class="text-[#9da6b9] font-mono text-xs">Shell</span></td>
+<td class="p-4 text-[#9da6b9] truncate max-w-xs">Cron job script to automatically backup dockerized Postgres databases to S3.</td>
+<td class="p-4 text-right"><a class="text-white hover:text-primary" href="#"><span class="material-symbols-outlined text-sm">north_east</span></a></td>
+</tr>
+<tr class="group hover:bg-[#282e39]/30 transition-colors">
+<td class="p-4 font-bold text-white group-hover:text-primary transition-colors">vim-config-ultimate</td>
+<td class="p-4"><span class="text-[#9da6b9] font-mono text-xs">VimL</span></td>
+<td class="p-4 text-[#9da6b9] truncate max-w-xs">My personal .vimrc with 50+ plugins tailored for Go development.</td>
+<td class="p-4 text-right"><a class="text-white hover:text-primary" href="#"><span class="material-symbols-outlined text-sm">north_east</span></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+<!-- Terminal Footer -->
+<footer class="w-full bg-[#0d0f14] border-t border-[#282e39] py-12 mt-auto">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="font-mono text-sm space-y-4">
+<p class="text-[#586070]">$ echo "Let's build something together"</p>
+<p class="text-white">&gt; Sending email to <span class="text-primary">hello@partha.dev</span>...</p>
+<p class="text-green-500">&gt; Ready to connect_</p>
+<div class="flex gap-4 pt-4">
+<a class="text-[#9da6b9] hover:text-white transition-colors" href="#">Twitter</a>
+<a class="text-[#9da6b9] hover:text-white transition-colors" href="#">GitHub</a>
+<a class="text-[#9da6b9] hover:text-white transition-colors" href="#">LinkedIn</a>
+<a class="text-[#9da6b9] hover:text-white transition-colors" href="#">Discord</a>
+</div>
+</div>
+<div class="flex flex-col items-start md:items-end justify-between">
+<div class="text-[#586070] text-sm text-right">
+<p>© 2024 Partha Saradhi. All rights reserved.</p>
+<p class="mt-2 text-xs">Designed with <span class="text-red-500">♥</span> and too much caffeine.</p>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Failures &amp; Lessons</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622", // Deep charcoal/blue-black
+                        "card-dark": "#161b26",
+                        "card-border": "#2a3140",
+                        "accent-error": "#ef4444",
+                        "accent-success": "#10b981",
+                        "accent-warning": "#f59e0b",
+                        "accent-purple": "#8b5cf6",
+                        "accent-pink": "#ec4899",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "mono": ["Space Grotesk", "monospace"],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #2a3140 1px, transparent 1px), linear-gradient(to bottom, #2a3140 1px, transparent 1px)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .bento-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+        .card-glow-hover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .card-glow-hover:hover::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen text-slate-200 font-display selection:bg-primary selection:text-white overflow-x-hidden">
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0">
+<div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[10%] w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-[120px]"></div>
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCI+CjxwYXRoIGQ9Ik02MCAwTDYwIDYwTDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFmMjQzMyIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjMiLz4KPC9zdmc+')] opacity-20 mask-image:linear-gradient(to_bottom,white,transparent)"></div>
+</div>
+<div class="relative z-10 container mx-auto px-4 py-12 lg:py-20 max-w-7xl">
+<header class="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary/80 font-mono text-sm tracking-widest uppercase">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span>&gt; ./load_modules.sh --mode=grid</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white">
+                    FAILURES &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-600">LEARNINGS</span>
+</h1>
+<p class="text-slate-400 max-w-xl text-lg mt-2 font-body font-light">
+                    A dynamic log of post-mortems, architectural insights, and tooling recommendations.
+                </p>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex flex-col items-end">
+<span class="text-xs text-slate-500 uppercase tracking-wider font-mono">Synced</span>
+<span class="text-emerald-400 font-mono font-bold flex items-center gap-1">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+                        Live
+                    </span>
+</div>
+<button class="bg-card-dark border border-card-border hover:border-primary/50 hover:bg-card-border/50 transition-all text-white px-5 py-2.5 rounded-lg flex items-center gap-2 text-sm font-medium group shadow-lg shadow-black/20">
+<span>Manage Entries</span>
+<span class="material-symbols-outlined text-base group-hover:rotate-90 transition-transform">settings</span>
+</button>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-8 w-full">
+<div class="flex items-center gap-2 mb-6 overflow-x-auto no-scrollbar pb-2">
+<button class="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono font-medium hover:bg-primary/20 transition-colors">ALL</button>
+<button class="px-4 py-1.5 rounded-full bg-card-dark border border-card-border text-slate-400 text-xs font-mono font-medium hover:text-white hover:border-slate-500 transition-colors">FAILURES</button>
+<button class="px-4 py-1.5 rounded-full bg-card-dark border border-card-border text-slate-400 text-xs font-mono font-medium hover:text-white hover:border-slate-500 transition-colors">LESSONS</button>
+<button class="px-4 py-1.5 rounded-full bg-card-dark border border-card-border text-slate-400 text-xs font-mono font-medium hover:text-white hover:border-slate-500 transition-colors">RECOMMENDATIONS</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<article class="group relative bg-card-dark rounded-xl border border-card-border overflow-hidden flex flex-col h-full bento-card hover:border-red-500/30">
+<div class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="p-6 flex flex-col flex-1 relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] font-mono text-red-400 bg-red-900/20 px-2 py-0.5 rounded border border-red-900/30">CRITICAL</span>
+<span class="text-[10px] font-mono text-slate-600 mt-1">2 days ago</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 group-hover:text-red-200 transition-colors leading-tight">Production DB Deadlock</h3>
+<p class="text-sm text-slate-400 leading-relaxed mb-6 font-body">
+                                Circular dependency in transaction logic caused cascading failure during peak load. Required manual session termination.
+                            </p>
+<div class="mt-auto pt-4 border-t border-card-border/50 flex items-center justify-between">
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<span class="text-xs font-mono text-slate-500">Post-Mortem</span>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-red-400 transition-colors -rotate-45 group-hover:rotate-0 transform duration-300">arrow_forward</span>
+</div>
+</div>
+</article>
+<article class="group relative bg-card-dark rounded-xl border border-card-border overflow-hidden flex flex-col h-full bento-card hover:border-purple-500/30">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="p-6 flex flex-col flex-1 relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] font-mono text-purple-400 bg-purple-900/20 px-2 py-0.5 rounded border border-purple-900/30">REC</span>
+<span class="text-[10px] font-mono text-slate-600 mt-1">4 days ago</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 group-hover:text-purple-200 transition-colors leading-tight">Biome JS Tooling</h3>
+<p class="text-sm text-slate-400 leading-relaxed mb-6 font-body">
+                                Replaced ESLint and Prettier. 30x faster linting and formatting pipeline. A massive DX improvement for the team.
+                            </p>
+<div class="mt-auto pt-4 border-t border-card-border/50 flex items-center justify-between">
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-purple-500"></span>
+<span class="text-xs font-mono text-slate-500">Tooling</span>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-purple-400 transition-colors text-lg">open_in_new</span>
+</div>
+</div>
+</article>
+<article class="group relative bg-card-dark rounded-xl border border-card-border overflow-hidden flex flex-col h-full bento-card hover:border-primary/30">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="p-6 flex flex-col flex-1 relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] font-mono text-primary bg-blue-900/20 px-2 py-0.5 rounded border border-blue-900/30">LESSON</span>
+<span class="text-[10px] font-mono text-slate-600 mt-1">1 week ago</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-200 transition-colors leading-tight">The Value of Strict Typing</h3>
+<p class="text-sm text-slate-400 leading-relaxed mb-6 font-body">
+                                Moving to strict TypeScript reduced our runtime errors by 40%. It's not just tooling; it's documentation that never lies.
+                            </p>
+<div class="mt-auto pt-4 border-t border-card-border/50 flex items-center justify-between">
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-xs font-mono text-slate-500">Architecture</span>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors -rotate-45 group-hover:rotate-0 transform duration-300">arrow_forward</span>
+</div>
+</div>
+</article>
+<article class="group relative bg-card-dark rounded-xl border border-card-border overflow-hidden flex flex-col h-full bento-card hover:border-orange-500/30">
+<div class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="p-6 flex flex-col flex-1 relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined">sync_problem</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] font-mono text-orange-400 bg-orange-900/20 px-2 py-0.5 rounded border border-orange-900/30">RECOVERED</span>
+<span class="text-[10px] font-mono text-slate-600 mt-1">2 weeks ago</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 group-hover:text-orange-200 transition-colors leading-tight">Memory Leak in Workers</h3>
+<p class="text-sm text-slate-400 leading-relaxed mb-6 font-body">
+                                Identified zombie processes in image processing pipeline. Implemented graceful shutdowns and active monitoring on heap usage.
+                            </p>
+<div class="mt-auto pt-4 border-t border-card-border/50 flex items-center justify-between">
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span>
+<span class="text-xs font-mono text-slate-500">Performance</span>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-orange-400 transition-colors -rotate-45 group-hover:rotate-0 transform duration-300">arrow_forward</span>
+</div>
+</div>
+</article>
+<article class="group relative bg-card-dark rounded-xl border border-card-border overflow-hidden flex flex-col h-full bento-card hover:border-pink-500/30">
+<div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="p-6 flex flex-col flex-1 relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] font-mono text-pink-400 bg-pink-900/20 px-2 py-0.5 rounded border border-pink-900/30">REC</span>
+<span class="text-[10px] font-mono text-slate-600 mt-1">3 weeks ago</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 group-hover:text-pink-200 transition-colors leading-tight">"Staff Engineer" Book</h3>
+<p class="text-sm text-slate-400 leading-relaxed mb-6 font-body">
+                                Essential reading for understanding technical leadership beyond code. It redefined how I approach architectural buy-in.
+                            </p>
+<div class="mt-auto pt-4 border-t border-card-border/50 flex items-center justify-between">
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-pink-500"></span>
+<span class="text-xs font-mono text-slate-500">Career</span>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-pink-400 transition-colors text-lg">open_in_new</span>
+</div>
+</div>
+</article>
+<article class="group relative bg-card-dark rounded-xl border border-card-border overflow-hidden flex flex-col h-full bento-card hover:border-emerald-500/30">
+<div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="p-6 flex flex-col flex-1 relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined">extension</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] font-mono text-emerald-400 bg-emerald-900/20 px-2 py-0.5 rounded border border-emerald-900/30">LESSON</span>
+<span class="text-[10px] font-mono text-slate-600 mt-1">1 month ago</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-200 transition-colors leading-tight">Event Sourcing Patterns</h3>
+<p class="text-sm text-slate-400 leading-relaxed mb-6 font-body">
+                                Complex domains benefit from storing state changes, not just current state. Audit trails became essentially free.
+                            </p>
+<div class="mt-auto pt-4 border-t border-card-border/50 flex items-center justify-between">
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-xs font-mono text-slate-500">Design Patterns</span>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-emerald-400 transition-colors -rotate-45 group-hover:rotate-0 transform duration-300">arrow_forward</span>
+</div>
+</div>
+</article>
+</div>
+<div class="mt-12 flex flex-col items-center justify-center gap-4 opacity-70 hover:opacity-100 transition-opacity">
+<div class="h-px w-24 bg-gradient-to-r from-transparent via-card-border to-transparent"></div>
+<button class="flex items-center gap-2 text-sm text-slate-500 hover:text-primary transition-colors group cursor-pointer bg-transparent border-none">
+<span class="material-symbols-outlined text-base group-hover:animate-bounce">keyboard_double_arrow_down</span>
+<span>Load older entries</span>
+</button>
+</div>
+</div>
+<aside class="lg:col-span-4 w-full flex flex-col gap-6 sticky top-8">
+<div class="bg-card-dark rounded-xl border border-card-border overflow-hidden">
+<div class="p-5 border-b border-card-border/50 bg-[#131821] flex justify-between items-center">
+<h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">
+                            Learning Velocity
+                        </h3>
+<span class="material-symbols-outlined text-slate-600 text-sm">bar_chart</span>
+</div>
+<div class="p-6">
+<div class="flex items-end gap-2 mb-2">
+<span class="text-3xl font-bold text-white">12</span>
+<span class="text-sm text-slate-400 mb-1">entries this month</span>
+</div>
+<div class="w-full h-1.5 bg-slate-800 rounded-full mb-4 overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-accent-purple w-[65%] rounded-full"></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 rounded bg-white/5 border border-white/5">
+<span class="block text-xs text-slate-500 mb-1">Lessons</span>
+<span class="text-lg font-mono text-primary font-bold">8</span>
+</div>
+<div class="p-3 rounded bg-white/5 border border-white/5">
+<span class="block text-xs text-slate-500 mb-1">Failures</span>
+<span class="text-lg font-mono text-accent-error font-bold">4</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card-dark rounded-xl border border-card-border flex flex-col overflow-hidden relative min-h-[400px]">
+<div class="p-5 border-b border-card-border/50 flex justify-between items-center bg-[#131821]">
+<h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 font-mono">
+<span class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
+                            Recent Logs
+                        </h3>
+<span class="material-symbols-outlined text-slate-600 text-sm">history</span>
+</div>
+<div class="flex-1 overflow-y-auto no-scrollbar">
+<div class="group flex gap-4 p-4 hover:bg-white/[0.03] transition-colors cursor-pointer border-b border-card-border/30 last:border-0">
+<div class="mt-1">
+<div class="w-8 h-8 rounded bg-primary/10 text-primary flex items-center justify-center border border-primary/20 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-lg">lightbulb</span>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[9px] font-mono text-primary bg-primary/10 px-1.5 rounded uppercase">Lesson</span>
+<span class="text-[9px] text-slate-500">Today, 10:00 AM</span>
+</div>
+<h4 class="text-sm font-medium text-slate-200 group-hover:text-primary transition-colors leading-tight">Early Abstractions</h4>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Wait for the rule of three before extracting a shared component.</p>
+</div>
+</div>
+<div class="group flex gap-4 p-4 hover:bg-white/[0.03] transition-colors cursor-pointer border-b border-card-border/30 last:border-0">
+<div class="mt-1">
+<div class="w-8 h-8 rounded bg-accent-purple/10 text-accent-purple flex items-center justify-center border border-accent-purple/20 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-lg">star</span>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[9px] font-mono text-accent-purple bg-accent-purple/10 px-1.5 rounded uppercase">Rec</span>
+<span class="text-[9px] text-slate-500">Yesterday</span>
+</div>
+<h4 class="text-sm font-medium text-slate-200 group-hover:text-accent-purple transition-colors leading-tight">"Staff Engineer" Book</h4>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Understanding technical leadership beyond code.</p>
+</div>
+</div>
+<div class="group flex gap-4 p-4 hover:bg-white/[0.03] transition-colors cursor-pointer border-b border-card-border/30 last:border-0">
+<div class="mt-1">
+<div class="w-8 h-8 rounded bg-accent-error/10 text-accent-error flex items-center justify-center border border-accent-error/20 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-lg">warning</span>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[9px] font-mono text-accent-error bg-accent-error/10 px-1.5 rounded uppercase">Failure</span>
+<span class="text-[9px] text-slate-500">3 days ago</span>
+</div>
+<h4 class="text-sm font-medium text-slate-200 group-hover:text-accent-error transition-colors leading-tight">API Rate Limiting</h4>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Forgot to implement sliding window on the public endpoint.</p>
+</div>
+</div>
+<div class="group flex gap-4 p-4 hover:bg-white/[0.03] transition-colors cursor-pointer border-b border-card-border/30 last:border-0">
+<div class="mt-1">
+<div class="w-8 h-8 rounded bg-primary/10 text-primary flex items-center justify-center border border-primary/20 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-lg">lightbulb</span>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[9px] font-mono text-primary bg-primary/10 px-1.5 rounded uppercase">Lesson</span>
+<span class="text-[9px] text-slate-500">1 week ago</span>
+</div>
+<h4 class="text-sm font-medium text-slate-200 group-hover:text-primary transition-colors leading-tight">Testing Pyramid</h4>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Shifted focus from E2E to integration tests.</p>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-card-border/50 bg-[#131821]">
+<button class="w-full py-2 text-[10px] font-mono text-slate-500 hover:text-white hover:bg-white/5 rounded transition-colors uppercase tracking-widest border border-transparent hover:border-card-border">
+                            View Archive
+                        </button>
+</div>
+</div>
+<div class="bg-gradient-to-br from-primary/10 to-transparent rounded-xl border border-primary/20 p-6 flex flex-col gap-3 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-all"></div>
+<h3 class="text-white font-bold text-sm z-10">Subscribe to updates</h3>
+<p class="text-xs text-slate-400 z-10 mb-2">Get notified when new post-mortems or lessons are added.</p>
+<div class="flex gap-2 z-10">
+<input class="bg-card-dark/50 border border-white/10 rounded px-3 py-1.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-primary/50 flex-1" placeholder="email@example.com" type="email"/>
+<button class="bg-primary text-white p-1.5 rounded hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</div>
+
+</body></html>

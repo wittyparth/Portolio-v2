@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Partha.Dev - Thought Stream</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b4bee",
+                        "primary-hover": "#1e3ab8",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0a0f", // Deep charcoal/slate
+                        "background-card": "#15151e",
+                        "surface-dark": "#1c1d27",
+                        "surface-hover": "#252631",
+                        "text-primary": "#e2e8f0",
+                        "text-secondary": "#9da1b9",
+                        "accent-blue": "#3b82f6",
+                        "accent-pink": "#ec4899",
+                        "accent-teal": "#14b8a6",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"]
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #282b39; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2b4bee; 
+        }
+        .glass-effect {
+            background: rgba(28, 29, 39, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .card-hover-glow {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover-glow:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(43, 75, 238, 0.2);
+            border-color: rgba(43, 75, 238, 0.4);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(43, 75, 238, 0.5);
+        }.line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden font-display selection:bg-primary selection:text-white">
+<div class="fixed inset-0 pointer-events-none opacity-[0.4] mix-blend-overlay z-0 bg-noise"></div>
+<header class="sticky top-0 z-50 w-full glass-effect border-b border-[#282b39]">
+<div class="max-w-[1440px] mx-auto px-4 md:px-10 py-3 flex items-center justify-between">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<span class="material-symbols-outlined text-2xl">terminal</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Partha.Dev</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8">
+<nav class="flex items-center gap-9">
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Work</a>
+<a class="text-white text-sm font-medium leading-normal relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary after:rounded-full" href="#">Blog</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">About</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Contact</a>
+</nav>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary hover:bg-primary/90 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-[0_0_15px_rgba(43,75,238,0.3)]">
+<span class="truncate">Resume</span>
+</button>
+</div>
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="relative z-10 flex flex-col items-center w-full pb-20">
+<div class="w-full max-w-[1280px] px-4 md:px-8 pt-12 pb-8">
+<div class="relative w-full overflow-hidden rounded-2xl min-h-[320px] md:min-h-[400px] bg-[#111218] group border border-white/5 shadow-2xl">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Abstract dark cyberpunk cityscape with neon blue data streams representing code flow" style='background-image: linear-gradient(0deg, #0a0a0f 0%, rgba(10, 10, 15, 0.4) 60%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDgBptQLhrVq4KeCsWTszO52j46cTflmf7-uhcEAW2VRrpvJzhmvrjUNfu5JFXqwt2zPEkmsm-juonRXpGtGIx249LtqM_Ksnr-m0LOtLPeZz3TW_prhASgMqqcS20xmXcElpn0RHciKtTZo5o045V5-2KpuEIqhyWZwOBSGqK0Dk_a-fH-KDNx-FUky_zpqZ8s7VEcAF3_JOUXGZULwQtY74KBNgxe6yhEf90kA25sxoi1IUFX4aSwuDPpaNPu9aTQKqY2cwZnTlhf");'>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent"></div>
+<div class="relative h-full flex flex-col justify-end p-6 md:p-12 z-10">
+<div class="flex items-center gap-2 mb-3">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary/20 text-primary border border-primary/30 backdrop-blur-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">auto_awesome</span> Featured
+                        </span>
+<span class="text-text-secondary text-xs">•</span>
+<span class="text-text-secondary text-xs font-mono">Latest Release</span>
+</div>
+<h1 class="text-white text-3xl md:text-5xl font-bold leading-tight max-w-3xl mb-4 tracking-tight drop-shadow-lg">
+                        Thought Stream: <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Architecting for Chaos</span>
+</h1>
+<p class="text-text-secondary text-base md:text-lg max-w-2xl font-light leading-relaxed mb-8">
+                        A curated feed of backend architecture, system design, and industry rants. Exploring the depths of distributed systems, one crash at a time.
+                    </p>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 text-white bg-white/10 hover:bg-white/20 border border-white/10 backdrop-blur-md px-6 py-3 rounded-lg transition-all group/btn">
+<span class="text-sm font-medium">Subscribe for Updates</span>
+<span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="sticky top-[64px] z-40 w-full max-w-[1280px] px-4 md:px-8 py-4 mb-2">
+<div class="glass-effect rounded-xl p-1.5 md:p-2 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border border-white/5">
+<div class="flex w-full md:w-auto overflow-x-auto no-scrollbar gap-1 p-1" role="tablist">
+<button class="px-5 py-2 rounded-lg text-sm font-semibold transition-all bg-surface-dark text-white border border-white/10 shadow-[0_2px_10px_rgba(0,0,0,0.2)] whitespace-nowrap flex items-center gap-2">
+<span class="material-symbols-outlined text-base">grid_view</span> All Posts
+                    </button>
+<button class="px-5 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-white hover:bg-white/5 transition-all whitespace-nowrap flex items-center gap-2 border border-transparent">
+<span class="material-symbols-outlined text-base">article</span> Blog
+                    </button>
+<button class="px-5 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-white hover:bg-white/5 transition-all whitespace-nowrap flex items-center gap-2 border border-transparent">
+<span class="material-symbols-outlined text-base">post</span> Medium
+                    </button>
+<button class="px-5 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-white hover:bg-white/5 transition-all whitespace-nowrap flex items-center gap-2 border border-transparent">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg> X (Twitter)
+                    </button>
+<button class="px-5 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-white hover:bg-white/5 transition-all whitespace-nowrap flex items-center gap-2 border border-transparent">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg> LinkedIn
+                    </button>
+</div>
+<div class="flex items-center gap-2 w-full md:w-auto justify-end px-1">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">search</span>
+</span>
+<input class="bg-surface-dark border border-white/10 rounded-lg py-2 pl-9 pr-4 text-sm text-white placeholder-text-secondary focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 w-full md:w-64 transition-all" placeholder="Search topics..." type="text"/>
+</div>
+<button class="p-2 rounded-lg bg-surface-dark border border-white/10 text-text-secondary hover:text-white hover:border-white/20 transition-all" title="Sort by Date">
+<span class="material-symbols-outlined text-xl">sort</span>
+</button>
+</div>
+</div>
+</div>
+<div class="w-full max-w-[1280px] px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr pb-12">
+<article class="group relative flex flex-col bg-surface-dark border border-white/5 rounded-xl overflow-hidden card-hover-glow h-full">
+<div class="relative w-full aspect-video overflow-hidden bg-background-card">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBv9DJSLa_6Vm1V99JTTZajUxm6ph6tvJzUTQDdwjsRRGZBTPcVqYM_Z2OyMgeRLBOiTzzuQiGHaP17Gor9TNj583_J5bpFZ5xWYRmKHuDTtN1tErjuc8W2Cl47aAczh7EAWP2moVHRL4gMvN8caHIxomtEbHM8Pbun4DsUwsXqS2G29M7CrtVI7aW5OR0V072_kRNIvT0otzL7IPljkBRDJN9iPlVqLpuRNzEoGNdFJnbx9TMBuixTbwWT130c0K4piifpK3SmHwIX");'></div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute top-3 right-3 z-10">
+<span class="inline-flex items-center justify-center size-8 rounded-full bg-surface-dark/90 backdrop-blur-md border border-white/10 shadow-lg text-primary" title="Blog Post">
+<span class="material-symbols-outlined text-lg">article</span>
+</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-5 md:p-6">
+<div class="flex items-center justify-between mb-3 text-xs text-text-secondary font-mono">
+<span class="uppercase tracking-wider text-accent-teal">Engineering</span>
+<span>Nov 12, 2023</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                        Scaling Redis for Millions of Requests
+                    </h3>
+<p class="text-text-secondary text-sm leading-relaxed mb-4 line-clamp-3 flex-1">
+                        An in-depth look at how we optimized our caching layer to handle massive traffic spikes without breaking a sweat. Includes Lua scripting strategies.
+                    </p>
+<div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4 text-xs text-text-secondary">
+<span class="flex items-center gap-1" title="Read time"><span class="material-symbols-outlined text-[14px]">schedule</span> 12m</span>
+<span class="flex items-center gap-1" title="Views"><span class="material-symbols-outlined text-[14px]">visibility</span> 1.2k</span>
+</div>
+<a class="flex items-center gap-1 text-sm font-medium text-white group-hover:text-primary transition-colors" href="#">
+                             Read Article <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<article class="group relative flex flex-col bg-surface-dark border border-white/5 rounded-xl overflow-hidden card-hover-glow h-full">
+<div class="relative w-full aspect-video overflow-hidden bg-background-card">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDAxZ6pNVd0EUOq-_7NLeFP-Ycs0btBLB7j_43F9Wr7oiHjWt_-tJnsi-icELM0CR8MMVYz2tNRZnkGNegc0bt75Sy4CAzWpFFbXcl1LMOYor75UaDlzYEAIgWbbRrJMvB3Hf2sUVyUonGxidChBlHeE3zJHcAFukQQgimp20ngLOrNjHFhfmOZVjqhrYSptt2lz7n4jn0BH0VZmsU3ylYCEAP7EzMhl6JTCLcImUg9afQxi_JiBHX9javBtVQFM7jyoFxjVErqp-7U");'></div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute top-3 right-3 z-10">
+<span class="inline-flex items-center justify-center size-8 rounded-full bg-white text-black shadow-lg font-serif font-bold text-lg" title="Medium Article">M</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-5 md:p-6">
+<div class="flex items-center justify-between mb-3 text-xs text-text-secondary font-mono">
+<span class="uppercase tracking-wider text-white">Case Study</span>
+<span>Sep 28, 2023</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                        Idempotency in Distributed Systems
+                    </h3>
+<p class="text-text-secondary text-sm leading-relaxed mb-4 line-clamp-3 flex-1">
+                        How to ensure your APIs handle duplicate requests gracefully without creating inconsistent states in your database.
+                    </p>
+<div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4 text-xs text-text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">thumb_up</span> 342</span>
+</div>
+<a class="flex items-center gap-1 text-sm font-medium text-white group-hover:text-primary transition-colors" href="#">
+                             Read on Medium <span class="material-symbols-outlined text-sm transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">arrow_outward</span>
+</a>
+</div>
+</div>
+</article>
+<article class="group relative flex flex-col bg-surface-dark border border-white/5 rounded-xl overflow-hidden card-hover-glow h-full">
+<div class="relative w-full aspect-video overflow-hidden bg-background-card">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4tXML8A8QAawx-h7NIWJEM1ik8k5rOUYD5hiVR_2ctI5qaPGdjWAlVyeRvFb49f_EAx453_Bl4NPUZiWEI_xLTA58-lF4TYpsmcQoxZcP0hFy5Vr7Hff5esHuoN7qJnXowo5wlTyiY5w1YRMvRWl9xaGNXclJXUUIUMGHHmhvCjc4yk6Hcg2oH1C2nu5KIrEkET0Ujo80WXtkGn08tl99w1PF9uHNhTwgeCsk5p_OGXccUJbVe44XVq5NU4sHjyLwPyMT3N3_VFoT");'></div>
+<div class="absolute inset-0 bg-[#0077b5]/10 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute top-3 right-3 z-10">
+<span class="inline-flex items-center justify-center size-8 rounded-full bg-[#0077b5] text-white shadow-lg" title="LinkedIn Post">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-5 md:p-6">
+<div class="flex items-center justify-between mb-3 text-xs text-text-secondary font-mono">
+<span class="uppercase tracking-wider text-[#0077b5]">Update</span>
+<span>Oct 20, 2023</span>
+</div>
+<h3 class="text-lg font-semibold text-white mb-2 leading-snug group-hover:text-[#0077b5] transition-colors line-clamp-2">
+                        Migrating Legacy Monoliths to Serverless
+                    </h3>
+<p class="text-text-secondary text-sm leading-relaxed mb-4 line-clamp-3 flex-1">
+                        Excited to share that I've successfully migrated our legacy monolith to a serverless architecture, reducing costs by 40%. It was a challenging journey...
+                    </p>
+<div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4 text-xs text-text-secondary">
+<span class="flex items-center gap-1 group-hover:text-[#0077b5] transition-colors"><span class="material-symbols-outlined text-[14px]">thumb_up</span> 142</span>
+<span class="flex items-center gap-1 group-hover:text-[#0077b5] transition-colors"><span class="material-symbols-outlined text-[14px]">comment</span> 23</span>
+</div>
+<a class="flex items-center gap-1 text-sm font-medium text-white group-hover:text-[#0077b5] transition-colors" href="#">
+                             View Post <span class="material-symbols-outlined text-sm transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">arrow_outward</span>
+</a>
+</div>
+</div>
+</article>
+<article class="group relative flex flex-col bg-surface-dark border border-white/5 rounded-xl overflow-hidden card-hover-glow h-full">
+<div class="relative w-full aspect-video overflow-hidden bg-background-card border-b border-white/5">
+<div class="absolute inset-0 bg-cover bg-center opacity-80 transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCq59yrXikHavzIfW0hHmEBDOCjePxv8iIwHqs2Wc9eithMV7y4HzBJKAPZVTgkCbJYPNRGslSrezJ8lmNOnh4IQhruwQYEGm9N_AFQWCzvc5llAuEBPr_Pe67ySu-UWI2pq3Zex3Qj3JRoExFz0483gGJLE4gTG6BaYVfMxYFUhyFMQrkePQU8PtyHLlYeuq4L7OAOtLnem4x-z4cDP8SuU-3O_yrqDv15JSZRxWhszZIUc5ZXGb16W6xi-YfftBRojCIFg9dvrnO8");'></div>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
+<div class="absolute top-3 right-3 z-10">
+<span class="inline-flex items-center justify-center size-8 rounded-full bg-black text-white border border-white/20 shadow-lg" title="X Thread">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-5 md:p-6">
+<div class="flex items-center justify-between mb-3 text-xs text-text-secondary font-mono">
+<span class="uppercase tracking-wider text-white">Thread</span>
+<span>Oct 20, 2023</span>
+</div>
+<h3 class="text-lg font-semibold text-white mb-2 leading-snug group-hover:text-white transition-colors line-clamp-2">
+                        Microservices vs Monoliths: The Real Cost
+                    </h3>
+<p class="text-text-secondary text-sm leading-relaxed mb-4 line-clamp-3 flex-1">
+                        Microservices are not always the answer. Sometimes a well-structured monolith is all you need to reach PMF. #SystemDesign #Engineering
+                    </p>
+<div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4 text-xs text-text-secondary">
+<span class="flex items-center gap-1 group-hover:text-green-400 transition-colors"><span class="material-symbols-outlined text-[14px]">repeat</span> 12</span>
+<span class="flex items-center gap-1 group-hover:text-pink-500 transition-colors"><span class="material-symbols-outlined text-[14px]">favorite</span> 48</span>
+</div>
+<a class="flex items-center gap-1 text-sm font-medium text-white group-hover:text-white transition-colors" href="#">
+                             Open Thread <span class="material-symbols-outlined text-sm transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">arrow_outward</span>
+</a>
+</div>
+</div>
+</article>
+<article class="group relative flex flex-col bg-surface-dark border border-white/5 rounded-xl overflow-hidden card-hover-glow h-full">
+<div class="relative w-full aspect-video overflow-hidden bg-background-card">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCz3ZyuztbHToFGVc-jIbaYarh6sj2UJPHk4rL6AVsm8cqfqAkT7QVaJ9fpEH6_hfcvSr0TqmKdqtHxD8emJKbI4DJoUriOqGCb1joqqZoANy39KU9-6mrBL_OMzIInn1JDREfzj5iRyhhq4Lxf0ZOeTlBRzMKfk83n-zXeOIXAdukAyNTt5Vw4BSztLWgGSvO7aWHxZ5vQjD_Tnkx8gLtpjpVza_0-ABl_Q13y87sYg70B5uCYOglmBz12cJ_beW60gNHqf4Uw4B1i");'></div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute top-3 right-3 z-10">
+<span class="inline-flex items-center justify-center size-8 rounded-full bg-surface-dark/90 backdrop-blur-md border border-white/10 shadow-lg text-primary" title="Blog Post">
+<span class="material-symbols-outlined text-lg">article</span>
+</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-5 md:p-6">
+<div class="flex items-center justify-between mb-3 text-xs text-text-secondary font-mono">
+<span class="uppercase tracking-wider text-accent-teal">Tutorial</span>
+<span>Oct 15, 2023</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                        The Art of Database Sharding
+                    </h3>
+<p class="text-text-secondary text-sm leading-relaxed mb-4 line-clamp-3 flex-1">
+                        Understanding when to shard and how to choose a shard key to avoid hotspots. Practical examples with Postgres.
+                    </p>
+<div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4 text-xs text-text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> 8m</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">visibility</span> 890</span>
+</div>
+<a class="flex items-center gap-1 text-sm font-medium text-white group-hover:text-primary transition-colors" href="#">
+                             Read Article <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<article class="relative flex flex-col justify-center bg-[#0d0e12] border border-dashed border-primary/30 rounded-xl overflow-hidden p-6 md:p-8 h-full">
+<div class="absolute inset-0 opacity-5 pointer-events-none overflow-hidden text-[10px] font-mono text-primary leading-tight p-4">
+                    function subscribe(user) {<br/>
+                      if (user.isAwesome) {<br/>
+                        newsletter.send(user.email);<br/>
+                      }<br/>
+                    }<br/>
+                    // Join the resistance
+                </div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="size-8 rounded-full bg-primary/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">mail</span>
+</span>
+<span class="text-primary font-mono text-xs font-bold tracking-widest uppercase">Weekly Intel</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2">Join the Thought Stream</h3>
+<p class="text-text-secondary text-sm mb-6">Get backend engineering tips delivered straight to your inbox.</p>
+</div>
+<form class="w-full flex flex-col gap-3">
+<input class="bg-surface-dark border border-white/10 text-white text-sm rounded-lg block w-full p-2.5 focus:ring-primary focus:border-primary placeholder-gray-600 transition-all" placeholder="dev@example.com" required="" type="email"/>
+<button class="w-full text-white bg-primary hover:bg-primary/90 focus:ring-4 focus:outline-none focus:ring-primary/30 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2" type="submit">
+                            Subscribe
+                            <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</form>
+</div>
+</article>
+</div>
+<div class="mt-8 flex flex-col items-center justify-center gap-4">
+<button class="px-6 py-3 rounded-xl bg-surface-dark border border-white/10 text-text-secondary hover:text-white hover:border-white/30 hover:bg-white/5 transition-all text-sm font-medium flex items-center gap-2 group">
+<span>Load More Posts</span>
+<span class="material-symbols-outlined text-lg group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+</div>
+</main>
+<footer class="w-full border-t border-white/5 bg-background-dark py-10">
+<div class="max-w-[1280px] mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">P</div>
+<span class="text-text-secondary text-sm">© 2023 Partha.Dev</span>
+</div>
+<div class="flex gap-6">
+<a class="text-text-secondary hover:text-white transition-colors text-sm" href="#">Twitter</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm" href="#">LinkedIn</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm" href="#">GitHub</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm" href="#">RSS</a>
+</div>
+</div>
+</footer>
+
+</body></html>

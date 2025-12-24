@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Typing Test &amp; Rankings // Partha.dev</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "primary-glow": "rgba(43, 108, 238, 0.5)",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0f1115", // Deep dark
+                        "surface-dark": "#161b22",
+                        "surface-border": "#282e39",
+                        "text-dim": "#9da6b9",
+                        "accent-success": "#0bda5e",
+                        "accent-gold": "#ffd700",
+                        "accent-silver": "#c0c0c0", 
+                        "accent-bronze": "#cd7f32",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)",
+                        'radial-glow': "radial-gradient(circle at center, rgba(43, 108, 238, 0.15) 0%, rgba(15, 17, 21, 0) 70%)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for a premium feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111318; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #282e39; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b4354; 
+        }
+
+        /* Cursor Animation */
+        .typing-cursor {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Scanline effect */
+        .scanline {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background: rgba(22, 27, 34, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white selection:bg-primary selection:text-white overflow-x-hidden min-h-screen flex flex-col">
+<!-- Ambient Background Effects -->
+<div class="fixed inset-0 z-0 bg-grid-pattern bg-[length:40px_40px] opacity-[0.07] pointer-events-none"></div>
+<div class="fixed inset-0 z-0 bg-radial-glow pointer-events-none"></div>
+<!-- Top Navigation -->
+<header class="relative z-50 flex items-center justify-between border-b border-surface-border bg-surface-dark/90 backdrop-blur-md px-6 py-4 lg:px-12">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Partha.dev</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-text-dim hover:text-white transition-colors text-sm font-medium" href="#">Home</a>
+<a class="text-text-dim hover:text-white transition-colors text-sm font-medium" href="#">Projects</a>
+<a class="text-white text-sm font-medium relative after:content-[''] after:absolute after:-bottom-5 after:left-0 after:w-full after:h-0.5 after:bg-primary" href="#">Typing Test</a>
+<a class="text-text-dim hover:text-white transition-colors text-sm font-medium" href="#">About</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-border/50 border border-white/5">
+<span class="material-symbols-outlined text-accent-success text-sm">circle</span>
+<span class="text-xs font-mono text-text-dim">SYSTEM ONLINE</span>
+</div>
+<button class="flex items-center justify-center rounded-lg h-9 px-4 bg-primary hover:bg-blue-600 transition-colors text-white text-sm font-bold shadow-[0_0_15px_rgba(43,108,238,0.3)]">
+                Hire Me
+            </button>
+</div>
+</header>
+<!-- Main Layout -->
+<main class="relative z-10 flex-1 flex flex-col lg:flex-row max-w-[1600px] mx-auto w-full p-4 lg:p-8 gap-6">
+<!-- Left Column: Typing Arena & Stats (Flex Grow) -->
+<section class="flex-1 flex flex-col gap-6 min-w-0">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-sm">code</span>
+<span class="text-xs font-mono uppercase tracking-widest">Module: Proficiency_Check_v2.4</span>
+</div>
+<h1 class="text-3xl lg:text-4xl font-black tracking-tight leading-tight">
+                        Neural Input Diagnosis
+                    </h1>
+<p class="text-text-dim mt-1 max-w-xl">
+                        Calibrate your input latency. Synchronize with the global mainframe. Achieve 100% efficiency.
+                    </p>
+</div>
+<!-- Mode Switcher -->
+<div class="flex p-1 bg-surface-border/50 rounded-xl backdrop-blur-sm self-start sm:self-center border border-white/5">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="mode" type="radio"/>
+<span class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-text-dim peer-checked:bg-surface-dark peer-checked:text-white peer-checked:shadow-sm transition-all hover:text-white">
+<span class="material-symbols-outlined text-lg">timer</span> 15s
+                        </span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="mode" type="radio"/>
+<span class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-text-dim peer-checked:bg-surface-dark peer-checked:text-white peer-checked:shadow-sm transition-all hover:text-white">
+<span class="material-symbols-outlined text-lg">timer</span> 30s
+                        </span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="mode" type="radio"/>
+<span class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-text-dim peer-checked:bg-surface-dark peer-checked:text-white peer-checked:shadow-sm transition-all hover:text-white">
+<span class="material-symbols-outlined text-lg">text_fields</span> Words
+                        </span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="mode" type="radio"/>
+<span class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-text-dim peer-checked:bg-surface-dark peer-checked:text-white peer-checked:shadow-sm transition-all hover:text-white">
+<span class="material-symbols-outlined text-lg">code</span> Code
+                        </span>
+</label>
+</div>
+</div>
+<!-- Stats Dashboard (Real-time) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- WPM Card -->
+<div class="glass-panel p-5 rounded-xl flex flex-col relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-4xl">speed</span>
+</div>
+<p class="text-text-dim text-xs font-mono uppercase tracking-wider mb-1">Current WPM</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-white">000</span>
+<span class="text-xs text-accent-success font-medium flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 0%
+                        </span>
+</div>
+<!-- Micro Chart (CSS fake) -->
+<div class="h-1 w-full bg-surface-border mt-4 rounded-full overflow-hidden">
+<div class="h-full w-0 bg-primary transition-all duration-300 group-hover:w-1/2"></div>
+</div>
+</div>
+<!-- Accuracy Card -->
+<div class="glass-panel p-5 rounded-xl flex flex-col relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-4xl">check_circle</span>
+</div>
+<p class="text-text-dim text-xs font-mono uppercase tracking-wider mb-1">Accuracy</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-white">100</span>
+<span class="text-lg text-text-dim">%</span>
+</div>
+<div class="h-1 w-full bg-surface-border mt-4 rounded-full overflow-hidden">
+<div class="h-full w-full bg-accent-success"></div>
+</div>
+</div>
+<!-- Timer Card -->
+<div class="glass-panel p-5 rounded-xl flex flex-col relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-4xl">hourglass_top</span>
+</div>
+<p class="text-text-dim text-xs font-mono uppercase tracking-wider mb-1">Time Remaining</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-white">15</span>
+<span class="text-lg text-text-dim">s</span>
+</div>
+<div class="h-1 w-full bg-surface-border mt-4 rounded-full overflow-hidden">
+<div class="h-full w-full bg-white/50"></div>
+</div>
+</div>
+<!-- Errors Card -->
+<div class="glass-panel p-5 rounded-xl flex flex-col relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-4xl">warning</span>
+</div>
+<p class="text-text-dim text-xs font-mono uppercase tracking-wider mb-1">Input Errors</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-white">0</span>
+</div>
+<div class="h-1 w-full bg-surface-border mt-4 rounded-full overflow-hidden">
+<div class="h-full w-0 bg-red-500"></div>
+</div>
+</div>
+</div>
+<!-- The Arena (Main Typing Area) -->
+<div class="glass-panel flex-1 min-h-[400px] rounded-2xl p-8 lg:p-12 relative flex flex-col items-center justify-center border-t-2 border-t-primary/20 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
+<!-- Background visual noise in arena -->
+<div class="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 blur-[100px] rounded-full"></div>
+</div>
+<!-- Input Overlay (Focus) -->
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-2 py-1 rounded bg-black/40 border border-white/5 text-[10px] text-text-dim font-mono tracking-widest uppercase backdrop-blur-md">Focus Mode: Active</span>
+</div>
+<!-- Typing Text Container -->
+<div class="relative z-10 w-full max-w-4xl text-2xl lg:text-3xl leading-relaxed font-mono text-text-dim break-words text-justify lg:text-center selection:bg-transparent">
+<span class="text-white">The quick brown fox jum</span><span class="border-l-2 border-primary animate-pulse text-white">p</span><span class="bg-red-500/20 text-red-400 underline decoration-red-500 underline-offset-4">s</span> over the lazy dog. System architecture requires robust <span class="text-white/20">backend solutions to handle scalable requests. Optimization is not just a feature, it is a necessity for modern web applications. Typing proficiency correlates with cognitive throughput.</span>
+</div>
+<!-- Restart Button Overlay -->
+<div class="mt-12 opacity-0 hover:opacity-100 focus-within:opacity-100 transition-opacity flex items-center gap-4">
+<button class="flex items-center gap-2 px-6 py-2 bg-surface-border hover:bg-surface-border/80 text-white rounded-lg transition-all text-sm font-medium">
+<span class="material-symbols-outlined text-lg">refresh</span>
+                        Restart Test
+                    </button>
+<span class="text-xs text-text-dim font-mono bg-black/30 px-2 py-1 rounded border border-white/5">Press TAB to restart</span>
+</div>
+</div>
+<!-- Keyboard Visualizer (Decorative) -->
+<div class="hidden lg:flex justify-center mt-2 opacity-50 pointer-events-none select-none">
+<div class="flex gap-1">
+<div class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xs text-white/20 font-mono">Q</div>
+<div class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xs text-white/20 font-mono">W</div>
+<div class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xs text-white/20 font-mono">E</div>
+<div class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xs text-white/20 font-mono">R</div>
+<div class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xs text-white/20 font-mono">T</div>
+<div class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xs text-white/20 font-mono">Y</div>
+<div class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xs text-white/20 font-mono">U</div>
+<div class="w-10 h-10 border border-primary/40 bg-primary/10 rounded flex items-center justify-center text-xs text-primary font-mono shadow-[0_0_10px_rgba(43,108,238,0.2)]">I</div>
+<div class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xs text-white/20 font-mono">O</div>
+<div class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xs text-white/20 font-mono">P</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Sidebar (Leaderboard & Profile) -->
+<aside class="w-full lg:w-[380px] flex flex-col gap-6 shrink-0">
+<!-- User Profile & Rank Card -->
+<div class="glass-panel p-6 rounded-xl flex items-center gap-4 relative overflow-hidden">
+<div class="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-transparent opacity-50"></div>
+<div class="relative">
+<div class="w-16 h-16 rounded-full bg-surface-border p-1">
+<img alt="User Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXbRbB2RYxtT7SPBVFZZHoKhje0RDUO06s6y8efWqyjS5MMMGKdE-j8Y_o45gVtHXkctCH1AWHlQ8JpxNwesJUz2b2zfeT9c-eL_CXEOUwt3O96mETSKFs1h0MP_tFvPYvv-s_GeIrwqviJf-TSRGrVNOSYeIK6v-5EBsd4pBx1LFcWHjVVzQxewv9wEypCb6aRVW7LtGhNRZUTk0fFxy8a2RK_1UXC8GfQD0SdNK-Jem7_FbpYpIx_wfs9xnNQ02u1q-qoVFm3nWB"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 bg-surface-dark rounded-full flex items-center justify-center border border-white/10 text-[10px] font-bold text-accent-gold shadow-lg">
+                        #4
+                    </div>
+</div>
+<div class="flex-1">
+<h3 class="text-white font-bold text-lg leading-tight">Partha Saradhi</h3>
+<p class="text-text-dim text-xs mb-2">Backend Engineer • Pro</p>
+<div class="flex items-center gap-3">
+<div class="px-2 py-0.5 rounded bg-white/5 border border-white/5 text-[10px] font-mono text-white">LVL 42</div>
+<div class="px-2 py-0.5 rounded bg-accent-gold/10 border border-accent-gold/20 text-[10px] font-mono text-accent-gold">ELITE</div>
+</div>
+</div>
+</div>
+<!-- Global Leaderboard -->
+<div class="glass-panel rounded-xl flex flex-col flex-1 max-h-[600px] overflow-hidden">
+<div class="p-5 border-b border-white/5 flex items-center justify-between">
+<h3 class="font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-gold">trophy</span>
+                        Global Ranking
+                    </h3>
+<button class="text-xs text-primary hover:text-white transition-colors font-medium">View All</button>
+</div>
+<div class="flex-1 overflow-y-auto pr-1">
+<!-- Top 3 Styling -->
+<div class="flex flex-col">
+<!-- Rank 1 -->
+<div class="group flex items-center gap-3 p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-accent-gold bg-accent-gold/5">
+<div class="font-bold text-accent-gold w-6 text-center">1</div>
+<div class="w-8 h-8 rounded-full bg-surface-border overflow-hidden">
+<img alt="Rank 1 Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1i2FOwNxVJILNDTVUJx03p6MKRahcR1-KFJf-O4oQLfKCVlvHINy0QD_EHooE31gAnMH9focMMR2kqiK2IuHBhuHhsqJk8OG3MZCHNOaCL-6AwBAZWcDmBd9Vj_S5Bp51y3hJ40j5_ryiFmHGUcFSjwjj5o_gJj2FuKPkuynx06Bg3NljOaVWn6tnLS9gGF2EJPLrFj21-dy7gx17k6gVYDpN_c9G3kN1d65WhVd-eOOxloyPxYT8lM1tFmqlkXgRocz687szRhZs"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<p class="text-white text-sm font-bold truncate">Cyber_Ninja</p>
+<span class="text-[10px] text-white/40 font-mono">USA</span>
+</div>
+<p class="text-xs text-text-dim">100% Accuracy</p>
+</div>
+<div class="text-right">
+<p class="text-white font-mono font-bold">184</p>
+<p class="text-[10px] text-text-dim uppercase">WPM</p>
+</div>
+</div>
+<!-- Rank 2 -->
+<div class="group flex items-center gap-3 p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-accent-silver bg-accent-silver/5">
+<div class="font-bold text-accent-silver w-6 text-center">2</div>
+<div class="w-8 h-8 rounded-full bg-surface-border overflow-hidden">
+<img alt="Rank 2 Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6fkoCjPvvpbTvYxg55ARvAJHW6sGy8Tgb4H1m4TET63DW2HVGzt4BQTWMcpkDmoj9pjMVoor7pqPATt0aqCqxroNB653mTq_YLQHxGjojdo1xUqEoIa8NHfukiXU_Vjlk3Z6kTbmJyWXq-zGNKmuCulmVn4Js4tZ8zzm-UGPKdfImRv-9RodEryeTsXu7-rbXAIgfD753U4Zm_1h4bKcN5Rd78uH72i92sjOtLPOLFgJ-XwGjbBVphvxlSTD4t7CE7dDdHu5X927j"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<p class="text-white text-sm font-bold truncate">KeyStroke_Legend</p>
+<span class="text-[10px] text-white/40 font-mono">GER</span>
+</div>
+<p class="text-xs text-text-dim">99.8% Accuracy</p>
+</div>
+<div class="text-right">
+<p class="text-white font-mono font-bold">172</p>
+<p class="text-[10px] text-text-dim uppercase">WPM</p>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="group flex items-center gap-3 p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-accent-bronze bg-accent-bronze/5">
+<div class="font-bold text-accent-bronze w-6 text-center">3</div>
+<div class="w-8 h-8 rounded-full bg-surface-border overflow-hidden">
+<img alt="Rank 3 Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY3DER6Y5csy9POum7xUS3pkgaLF_RLWbRmmHE_nLWfkzL_n3V-HSFWAyXMULCI_xPURL5QMJiBEbbRDp1QH7vVjv7yjQHuWaGOn3lXx6JxYCuAiZMMXL5-9kNlKOwc3gb4a0Qaj6xKQOtXjn9kh-Ej3WwfoMWm5eEZwkVjALABqMAqCcdSk6IDptYdoab3vJ6m7JrYaw0mSgArzmFaa7YKwVhvS7_LJTVru5Y0iCYqTmp4gFowyXm8--09t_sUEa4mQ54EwHTH1As"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<p class="text-white text-sm font-bold truncate">Alex_Dev</p>
+<span class="text-[10px] text-white/40 font-mono">UK</span>
+</div>
+<p class="text-xs text-text-dim">98% Accuracy</p>
+</div>
+<div class="text-right">
+<p class="text-white font-mono font-bold">165</p>
+<p class="text-[10px] text-text-dim uppercase">WPM</p>
+</div>
+</div>
+<!-- Rank 4 (User) -->
+<div class="group flex items-center gap-3 p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-primary bg-primary/10">
+<div class="font-bold text-primary w-6 text-center">4</div>
+<div class="w-8 h-8 rounded-full bg-surface-border overflow-hidden ring-2 ring-primary ring-offset-1 ring-offset-surface-dark">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmSc1yn34o6TA5kwQeGSLyo_KDRdPIPxaLzmbyGwn-WSu_pCa5BuGO6BMRBHEWhkMAAnZTpZwAXABGazdnRprDiFmFoPeMNbdwTLiqnzMzFL4m5E-sjeCKflgNE4zXik0waaAUghBTGTB-9slwS7iXfnkWpl4cxNPG36uR9fiLD0X_AMhn1WCYp0uCPRk70dyrVWGKpjpM3lUO1e5Q51PvIFSZVkacOXLC9lgbkgZJShZt6_ifV7xDZi44nfNcXmo2adYXI0D1oEDO"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<p class="text-white text-sm font-bold truncate">Partha Saradhi</p>
+<span class="px-1 py-0.5 rounded bg-primary text-[8px] font-bold text-white uppercase">YOU</span>
+</div>
+<p class="text-xs text-text-dim">99% Accuracy</p>
+</div>
+<div class="text-right">
+<p class="text-white font-mono font-bold">142</p>
+<p class="text-[10px] text-text-dim uppercase">WPM</p>
+</div>
+</div>
+<!-- Other Ranks -->
+<div class="group flex items-center gap-3 p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-transparent">
+<div class="font-bold text-text-dim w-6 text-center">5</div>
+<div class="w-8 h-8 rounded-full bg-surface-border overflow-hidden">
+<img alt="Rank 5 Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpyC23ImcW2bzZbKZFM2S_5ic-eMWZp_E236dUcQ3VyYj5T7AyV9A5qogQxo936flxhQg6wAwD2_zQK50oBPsJtRopV5JfvQQMCZn3YKODWNzFEyEl6W7oeny6_4vbUe3FR-4KDM6zJXhBJsstn8wsBQWhBM0cAKw0AytPkZk-PodZvUikdGacVvQB7i8N_Qn6oLA2IcfqM2iBKxBNasOUykr4Ps9Br0W_-eZdet0_hcCvnQdQ3_Jg4SCLqpE5oH0MHDQS3MJsZtxs"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<p class="text-white text-sm font-bold truncate">NullPointer</p>
+<span class="text-[10px] text-white/40 font-mono">IND</span>
+</div>
+<p class="text-xs text-text-dim">96% Accuracy</p>
+</div>
+<div class="text-right">
+<p class="text-white font-mono font-bold">130</p>
+<p class="text-[10px] text-text-dim uppercase">WPM</p>
+</div>
+</div>
+<div class="group flex items-center gap-3 p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-transparent">
+<div class="font-bold text-text-dim w-6 text-center">6</div>
+<div class="w-8 h-8 rounded-full bg-surface-border overflow-hidden">
+<img alt="Rank 6 Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6DTJEAtJ_duSbyZzjhwLFXV7TpUk3d8329pWoNDq-Knqi-P5rSEG4V6N-4kzIIzQAIqvbcLPKxQb_S51pxhMXDysRJT-cvUG9J96y30F7Okf1sR6ncLOo9pWOQCQI_4t7WZIuWS0KxN_ASTYvhipyTwfEg4A222CaUM4P0bChD_EKVtWQcv0sGvufpgOE5V1MqK8NEyuXGec2ySBGGf5LSofdTj25M3AYxN4Ae2H3uAZ_tjPaRDzFCbG6dhnodH5s7UkCUzxCJtDh"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<p class="text-white text-sm font-bold truncate">FastFingers_99</p>
+<span class="text-[10px] text-white/40 font-mono">CAN</span>
+</div>
+<p class="text-xs text-text-dim">95% Accuracy</p>
+</div>
+<div class="text-right">
+<p class="text-white font-mono font-bold">128</p>
+<p class="text-[10px] text-text-dim uppercase">WPM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Achievements / Footer -->
+<div class="glass-panel p-5 rounded-xl">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-bold text-white text-sm">Recent Achievements</h3>
+<span class="text-xs text-text-dim">3/12 Unlocked</span>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<!-- Unlocked Badge -->
+<div class="aspect-square rounded-lg bg-primary/20 border border-primary/50 flex flex-col items-center justify-center p-1 group cursor-help relative">
+<span class="material-symbols-outlined text-primary text-2xl mb-1">speed</span>
+<span class="text-[8px] text-primary font-bold uppercase text-center leading-tight">100 WPM</span>
+</div>
+<!-- Unlocked Badge -->
+<div class="aspect-square rounded-lg bg-accent-gold/20 border border-accent-gold/50 flex flex-col items-center justify-center p-1 group cursor-help relative">
+<span class="material-symbols-outlined text-accent-gold text-2xl mb-1">workspace_premium</span>
+<span class="text-[8px] text-accent-gold font-bold uppercase text-center leading-tight">Top 10</span>
+</div>
+<!-- Unlocked Badge -->
+<div class="aspect-square rounded-lg bg-accent-success/20 border border-accent-success/50 flex flex-col items-center justify-center p-1 group cursor-help relative">
+<span class="material-symbols-outlined text-accent-success text-2xl mb-1">verified</span>
+<span class="text-[8px] text-accent-success font-bold uppercase text-center leading-tight">No Errors</span>
+</div>
+<!-- Locked Badge -->
+<div class="aspect-square rounded-lg bg-surface-border/30 border border-white/5 flex flex-col items-center justify-center p-1 grayscale opacity-50">
+<span class="material-symbols-outlined text-white text-2xl mb-1">lock</span>
+<span class="text-[8px] text-text-dim font-bold uppercase text-center leading-tight">???</span>
+</div>
+</div>
+<button class="w-full mt-4 py-2 rounded-lg border border-white/10 text-xs font-medium text-text-dim hover:bg-white/5 hover:text-white transition-colors">
+                    View Certificate Gallery
+                </button>
+</div>
+</aside>
+</main>
+</body></html>
