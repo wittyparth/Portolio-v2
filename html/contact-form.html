@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guestbook &amp; Contact - Partha Saradhi</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "primary-glow": "#2b6cee40",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0B101B",
+                        "surface-dark": "#151c2f",
+                        "border-dark": "#2a3449",
+                        "text-dim": "#94a3b8",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)",
+                    },
+                    animation: {
+                        'blob': 'blob 20s infinite',
+                        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>textarea::-webkit-scrollbar {
+            width: 8px
+        }
+        textarea::-webkit-scrollbar-track {
+            background: #111827
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px
+        }.scanline {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+            background-size: 100% 4px;
+            pointer-events: none
+        }
+        .input-group:focus-within label {
+            color: #2b6cee
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(43, 108, 238, 0.3)
+        }.bg-noise {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBcOwvzlV9HoEd6e1U0Dw5JniX9VOZPmaNgYPZKqMhoxZAtN4EExeQukEEfqa4GPCFd0hdOcfnhKXkl64Uq70tejb6rrj5YsDXjcat6OsGJi8UBR5VLDwWzRAzPdW9CGWEJdFiLdoOX6POvbMkS23f3fKUH-9NaYw9pQlbmCF42NysPd8k77AeN1os4e7M_DMPvC6mDb6A5JR9aw_PQHGTvUQZRXgqjO0lDQCVSnrS6rOLCaAz6y-yAVlg7c0XRBaHpOrd9IMS-Nxme)
+        }.animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display min-h-screen flex flex-col antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#020408]">
+<div class="absolute inset-0 bg-gradient-to-b from-[#020408] via-[#050a14] to-[#020408] opacity-90"></div>
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-30">
+<div class="absolute -top-[10%] -left-[10%] w-[70vw] h-[70vw] bg-blue-900/40 rounded-full mix-blend-screen filter blur-[120px] animate-blob"></div>
+<div class="absolute top-[20%] -right-[10%] w-[60vw] h-[60vw] bg-indigo-900/40 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-2000"></div>
+<div class="absolute -bottom-[20%] left-[20%] w-[60vw] h-[60vw] bg-violet-900/40 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-4000"></div>
+</div>
+<div class="absolute inset-0 bg-[linear-gradient(rgba(43,108,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(43,108,238,0.03)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]"></div>
+<div class="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_100%)]"></div>
+<div class="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.2)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none z-10"></div>
+<div class="absolute inset-0 bg-noise opacity-[0.08] mix-blend-overlay"></div>
+</div>
+<div class="relative z-10 layout-container flex flex-col items-center justify-center min-h-screen w-full px-4 py-12 md:px-8 lg:px-16">
+<div class="w-full max-w-6xl flex flex-col gap-8">
+<div class="flex items-center justify-between w-full border-b border-border-dark pb-4 mb-4 backdrop-blur-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary animate-pulse">terminal</span>
+<h2 class="text-2xl md:text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                        TRANSMISSION &amp; LOGS
+                    </h2>
+</div>
+<div class="hidden md:flex items-center gap-2 text-xs font-mono text-text-dim bg-surface-dark/80 px-3 py-1 rounded-full border border-border-dark backdrop-blur-sm shadow-lg">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    SYSTEM ONLINE
+                </div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full h-full">
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="relative flex-1 group rounded-xl border border-border-dark bg-surface-dark/60 backdrop-blur-xl p-6 lg:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-primary/50 shadow-2xl">
+<div class="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex flex-col gap-4 z-10">
+<div class="flex items-start justify-between">
+<div class="p-3 bg-primary/10 rounded-lg border border-primary/20 text-primary shadow-[0_0_15px_rgba(43,108,238,0.1)]">
+<span class="material-symbols-outlined" style="font-size: 32px;">history_edu</span>
+</div>
+<span class="text-[10px] font-mono text-primary bg-primary/5 px-2 py-1 rounded border border-primary/10">LIVE FEED</span>
+</div>
+<div>
+<h3 class="text-3xl font-bold text-white mb-2">Guestbook Activity</h3>
+<p class="text-text-dim text-sm leading-relaxed">
+                                    See who's stopped by recently. Join the list of visitors and leave your mark on the digital log.
+                                </p>
+</div>
+</div>
+<div class="mt-8 flex flex-col gap-3 relative">
+<div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-surface-dark to-transparent z-20 pointer-events-none"></div>
+<div class="flex items-center gap-4 p-3 rounded-lg bg-[#0f1420]/80 border border-border-dark/50 hover:border-primary/30 transition-colors group/item backdrop-blur-sm">
+<div class="h-10 w-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center border border-border-dark text-xs font-bold text-gray-300 group-hover/item:text-white group-hover/item:border-primary/50 transition-colors">
+                                    AM
+                                </div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-white truncate">Alice M.</span>
+<span class="text-[10px] font-mono text-text-dim">2m ago</span>
+</div>
+<p class="text-xs text-text-dim truncate italic group-hover/item:text-primary/80 transition-colors">"Incredible attention to detail!"</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-lg bg-[#0f1420]/80 border border-border-dark/50 hover:border-primary/30 transition-colors group/item backdrop-blur-sm">
+<div class="h-10 w-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center border border-border-dark text-xs font-bold text-gray-300 group-hover/item:text-white group-hover/item:border-primary/50 transition-colors">
+                                    DK
+                                </div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-white truncate">David K.</span>
+<span class="text-[10px] font-mono text-text-dim">1h ago</span>
+</div>
+<p class="text-xs text-text-dim truncate italic group-hover/item:text-primary/80 transition-colors">"Love the dark mode implementation."</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-lg bg-[#0f1420]/80 border border-border-dark/50 hover:border-primary/30 transition-colors group/item opacity-60 backdrop-blur-sm">
+<div class="h-10 w-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center border border-border-dark text-xs font-bold text-gray-300 group-hover/item:text-white">
+                                    SL
+                                </div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-white truncate">Sarah L.</span>
+<span class="text-[10px] font-mono text-text-dim">4h ago</span>
+</div>
+<p class="text-xs text-text-dim truncate italic group-hover/item:text-primary/80 transition-colors">"Great portfolio structure."</p>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-border-dark/50 z-20">
+<button class="w-full group/btn relative flex items-center justify-between px-6 py-4 bg-primary rounded-lg overflow-hidden transition-all hover:bg-blue-600 active:scale-[0.98] shadow-lg shadow-primary/20 hover:shadow-primary/40">
+<div class="absolute inset-0 bg-white/10 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+<div class="flex flex-col items-start relative z-10">
+<span class="text-white font-bold text-lg tracking-wide">Sign the Guestbook</span>
+<span class="text-blue-100 text-xs font-normal">Join 1,204 other visitors</span>
+</div>
+<span class="material-symbols-outlined text-white group-hover/btn:translate-x-1 transition-transform relative z-10">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7 h-full">
+<div class="relative h-full rounded-xl border border-border-dark bg-surface-dark/40 backdrop-blur-md p-1 shadow-2xl">
+<div class="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-primary rounded-tl-sm -translate-x-[1px] -translate-y-[1px] shadow-[0_0_10px_rgba(43,108,238,0.5)]"></div>
+<div class="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-primary rounded-tr-sm translate-x-[1px] -translate-y-[1px] shadow-[0_0_10px_rgba(43,108,238,0.5)]"></div>
+<div class="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-primary rounded-bl-sm -translate-x-[1px] translate-y-[1px] shadow-[0_0_10px_rgba(43,108,238,0.5)]"></div>
+<div class="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-primary rounded-br-sm translate-x-[1px] translate-y-[1px] shadow-[0_0_10px_rgba(43,108,238,0.5)]"></div>
+<form class="h-full flex flex-col gap-6 p-6 lg:p-10 bg-[#0e121b]/80 rounded-lg shadow-inner backdrop-blur-sm">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-white flex items-center gap-2">
+<span class="w-2 h-6 bg-primary rounded-sm shadow-[0_0_8px_rgba(43,108,238,0.6)]"></span>
+                                    INITIALIZE CONTACT
+                                </h3>
+<div class="flex gap-2">
+<span class="h-2 w-2 rounded-full bg-border-dark"></span>
+<span class="h-2 w-2 rounded-full bg-border-dark"></span>
+<span class="h-2 w-2 rounded-full bg-border-dark"></span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="input-group flex flex-col gap-2 group">
+<label class="text-xs font-bold tracking-widest text-text-dim transition-colors uppercase pl-1">Identifier (Name)</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-border-dark group-focus-within:text-primary transition-colors text-lg">badge</span>
+</div>
+<input class="w-full bg-[#151c2f]/80 border border-border-dark text-white text-sm rounded-lg focus:ring-1 focus:ring-primary focus:border-primary block pl-10 p-3.5 placeholder-gray-600 transition-all shadow-[0_0_0_1px_rgba(0,0,0,0)] focus:shadow-[0_0_15px_rgba(43,108,238,0.15)] outline-none backdrop-blur-sm" placeholder="e.g. Neo Anderson" type="text"/>
+</div>
+</div>
+<div class="input-group flex flex-col gap-2 group">
+<label class="text-xs font-bold tracking-widest text-text-dim transition-colors uppercase pl-1">Return Address (Email)</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-border-dark group-focus-within:text-primary transition-colors text-lg">alternate_email</span>
+</div>
+<input class="w-full bg-[#151c2f]/80 border border-border-dark text-white text-sm rounded-lg focus:ring-1 focus:ring-primary focus:border-primary block pl-10 p-3.5 placeholder-gray-600 transition-all shadow-[0_0_0_1px_rgba(0,0,0,0)] focus:shadow-[0_0_15px_rgba(43,108,238,0.15)] outline-none backdrop-blur-sm" placeholder="neo@matrix.com" type="email"/>
+</div>
+</div>
+</div>
+<div class="input-group flex flex-col gap-2 flex-1 group">
+<label class="text-xs font-bold tracking-widest text-text-dim transition-colors uppercase pl-1">Payload (Message)</label>
+<div class="relative flex-1">
+<textarea class="w-full h-40 md:h-full min-h-[160px] bg-[#151c2f]/80 border border-border-dark text-white text-sm rounded-lg focus:ring-1 focus:ring-primary focus:border-primary block p-4 placeholder-gray-600 transition-all resize-none shadow-[0_0_0_1px_rgba(0,0,0,0)] focus:shadow-[0_0_15px_rgba(43,108,238,0.15)] outline-none font-mono backdrop-blur-sm" placeholder="Type your transmission here..."></textarea>
+<div class="absolute bottom-3 right-3 text-[10px] text-gray-600 font-mono pointer-events-none bg-[#151c2f] px-1 rounded">Markdown Supported</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="hidden sm:flex items-center gap-2 text-xs text-text-dim font-mono">
+<span class="material-symbols-outlined text-[16px]">encrypted</span>
+<span>End-to-end encrypted</span>
+</div>
+<button class="group flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-black px-8 py-3.5 rounded-lg font-bold text-sm transition-all shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] active:scale-95 ml-auto w-full sm:w-auto" type="button">
+<span class="tracking-widest uppercase">Execute Send</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform text-lg">send</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div class="w-full flex justify-between items-center text-[10px] text-gray-600 font-mono uppercase tracking-widest border-t border-border-dark pt-6 mt-2 opacity-50">
+<span>System_ID: PS_PORTFOLIO_V4</span>
+<span class="flex items-center gap-2">
+<span class="animate-ping h-1 w-1 rounded-full bg-green-500"></span>
+                    Network Stable
+                </span>
+</div>
+</div>
+</div>
+
+</body></html>

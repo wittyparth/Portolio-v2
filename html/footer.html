@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Global Footer - Partha Saradhi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19a1e6",
+                        "primary-dark": "#0d5c85",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111518", // Matching the provided background
+                        "surface-dark": "#1a2126",
+                        "border-dark": "#293338",
+                        "text-dim": "#9dafb8",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["Space Grotesk", "monospace"] // Using Space Grotesk for mono feel as requested
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'scan': 'scan 8s linear infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(25, 161, 230, 0.1)' },
+                            '100%': { boxShadow: '0 0 20px rgba(25, 161, 230, 0.3)' },
+                        },
+                        scan: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' }
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111518;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #293338;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3c4b53;
+        }
+
+        /* Subtle grid background pattern */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(41, 51, 56, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(41, 51, 56, 0.3) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        .glass-panel {
+            background: rgba(17, 21, 24, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .text-glow:hover {
+            text-shadow: 0 0 8px rgba(25, 161, 230, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col justify-end">
+<!-- Main Content Area Placeholder -->
+<div class="flex-grow flex items-center justify-center text-text-dim text-sm p-10">
+<div class="text-center opacity-40">
+<span class="material-symbols-outlined text-4xl mb-2">terminal</span>
+<p>Content would be above here.</p>
+<p>Scroll down for the footer.</p>
+</div>
+</div>
+<!-- GLOBAL FOOTER START -->
+<footer class="relative w-full border-t border-border-dark bg-background-dark z-10">
+<!-- Decorative Top Gradient Line -->
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+<!-- Ambient Background Effects -->
+<div class="absolute inset-0 bg-grid-pattern pointer-events-none opacity-20"></div>
+<div class="absolute -top-32 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="relative px-6 md:px-12 lg:px-24 pt-16 pb-8 max-w-[1400px] mx-auto">
+<!-- TOP DECK: Brand & Navigation -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+<!-- Col 1: Brand Identity -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="group cursor-default">
+<h2 class="text-3xl font-bold tracking-tight text-white mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary animate-pulse-slow">code_blocks</span>
+<span class="group-hover:text-primary transition-colors duration-300">PARTHA SARADHI</span>
+</h2>
+<div class="h-1 w-12 bg-primary rounded-full mb-4 group-hover:w-24 transition-all duration-500"></div>
+<p class="text-text-dim text-base leading-relaxed max-w-sm">
+                                Backend Engineer architecting high-performance scalable systems. 
+                                Crafting detailed digital experiences where code meets precision.
+                            </p>
+</div>
+<!-- Status Indicator -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-border-dark/50 border border-border-dark w-fit mt-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+</span>
+<span class="text-xs font-medium text-text-dim uppercase tracking-wider">System Operational</span>
+</div>
+</div>
+<!-- Col 2: Navigation Matrices -->
+<div class="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-8">
+<!-- Main Deck -->
+<div class="flex flex-col gap-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary/80 mb-2 border-b border-primary/20 pb-2 w-fit">Main Deck</h3>
+<ul class="flex flex-col gap-2">
+<li>
+<a class="text-text-dim hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-1 group" href="#">
+<span class="w-0 overflow-hidden group-hover:w-4 transition-all duration-300 text-primary opacity-0 group-hover:opacity-100 material-symbols-outlined text-[14px]">arrow_forward_ios</span>
+                                        Home
+                                    </a>
+</li>
+<li>
+<a class="text-text-dim hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-1 group" href="#">
+<span class="w-0 overflow-hidden group-hover:w-4 transition-all duration-300 text-primary opacity-0 group-hover:opacity-100 material-symbols-outlined text-[14px]">arrow_forward_ios</span>
+                                        Projects
+                                    </a>
+</li>
+<li>
+<a class="text-text-dim hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-1 group" href="#">
+<span class="w-0 overflow-hidden group-hover:w-4 transition-all duration-300 text-primary opacity-0 group-hover:opacity-100 material-symbols-outlined text-[14px]">arrow_forward_ios</span>
+                                        Blog
+                                    </a>
+</li>
+<li>
+<a class="text-text-dim hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-1 group" href="#">
+<span class="w-0 overflow-hidden group-hover:w-4 transition-all duration-300 text-primary opacity-0 group-hover:opacity-100 material-symbols-outlined text-[14px]">arrow_forward_ios</span>
+                                        Resume
+                                    </a>
+</li>
+</ul>
+</div>
+<!-- External Nodes -->
+<div class="flex flex-col gap-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary/80 mb-2 border-b border-primary/20 pb-2 w-fit">Nodes</h3>
+<ul class="flex flex-col gap-2">
+<li>
+<a class="text-text-dim hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-1 group" href="#">
+<span class="w-0 overflow-hidden group-hover:w-4 transition-all duration-300 text-primary opacity-0 group-hover:opacity-100 material-symbols-outlined text-[14px]">terminal</span>
+                                        Docs
+                                    </a>
+</li>
+<li>
+<a class="text-text-dim hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-1 group" href="#">
+<span class="w-0 overflow-hidden group-hover:w-4 transition-all duration-300 text-primary opacity-0 group-hover:opacity-100 material-symbols-outlined text-[14px]">show_chart</span>
+                                        Status
+                                    </a>
+</li>
+<li>
+<a class="text-text-dim hover:text-white hover:pl-2 transition-all duration-300 text-sm flex items-center gap-1 group" href="#">
+<span class="w-0 overflow-hidden group-hover:w-4 transition-all duration-300 text-primary opacity-0 group-hover:opacity-100 material-symbols-outlined text-[14px]">history</span>
+                                        Changelog
+                                    </a>
+</li>
+</ul>
+</div>
+<!-- Contact Action -->
+<div class="flex flex-col gap-4 sm:hidden md:flex">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary/80 mb-2 border-b border-primary/20 pb-2 w-fit">Connect</h3>
+<button class="flex items-center justify-center w-10 h-10 rounded-lg bg-surface-dark border border-border-dark hover:border-primary hover:bg-primary/10 text-text-dim hover:text-white transition-all duration-300 group relative">
+<span class="material-symbols-outlined text-xl">mail</span>
+<span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Send Email</span>
+</button>
+</div>
+</div>
+<!-- Col 3: Social & Visitor Console -->
+<div class="lg:col-span-3 flex flex-col justify-between gap-8">
+<!-- Social Hub -->
+<div class="flex flex-col gap-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary/80 mb-2 w-fit">Social Frequency</h3>
+<div class="flex flex-wrap gap-3">
+<a class="group relative flex items-center justify-center w-10 h-10 rounded-lg bg-surface-dark border border-border-dark hover:border-primary hover:bg-primary hover:shadow-[0_0_15px_rgba(25,161,230,0.4)] hover:-translate-y-1 transition-all duration-300" href="#">
+<i class="material-symbols-outlined text-xl text-text-dim group-hover:text-white transition-colors">code</i>
+<span class="sr-only">GitHub</span>
+</a>
+<a class="group relative flex items-center justify-center w-10 h-10 rounded-lg bg-surface-dark border border-border-dark hover:border-primary hover:bg-primary hover:shadow-[0_0_15px_rgba(25,161,230,0.4)] hover:-translate-y-1 transition-all duration-300" href="#">
+<i class="material-symbols-outlined text-xl text-text-dim group-hover:text-white transition-colors">work</i>
+<span class="sr-only">LinkedIn</span>
+</a>
+<a class="group relative flex items-center justify-center w-10 h-10 rounded-lg bg-surface-dark border border-border-dark hover:border-primary hover:bg-primary hover:shadow-[0_0_15px_rgba(25,161,230,0.4)] hover:-translate-y-1 transition-all duration-300" href="#">
+<i class="material-symbols-outlined text-xl text-text-dim group-hover:text-white transition-colors">flutter_dash</i>
+<span class="sr-only">Twitter</span>
+</a>
+<a class="group relative flex items-center justify-center w-10 h-10 rounded-lg bg-surface-dark border border-border-dark hover:border-primary hover:bg-primary hover:shadow-[0_0_15px_rgba(25,161,230,0.4)] hover:-translate-y-1 transition-all duration-300" href="#">
+<i class="material-symbols-outlined text-xl text-text-dim group-hover:text-white transition-colors">data_object</i>
+<span class="sr-only">LeetCode</span>
+</a>
+</div>
+</div>
+<!-- Visitor Counter Console -->
+<div class="relative overflow-hidden rounded-xl bg-surface-dark/50 border border-border-dark p-4 group">
+<!-- Scan line effect -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent w-full h-full -translate-x-full animate-scan pointer-events-none"></div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] uppercase font-bold tracking-widest text-text-dim">Traffic Monitor</span>
+<span class="flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-border-dark/50 pt-2">
+<div>
+<p class="text-[10px] text-text-dim uppercase mb-0.5">Total Visits</p>
+<p class="font-mono text-xl font-bold text-white tabular-nums tracking-tight group-hover:text-primary transition-colors">
+                                        12,405
+                                    </p>
+</div>
+<div>
+<p class="text-[10px] text-text-dim uppercase mb-0.5">Today</p>
+<p class="font-mono text-xl font-bold text-white tabular-nums tracking-tight flex items-center gap-1">
+                                        42
+                                        <span class="text-[10px] text-green-400 bg-green-400/10 px-1 rounded flex items-center">
+<span class="material-symbols-outlined text-[10px]">arrow_drop_up</span>
+                                            12%
+                                        </span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- MIDDLE DECK: Interactive Console Strip -->
+<div class="border-y border-border-dark py-6 flex flex-col md:flex-row items-center justify-between gap-6 mb-8 relative overflow-hidden">
+<!-- Background accent for this strip -->
+<div class="absolute inset-0 bg-white/1 pointer-events-none"></div>
+<!-- Email Copy Component -->
+<div class="flex items-center gap-4 z-10 w-full md:w-auto">
+<div class="relative w-full md:w-auto group">
+<button class="flex w-full md:w-auto items-center justify-between md:justify-start gap-3 bg-surface-dark border border-border-dark hover:border-primary/50 rounded-lg px-4 py-3 transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center w-8 h-8 rounded bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</div>
+<div class="flex flex-col items-start">
+<span class="text-[10px] uppercase tracking-wider text-text-dim font-bold">Contact Node</span>
+<span class="text-sm font-medium text-white font-mono">partha@example.com</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-dim group-hover:text-primary transition-colors ml-4 text-[18px]">content_copy</span>
+</button>
+<!-- Tooltip for success (simulated) -->
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-white text-xs rounded opacity-0 group-active:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
+                                Copied to clipboard!
+                            </div>
+</div>
+</div>
+<!-- Quote / Console Log -->
+<div class="hidden md:flex items-center gap-2 text-text-dim/60 font-mono text-xs z-10">
+<span class="text-primary/60">&gt;</span>
+<span class="italic">"Optimizing for O(1) experiences in an O(n) world."</span>
+<span class="animate-pulse w-2 h-4 bg-primary/60 ml-1"></span>
+</div>
+</div>
+<!-- BOTTOM DECK: Legal & Meta -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-text-dim pt-2">
+<div class="flex flex-col md:flex-row items-center gap-1 md:gap-4">
+<p>© 2024 Partha Saradhi. All systems go.</p>
+<span class="hidden md:inline text-border-dark">|</span>
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors hover:underline" href="#">Privacy Protocol</a>
+<a class="hover:text-primary transition-colors hover:underline" href="#">Terms of Service</a>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>Powered by <span class="text-white font-medium">Passion &amp; Coffee</span></span>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<!-- Script to handle dynamic year if needed, kept minimal as requested -->
+<script>
+        document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Partha Saradhi. All systems go.`;
+    </script>
+</body></html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Partha Saradhi - Portfolio</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Noto+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "card-dark": "#161b22",
+                        "card-border": "#30363d",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Utilities for Premium Feel */
+        .glass-card {
+            background: rgba(22, 27, 34, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .bento-hover-effect {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .bento-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(43, 108, 238, 0.15);
+            border-color: rgba(43, 108, 238, 0.5);
+        }
+
+        .icon-glow {
+            filter: drop-shadow(0 0 8px rgba(43, 108, 238, 0.3));
+        }
+        
+        /* Subtle grid background */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-[#111318] dark:bg-background-dark text-white font-display overflow-x-hidden antialiased selection:bg-primary/30 selection:text-white">
+<!-- Background Decoration -->
+<div class="fixed inset-0 pointer-events-none bg-grid-pattern opacity-40 z-0"></div>
+<div class="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none z-0"></div>
+<div class="relative z-10 flex flex-col min-h-screen">
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full border-b border-[#282e39]/50 bg-[#111318]/80 backdrop-blur-md">
+<div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="font-bold text-lg">P</span>
+</div>
+<h1 class="text-white text-lg font-bold tracking-tight">Partha Saradhi</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Work</a>
+<a class="text-sm font-medium text-white transition-colors" href="#">Growth</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Blog</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">About</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 group">
+<span>Contact</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</button>
+<div class="size-9 rounded-full bg-cover bg-center border border-white/10" data-alt="Portrait of the engineer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDPJ2lFaCN-S1PGIDkphui1LNl-s0DGZwAPyM8AnG-hBR3ukj8i7ZMBR_kaTmY8hum6NxXghx-dWLA5fsuUTdvVs-S53MVbvRlrWYhDhmguYmgXspBRoZZWutBppo6CZvGlh3WuQUAvtkLYhPXMmF04rRhMwpS0ksTXABKWd2lyD4jYPWtoDr1lXyyM15Pw3biXqz31YrU87Ajz81QkYSyv84zAiaEOVCP23ZkvLfTBFg9eQjZtYk2oq7AEOJ9XD98lBEta5wjjwWZK");'></div>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-[1000px] mx-auto px-6 py-12 flex flex-col gap-16">
+<!-- Section 1: Growth & Learning Bento Grid -->
+<section class="flex flex-col gap-6">
+<div class="flex items-end justify-between px-2">
+<div class="flex flex-col gap-2">
+<span class="text-primary text-xs font-bold tracking-wider uppercase">Knowledge Base</span>
+<h2 class="text-3xl font-bold text-white tracking-tight">Intellectual Growth</h2>
+<p class="text-gray-400 max-w-lg text-sm leading-relaxed">
+                            A transparent window into my engineering journey. Failures, resources, and daily logs.
+                        </p>
+</div>
+<div class="hidden sm:block h-[1px] flex-1 bg-gradient-to-r from-[#282e39] to-transparent ml-8 mb-4"></div>
+</div>
+<!-- Bento Grid Container -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-5 auto-rows-[minmax(200px,auto)]">
+<!-- Cell 1: Failures & Lessons (Large, 8 cols) -->
+<a class="group md:col-span-8 relative overflow-hidden rounded-2xl bg-[#161b22] border border-[#30363d] bento-hover-effect flex flex-col md:flex-row" href="#">
+<!-- Background Glow -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<!-- Content -->
+<div class="flex-1 p-8 flex flex-col justify-between z-10">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 rounded-lg bg-[#282e39]/50 text-white border border-white/5">
+<span class="material-symbols-outlined icon-glow">build_circle</span>
+</div>
+<span class="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">DEBUGGING LIFE</span>
+</div>
+<h3 class="text-2xl font-bold text-white mb-2 group-hover:text-primary transition-colors">Failures &amp; Lessons</h3>
+<p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+                                    Navigating the bugs in code and life. A transparent look at what went wrong, the root cause analysis, and the patches I applied to fix it.
+                                </p>
+</div>
+<div class="mt-8 flex items-center gap-2 text-sm font-semibold text-white group/btn">
+<span>Explore Journey</span>
+<span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform text-primary">arrow_forward</span>
+</div>
+</div>
+<!-- Visual/Graphic Area -->
+<div class="w-full md:w-2/5 min-h-[200px] bg-[#111318]/50 relative flex items-center justify-center overflow-hidden">
+<!-- Abstract SVG Graph -->
+<svg class="w-full h-full absolute inset-0 text-primary/20" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0 100 L20 80 L40 90 L60 40 L80 50 L100 20 L100 100 Z" fill="currentColor"></path>
+</svg>
+<!-- Animated Element -->
+<div class="relative size-32 opacity-80 group-hover:scale-110 transition-transform duration-500">
+<svg class="w-full h-full text-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path class="animate-pulse" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Cell 2: Recommendations (Tall, 4 cols) -->
+<a class="group md:col-span-4 relative overflow-hidden rounded-2xl bg-[#161b22] border border-[#30363d] bento-hover-effect flex flex-col" href="#">
+<div class="absolute top-0 right-0 p-32 bg-primary/10 blur-[60px] rounded-full pointer-events-none group-hover:bg-primary/20 transition-all"></div>
+<div class="p-6 flex flex-col h-full z-10">
+<div class="flex justify-between items-start mb-6">
+<div class="p-2 rounded-lg bg-[#282e39]/50 text-white border border-white/5">
+<span class="material-symbols-outlined icon-glow">tips_and_updates</span>
+</div>
+<div class="size-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">Curated Recs</h3>
+<p class="text-gray-400 text-xs leading-relaxed mb-6 flex-grow">
+                                The books, dev tools, podcasts, and mental models that shaped my engineering philosophy.
+                            </p>
+<!-- Visual placeholder for books/items -->
+<div class="flex -space-x-3 mb-6">
+<div class="size-8 rounded-full border border-[#161b22] bg-cover bg-center" data-alt="Book cover abstract" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZIK2gobQeArSXJohX1AwccgXPEa9XikYAUYsuqXP1CvNOJPiTUC1OCLBV_v1WhjoEaZP2yeXAw4re9A2ZU6-ZIM9V6qDLwpH2KVKmlMPngvALV7nrV3HbR7XU9hQnrCsEtxk_6Lu7XdgTBD7rNT20o9Aj60nKQkNotZl-xvQvgb1hwqgzvEfE5ryxQFSR3AQIYPdZItsmMQUGD6jzTw9PE80WZ2VLc2Apo8gFDvDiuPEoPuG5mEZjOYePiwT254NZ02Nfzye5UHWW");'></div>
+<div class="size-8 rounded-full border border-[#161b22] bg-cover bg-center" data-alt="Tool logo abstract" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBX7H6O2Yd4_IkMa5RySacI9pEU9fyuNhxrn7AfSUf4zAsV4ioclWlnwraThtkA-9gTn_pP1k8oh0KTWT6T3yBmdx8XfMSRSzoj4Wp_eYZNOBPcOTnQMIBuK73nFoQVrrWzFErumH_HoG4dtt27WlXnellWO9cIYsDXbkhmTvdrgr1RtUIOAf0x4HC7Wx5tQ31RzcHh6OLo90tuXK2ufTkT_CxNK-ePq5Eet17eEb6bb2JI70DUYyIkOFqP8cHBka0mSQYWc6nuLCDk");'></div>
+<div class="size-8 rounded-full border border-[#161b22] bg-cover bg-center" data-alt="Podcast logo abstract" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAt0sc4B-1w9y0P0kdvmJCy0SvGRbmilZ2OmRbGDHsq3Gkr-4QJAimQSP0bLz6QSSyy2GSQf7qoLGKR5rh5K8zSo0lRzBonXo7-8hYRCMeuGS3_NqAEX3Y2JU-hQ2qZAh-erinkhLuz1OZ1fgqr5dS4JFPFTkRXIYw-jl9uRHvM96i2BGbz3QT6d21H00xMpAgbsbY37QNb-84MiVRLPDcIMCt13Lo0VyWWTTvYuSOhUbkSa4D2iXtkMR8UjadOVbp4bpxisq7nJ7Nz");'></div>
+<div class="size-8 rounded-full border border-[#161b22] bg-[#282e39] flex items-center justify-center text-[10px] text-white font-medium">+12</div>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-4">
+<span class="text-xs text-gray-500 font-mono">Updated Weekly</span>
+<span class="material-symbols-outlined text-white text-[20px] group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+</a>
+<!-- Cell 3: Learning Log (Wide "Terminal", 12 cols) -->
+<a class="group md:col-span-12 relative overflow-hidden rounded-2xl bg-[#0d1117] border border-[#30363d] bento-hover-effect flex flex-col md:flex-row items-stretch" href="#">
+<!-- Terminal Header Decoration -->
+<div class="absolute top-0 left-0 w-full h-8 bg-[#161b22] border-b border-[#30363d] flex items-center px-4 gap-2 z-20">
+<div class="size-3 rounded-full bg-[#ff5f56]"></div>
+<div class="size-3 rounded-full bg-[#ffbd2e]"></div>
+<div class="size-3 rounded-full bg-[#27c93f]"></div>
+<div class="ml-4 text-[10px] text-gray-500 font-mono">user@partha:~/learning-log</div>
+</div>
+<div class="mt-8 p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 w-full z-10">
+<!-- Icon/Title Side -->
+<div class="flex-shrink-0 flex flex-col gap-2 min-w-[200px]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">terminal</span>
+<h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors">Dev Log</h3>
+</div>
+<p class="text-gray-400 text-sm">Daily commits to my personal knowledge base.</p>
+<div class="mt-2 inline-flex items-center gap-2 text-xs text-primary font-mono bg-primary/5 border border-primary/20 px-2 py-1 rounded w-fit">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                                    Live Updates
+                                </div>
+</div>
+<!-- "Code" Visual Side -->
+<div class="flex-grow w-full bg-[#111318] rounded-lg border border-[#30363d] p-4 font-mono text-xs md:text-sm text-gray-400 relative overflow-hidden group-hover:border-primary/30 transition-colors">
+<div class="absolute top-0 right-0 p-2 opacity-50">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex gap-2">
+<span class="text-gray-600">01</span>
+<span><span class="text-purple-400">const</span> <span class="text-blue-400">today</span> = <span class="text-green-400">new Date()</span>;</span>
+</div>
+<div class="flex gap-2">
+<span class="text-gray-600">02</span>
+<span><span class="text-purple-400">await</span> <span class="text-yellow-400">learn</span>(<span class="text-orange-400">"System Design Patterns"</span>);</span>
+</div>
+<div class="flex gap-2">
+<span class="text-gray-600">03</span>
+<span><span class="text-gray-500">// TODO: Refactor the cache layer implementation</span></span>
+</div>
+<div class="flex gap-2">
+<span class="text-gray-600">04</span>
+<span class="animate-pulse text-primary">_</span>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0">
+<div class="h-10 w-10 rounded-full bg-[#282e39] flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">arrow_outward</span>
+</div>
+</div>
+</div>
+</a>
+</div>
+</section>
+<!-- Section 2: Blog & Socials -->
+<section class="flex flex-col gap-6 pt-8">
+<div class="flex items-end justify-between px-2">
+<div class="flex flex-col gap-2">
+<span class="text-primary text-xs font-bold tracking-wider uppercase">Editorial</span>
+<h2 class="text-3xl font-bold text-white tracking-tight">Written Thoughts</h2>
+</div>
+<a class="text-sm font-medium text-gray-400 hover:text-white flex items-center gap-1 transition-colors" href="#">
+                        View all posts 
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Latest Article Card -->
+<article class="group relative flex flex-col justify-end overflow-hidden rounded-2xl bg-[#161b22] h-[400px] border border-[#30363d] bento-hover-effect">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Abstract visualization of backend architecture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBLdBpLnAm6MJmGdgN2jQXFuam4dpoQxZYFqMIknYv_oA-bYkgLoycyncbD30uibkd7ZzPxBNq1zKi2fJf1G53DT8UmltjMCu_5BPAXVOCLGnUmU19gg6bRliNE168KQsy7zp7EMm6qqTXaDU9M5XES_QFm0iaCZjXroxMlK05B_EfKh2QloP_88_ptn0vHh3JG_KAOzPRPRjsCcvhZK5HlY3743FItVBaFDSXQKqNfHmFc0kZLieZHq4euBADgE4JMA6Kh6QwIAhwI");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#111318] via-[#111318]/80 to-transparent"></div>
+<div class="relative z-10 p-8 flex flex-col gap-3">
+<div class="flex items-center gap-3 text-xs font-medium">
+<span class="bg-primary text-white px-2 py-1 rounded">Engineering</span>
+<span class="text-gray-300">Oct 24, 2023</span>
+<span class="text-gray-500">•</span>
+<span class="text-gray-300">5 min read</span>
+</div>
+<h3 class="text-2xl font-bold text-white leading-tight group-hover:text-primary transition-colors">
+                                Scaling WebSocket Connections to 1 Million Users
+                            </h3>
+<p class="text-gray-400 text-sm line-clamp-2">
+                                A deep dive into the challenges of horizontal scaling, ephemeral state management, and the architectural decisions that made it possible.
+                            </p>
+</div>
+</article>
+<!-- List of Recent Posts & Socials -->
+<div class="flex flex-col gap-5 h-full">
+<!-- Secondary Post 1 -->
+<a class="flex-1 bg-[#161b22] border border-[#30363d] rounded-2xl p-6 flex flex-col justify-center hover:bg-[#1c2128] transition-colors group" href="#">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs text-primary font-bold">CAREER</span>
+<span class="material-symbols-outlined text-gray-600 group-hover:text-white transition-colors text-[20px]">north_east</span>
+</div>
+<h4 class="text-lg font-bold text-white mb-1 group-hover:underline decoration-primary decoration-2 underline-offset-4">The Senior Engineer Mindset</h4>
+<p class="text-sm text-gray-400">Moving beyond code to impact and mentorship.</p>
+</a>
+<!-- Secondary Post 2 -->
+<a class="flex-1 bg-[#161b22] border border-[#30363d] rounded-2xl p-6 flex flex-col justify-center hover:bg-[#1c2128] transition-colors group" href="#">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs text-primary font-bold">TUTORIAL</span>
+<span class="material-symbols-outlined text-gray-600 group-hover:text-white transition-colors text-[20px]">north_east</span>
+</div>
+<h4 class="text-lg font-bold text-white mb-1 group-hover:underline decoration-primary decoration-2 underline-offset-4">Rust for Python Developers</h4>
+<p class="text-sm text-gray-400">Why I made the switch for core services.</p>
+</a>
+<!-- Social Links Bar -->
+<div class="h-16 bg-[#161b22] border border-[#30363d] rounded-2xl flex items-center justify-between px-6">
+<span class="text-sm font-medium text-white">Connect with me</span>
+<div class="flex gap-4">
+<a aria-label="GitHub" class="text-gray-400 hover:text-white transition-colors" href="#">
+<div class="size-6 bg-current" style="mask: url('https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg') no-repeat center; -webkit-mask: url('https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg') no-repeat center;"></div>
+</a>
+<a aria-label="LinkedIn" class="text-gray-400 hover:text-[#0A66C2] transition-colors" href="#">
+<div class="size-6 bg-current" style="mask: url('https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg') no-repeat center; -webkit-mask: url('https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg') no-repeat center;"></div>
+</a>
+<a aria-label="Twitter" class="text-gray-400 hover:text-[#1DA1F2] transition-colors" href="#">
+<div class="size-6 bg-current" style="mask: url('https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg') no-repeat center; -webkit-mask: url('https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg') no-repeat center;"></div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-[#282e39] bg-[#0d1117] py-12 mt-12">
+<div class="max-w-[1000px] mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
+<div>
+<h2 class="text-white font-bold text-lg">Partha Saradhi</h2>
+<p class="text-gray-500 text-sm mt-1">Backend Engineer • Problem Solver • Writer</p>
+</div>
+<p class="text-gray-600 text-sm">© 2023 All rights reserved.</p>
+</div>
+</footer>
+</div>
+<script>
+        // Simple script to handle optional icon animations or interactions if needed
+        // Currently purely CSS driven for performance and simplicity as per guidelines
+    </script>
+</body></html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guestbook - Partha.dev</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19a1e6",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111518",
+                        "card-dark": "#161b20",
+                        "card-border": "#293338",
+                        "accent-glow": "rgba(25, 161, 230, 0.15)",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #293338 1px, transparent 1px), linear-gradient(to bottom, #293338 1px, transparent 1px)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111518;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #293338;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3c4b53;
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .card-hover-effect {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover-effect:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px -10px rgba(25, 161, 230, 0.15);
+            border-color: rgba(25, 161, 230, 0.4);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #ffffff, #9dafb8);
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display overflow-x-hidden selection:bg-primary/30 selection:text-white">
+<!-- Background Decoration: Subtle Grid -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03]" style="background-size: 40px 40px; background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px);">
+</div>
+<!-- Main Layout -->
+<div class="relative flex flex-col min-h-screen w-full">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-card-border bg-background-dark/80 glass-effect">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo Area -->
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg class="w-full h-full drop-shadow-[0_0_8px_rgba(25,161,230,0.5)]" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold tracking-tight">Partha.dev</h2>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="#">Work</a>
+<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="#">About</a>
+<a class="text-white text-sm font-medium transition-colors border-b-2 border-primary pb-0.5" href="#">Guestbook</a>
+<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="#">Contact</a>
+</nav>
+<!-- CTA -->
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center justify-center h-9 px-4 bg-card-border hover:bg-gray-700 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all border border-transparent hover:border-gray-500">
+                            CMD+K
+                        </button>
+<button class="flex items-center justify-center h-10 px-5 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(25,161,230,0.3)] hover:shadow-[0_0_20px_rgba(25,161,230,0.5)]">
+                            Hire Me
+                        </button>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+<!-- Header Section -->
+<section class="mb-12 relative">
+<!-- Decorative Glow -->
+<div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-4 max-w-2xl">
+<div class="flex items-center gap-2 text-primary font-mono text-xs tracking-wider uppercase">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            System Online
+                        </div>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+                            Community <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">Logs</span>
+</h1>
+<p class="text-lg text-gray-400 leading-relaxed max-w-xl">
+                            A persistent stream of thoughts from visitors. This space is a dynamic collection of signals, appreciation, and connections.
+                        </p>
+<div class="flex items-center gap-4 pt-2">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card-border/50 border border-card-border">
+<span class="material-symbols-outlined text-gray-400 text-base">database</span>
+<span class="font-mono text-xs text-gray-300">Entries: <span class="text-white font-bold">1,024</span></span>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card-border/50 border border-card-border">
+<span class="material-symbols-outlined text-gray-400 text-base">update</span>
+<span class="font-mono text-xs text-gray-300">Last Update: <span class="text-white font-bold">2m ago</span></span>
+</div>
+</div>
+</div>
+<div class="flex-shrink-0">
+<button class="group flex items-center justify-center gap-3 h-12 px-6 bg-white text-background-dark hover:bg-gray-100 text-sm font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">edit</span>
+                            Sign Guestbook
+                        </button>
+</div>
+</div>
+</section>
+<!-- Filters & Sorting -->
+<section class="mb-8 sticky top-[70px] z-40">
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-2 rounded-2xl bg-card-dark/80 backdrop-blur-md border border-card-border shadow-2xl">
+<!-- Tabs -->
+<div class="flex p-1 gap-1 bg-background-dark/50 rounded-xl w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-card-border text-white shadow-sm text-sm font-bold transition-all border border-gray-600">
+                            Newest Arrival
+                        </button>
+<button class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-card-border/50 text-sm font-medium transition-all">
+                            Most Appreciated
+                        </button>
+<button class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-card-border/50 text-sm font-medium transition-all">
+                            Featured
+                        </button>
+</div>
+<!-- Meta / Search -->
+<div class="flex items-center gap-3 w-full sm:w-auto px-2">
+<div class="relative w-full sm:w-64 group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="w-full bg-background-dark border border-card-border text-white text-sm rounded-lg pl-10 pr-4 py-2 focus:ring-1 focus:ring-primary focus:border-primary placeholder-gray-600 transition-all outline-none" placeholder="Search logs..." type="text"/>
+</div>
+<button class="p-2 text-gray-400 hover:text-white bg-background-dark border border-card-border rounded-lg hover:border-gray-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Masonry Grid Layout -->
+<section class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 pb-20">
+<!-- Card 1: Standard -->
+<article class="break-inside-avoid relative group bg-card-dark rounded-2xl p-6 border border-card-border card-hover-effect">
+<div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-gray-500 hover:text-primary transition-colors" title="Copy JSON">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+</button>
+</div>
+<div class="flex items-center gap-4 mb-4">
+<div class="size-12 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-lg" data-alt="Avatar gradient purple to indigo">
+                            AR
+                        </div>
+<div>
+<h3 class="text-white font-bold text-base leading-tight">Alex Rivera</h3>
+<p class="text-gray-500 text-xs font-mono mt-0.5">Frontend Dev • London</p>
+</div>
+</div>
+<div class="mb-5 relative">
+<span class="absolute -left-3 top-0 bottom-0 w-0.5 bg-card-border group-hover:bg-primary/50 transition-colors"></span>
+<p class="text-gray-300 text-sm leading-relaxed pl-2">
+                            Incredible work on the backend architecture article. The way you handled the scalability issues was pure genius. The visualizations really helped solidify the concepts. Keep shipping! 🚀
+                        </p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-card-border/50">
+<span class="text-gray-500 text-xs font-mono">2h ago</span>
+<button class="flex items-center gap-2 group/btn">
+<span class="material-symbols-outlined text-gray-500 group-hover/btn:text-primary transition-colors text-[20px]">thumb_up</span>
+<span class="text-gray-500 text-sm font-medium group-hover/btn:text-white transition-colors">12</span>
+</button>
+</div>
+</article>
+<!-- Card 2: Short & Sweet -->
+<article class="break-inside-avoid relative group bg-card-dark rounded-2xl p-6 border border-card-border card-hover-effect">
+<div class="flex items-center gap-4 mb-4">
+<div class="size-12 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-600 flex items-center justify-center text-white font-bold text-lg shadow-lg" data-alt="Avatar gradient emerald to cyan">
+                            JD
+                        </div>
+<div>
+<h3 class="text-white font-bold text-base leading-tight">Sarah Chen</h3>
+<p class="text-gray-500 text-xs font-mono mt-0.5">Product Designer</p>
+</div>
+</div>
+<div class="mb-5">
+<p class="text-gray-300 text-sm leading-relaxed">
+                            Love the dark mode implementation here! The contrast ratios are perfect.
+                        </p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-card-border/50">
+<span class="text-gray-500 text-xs font-mono">5h ago</span>
+<button class="flex items-center gap-2 group/btn">
+<span class="material-symbols-outlined text-gray-500 group-hover/btn:text-primary transition-colors text-[20px]">favorite</span>
+<span class="text-gray-500 text-sm font-medium group-hover/btn:text-white transition-colors">48</span>
+</button>
+</div>
+</article>
+<!-- Card 3: Code Snippet Style -->
+<article class="break-inside-avoid relative group bg-[#0e1215] rounded-2xl p-0 border border-card-border card-hover-effect overflow-hidden">
+<div class="bg-[#1a2026] px-4 py-2 flex items-center justify-between border-b border-card-border">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50"></div>
+</div>
+<span class="font-mono text-[10px] text-gray-500">guest_log.json</span>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-3 mb-4">
+<div class="size-10 rounded-full bg-gray-700 overflow-hidden border border-gray-600">
+<img alt="Mike Ross Avatar" class="w-full h-full object-cover" data-alt="Mike Ross avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeP0hEstjBrQsmaZBHUZAdFHwOMpbkFCqOteFvTBkUpL5e9lD-HtnqeOgKtAwlC6MI8b_-x1ovzQmTYZNOdwd7FKGefmvqCtKXU8SY_lswWujd32L5AF0tfqxCjdzZ3FN7Tep8D7kBsy7V35r51gLcORVvUUmugeIruCpCJpKocco1EJJO5I5iCXZVtPJ_YkF5LI2x_FsMILC8grgpTFZ20d0JnUFL-WX1uNnKPQy9TlKAZmR6iDWJkpmwOj-3alt7Qg2tgNuBzAWf"/>
+</div>
+<div>
+<h3 class="text-white font-bold text-sm">Mike Ross</h3>
+<p class="text-gray-500 text-[10px] font-mono">@mikeross_dev</p>
+</div>
+</div>
+<div class="font-mono text-xs text-gray-400 bg-[#0a0c0e] p-3 rounded-lg border border-gray-800 mb-4 overflow-x-auto">
+<span class="text-purple-400">const</span> <span class="text-blue-400">feedback</span> = {<br/>
+                              quality: <span class="text-green-400">"Exceptional"</span>,<br/>
+                              style: <span class="text-green-400">"10/10"</span><br/>
+                            };
+                        </div>
+<p class="text-gray-300 text-sm mb-2">Just dropped by to say this portfolio is setting a new standard.</p>
+<div class="flex items-center justify-between pt-4 mt-2 border-t border-card-border/30">
+<span class="text-gray-600 text-xs font-mono">1d ago</span>
+<div class="flex gap-3">
+<button class="text-gray-500 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">code</span></button>
+<button class="text-gray-500 hover:text-pink-500 transition-colors"><span class="material-symbols-outlined text-[18px]">favorite</span></button>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 4: Long Content -->
+<article class="break-inside-avoid relative group bg-card-dark rounded-2xl p-6 border border-card-border card-hover-effect">
+<div class="flex items-center gap-4 mb-4">
+<div class="size-12 rounded-full bg-gradient-to-tr from-orange-500 to-pink-600 flex items-center justify-center text-white font-bold text-lg shadow-lg" data-alt="Avatar gradient orange to pink">
+                            EL
+                        </div>
+<div>
+<h3 class="text-white font-bold text-base leading-tight">Elena Lin</h3>
+<p class="text-gray-500 text-xs font-mono mt-0.5">UX Researcher</p>
+</div>
+</div>
+<div class="mb-5">
+<p class="text-gray-300 text-sm leading-relaxed">
+                            I've been following your open source contributions for a while now. The recent library you published for handling asynchronous state management is a lifesaver. <br/><br/>
+                            Would love to see a breakdown of how you designed the API surface for that. It feels incredibly intuitive compared to other solutions.
+                        </p>
+</div>
+<div class="flex items-center gap-2 mb-4 flex-wrap">
+<span class="px-2 py-1 rounded bg-card-border text-[10px] text-gray-400 font-mono border border-gray-700">#opensource</span>
+<span class="px-2 py-1 rounded bg-card-border text-[10px] text-gray-400 font-mono border border-gray-700">#state-management</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-card-border/50">
+<span class="text-gray-500 text-xs font-mono">2d ago</span>
+<button class="flex items-center gap-2 group/btn">
+<span class="material-symbols-outlined text-gray-500 group-hover/btn:text-primary transition-colors text-[20px] fill-current">thumb_up</span>
+<span class="text-gray-500 text-sm font-medium group-hover/btn:text-white transition-colors">89</span>
+</button>
+</div>
+</article>
+<!-- Card 5: Minimal -->
+<article class="break-inside-avoid relative group bg-card-dark rounded-2xl p-6 border border-card-border card-hover-effect">
+<div class="flex items-center gap-4 mb-3">
+<div class="size-10 rounded-full bg-gray-800 flex items-center justify-center text-white font-bold border border-gray-700" data-alt="Simple gray avatar">
+<span class="material-symbols-outlined text-gray-400">person</span>
+</div>
+<div>
+<h3 class="text-white font-bold text-sm">Anonymous User</h3>
+<p class="text-gray-500 text-[10px] font-mono mt-0.5">Visitor #4291</p>
+</div>
+</div>
+<div class="mb-4">
+<p class="text-gray-300 text-sm leading-relaxed italic">
+                            "Simplicity is the ultimate sophistication." - You nailed it.
+                        </p>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-card-border/50">
+<span class="text-gray-600 text-xs font-mono">3d ago</span>
+<button class="text-gray-600 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</article>
+<!-- Card 6: Highly styled (Featured) -->
+<article class="break-inside-avoid relative group bg-gradient-to-b from-card-dark to-[#0f1316] rounded-2xl p-6 border border-primary/30 card-hover-effect shadow-[0_0_20px_rgba(25,161,230,0.05)]">
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-primary text-[20px]" title="Pinned by Partha">push_pin</span>
+</div>
+<div class="flex items-center gap-4 mb-4">
+<div class="size-12 rounded-full border-2 border-primary p-0.5">
+<div class="w-full h-full rounded-full bg-slate-700 overflow-hidden">
+<img alt="David K Avatar" class="w-full h-full object-cover" data-alt="David K avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiQMc4ZS5tQgIHdInkjnLp20rtrsx-Z2Yt6ir-r98PGeCYdwq-vX-fKKSm88XCz0s538Aofh7WwWs62eBgygmXaLfm-_W1a_e6b9zT01_-NEKJu6qmQCNTdqtLDYhVXJCkv0zWEKe-xpQo6RV4V4f5j0cDYLIv5HVAvfjWaYRlW4OTP_xUTGgE-CiRJundn2POG6xK4I-8VGsI_jIgVZzyrdpdRNVpE0nkQpZyK5QZlTVy4pKmikUH_6JG08owCnhyK_XcMv9X724N"/>
+</div>
+</div>
+<div>
+<h3 class="text-white font-bold text-base leading-tight">David Kim</h3>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[14px]">verified</span>
+<p class="text-primary text-xs font-medium">CTO @ TechFlow</p>
+</div>
+</div>
+</div>
+<div class="mb-5">
+<p class="text-gray-200 text-sm font-medium leading-relaxed">
+                            Partha, I'm seriously impressed by the database optimization techniques you detailed in your latest case study. <br/><br/>
+                            We're facing similar challenges at scale. Sent you a DM on Twitter, would love to pick your brain on the caching strategy.
+                        </p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-card-border/50">
+<span class="text-gray-500 text-xs font-mono">1w ago</span>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-1.5 group/btn text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20 hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[16px]">reply</span>
+<span class="text-xs font-bold">Reply</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Loading / Pagination State -->
+<div class="flex flex-col items-center justify-center py-8 border-t border-card-border">
+<p class="text-gray-500 font-mono text-xs mb-4">Displaying 1-6 of 1,024 logs</p>
+<button class="group flex items-center justify-center gap-2 px-6 py-3 bg-card-dark border border-card-border hover:border-primary/50 text-white text-sm font-bold rounded-xl transition-all hover:bg-card-border/50">
+<span class="size-4 border-2 border-gray-400 border-t-white rounded-full animate-spin group-hover:border-primary group-hover:border-t-transparent"></span>
+<span>Load More Entries</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-card-dark border-t border-card-border mt-auto">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<div class="col-span-1 md:col-span-2">
+<div class="flex items-center gap-2 mb-4">
+<div class="size-6 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h3 class="text-white font-bold text-lg">Partha.dev</h3>
+</div>
+<p class="text-gray-500 text-sm max-w-xs leading-relaxed">
+                            Crafting scalable backend systems and digital experiences with precision and passion.
+                        </p>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm mb-4">Socials</h4>
+<div class="flex flex-col gap-2">
+<a class="text-gray-400 hover:text-primary text-sm transition-colors flex items-center gap-2" href="#">
+<span class="w-1 h-1 rounded-full bg-gray-600"></span> Twitter / X
+                            </a>
+<a class="text-gray-400 hover:text-primary text-sm transition-colors flex items-center gap-2" href="#">
+<span class="w-1 h-1 rounded-full bg-gray-600"></span> GitHub
+                            </a>
+<a class="text-gray-400 hover:text-primary text-sm transition-colors flex items-center gap-2" href="#">
+<span class="w-1 h-1 rounded-full bg-gray-600"></span> LinkedIn
+                            </a>
+</div>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm mb-4">Navigation</h4>
+<div class="flex flex-col gap-2">
+<a class="text-gray-400 hover:text-white text-sm transition-colors" href="#">Work</a>
+<a class="text-gray-400 hover:text-white text-sm transition-colors" href="#">About</a>
+<a class="text-gray-400 hover:text-white text-sm transition-colors" href="#">Guestbook</a>
+<a class="text-gray-400 hover:text-white text-sm transition-colors" href="#">Contact</a>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-card-border flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-gray-600 text-xs font-medium">© 2024 Partha Saradhi. All rights reserved.</p>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-black/30 border border-card-border">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-gray-400 text-xs font-mono">All Systems Operational</span>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
