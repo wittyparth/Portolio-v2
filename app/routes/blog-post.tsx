@@ -1,5 +1,4 @@
 import type { Route } from "./+types/blog-post";
-import { GlobalFooter } from '~/components/layout';
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -36,39 +35,8 @@ const tocItems = [
 export default function BlogPostPage() {
     return (
         <div className="bg-[#111c21] text-slate-100 font-body antialiased selection:bg-[#19a1e6]/30 selection:text-white overflow-x-hidden min-h-screen">
-            {/* Header */}
-            <header className="fixed top-0 left-0 right-0 z-50 bg-[#18242b]/70 backdrop-blur-[10px] border-b border-white/5">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16">
-                        <div className="flex items-center gap-3">
-                            <div className="size-8 rounded-lg bg-gradient-to-br from-[#19a1e6] to-blue-600 flex items-center justify-center text-white shadow-lg shadow-[#19a1e6]/20">
-                                <span className="material-symbols-outlined text-[20px]">terminal</span>
-                            </div>
-                            <h2 className="font-display font-bold text-lg tracking-tight text-white">Partha.dev</h2>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <button className="hidden md:flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium">
-                                <span className="material-symbols-outlined text-[18px]">search</span>
-                                <span>Search</span>
-                            </button>
-                            <div className="h-4 w-px bg-white/10 hidden md:block" />
-                            <a href="/blog" className="flex items-center justify-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/5 rounded-lg text-white text-sm font-bold transition-all group">
-                                <span className="material-symbols-outlined text-[18px] group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
-                                Back to Blog
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {/* Reading Progress */}
-                <div className="absolute bottom-0 left-0 h-[2px] bg-slate-800 w-full">
-                    <div className="h-full bg-[#19a1e6] shadow-[0_0_10px_rgba(25,161,230,0.5)] w-[35%] relative">
-                        <div className="absolute right-0 top-1/2 -translate-y-1/2 size-2 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-                    </div>
-                </div>
-            </header>
-
             {/* Main Layout */}
-            <div className="relative pt-24 pb-20 min-h-screen">
+            <div className="relative pt-8 pb-20 min-h-screen">
                 <div className="fixed top-20 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(25,161,230,0.15)_0%,rgba(17,28,33,0)_70%)] pointer-events-none opacity-50 z-0" />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-[80px_1fr_300px] gap-8 xl:gap-12">
@@ -276,8 +244,8 @@ export default function BlogPostPage() {
                                     <a
                                         key={item.label}
                                         className={`pl-4 py-1.5 text-sm -ml-[2px] transition-all ${item.active
-                                                ? 'text-[#19a1e6] border-l-2 border-[#19a1e6] font-medium'
-                                                : 'text-slate-400 hover:text-white hover:border-l-2 hover:border-white/20'
+                                            ? 'text-[#19a1e6] border-l-2 border-[#19a1e6] font-medium'
+                                            : 'text-slate-400 hover:text-white hover:border-l-2 hover:border-white/20'
                                             }`}
                                         href="#"
                                     >
@@ -304,13 +272,6 @@ export default function BlogPostPage() {
                     </aside>
                 </div>
             </div>
-
-            {/* Footer */}
-            <footer className="border-t border-white/5 bg-black/20 py-12">
-                <div className="max-w-7xl mx-auto px-4 text-center">
-                    <p className="text-slate-500 text-sm">© 2024 Partha.dev. All rights reserved.</p>
-                </div>
-            </footer>
         </div>
     );
 }

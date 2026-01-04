@@ -1,5 +1,4 @@
 import type { Route } from "./+types/failures";
-import { GlobalHeader, HeaderSpacer, GlobalFooter } from '~/components/layout';
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -136,8 +135,8 @@ export default function FailuresPage() {
                                 <button
                                     key={filter}
                                     className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-colors ${i === 0
-                                            ? 'bg-[#2b6cee]/10 border border-[#2b6cee]/20 text-[#2b6cee] hover:bg-[#2b6cee]/20'
-                                            : 'bg-[#161b26] border border-[#2a3140] text-slate-400 hover:text-white hover:border-slate-500'
+                                        ? 'bg-[#2b6cee]/10 border border-[#2b6cee]/20 text-[#2b6cee] hover:bg-[#2b6cee]/20'
+                                        : 'bg-[#161b26] border border-[#2a3140] text-slate-400 hover:text-white hover:border-slate-500'
                                         }`}
                                 >
                                     {filter}
@@ -231,8 +230,6 @@ export default function FailuresPage() {
                     </aside>
                 </div>
             </div>
-
-            <GlobalFooter />
         </div>
     );
 }

@@ -1,7 +1,6 @@
 import type { Route } from "./+types/terminal";
 import { useRef, useState, useEffect } from 'react';
 import {
-    PageLayout,
     Icon,
     Button
 } from '~/components/ui';
@@ -310,7 +309,6 @@ drwxr-xr-x  skills/
                     'home': '/',
                     'about': '/about',
                     'typing': '/typing-test',
-                    'speed': '/speed-stats',
                 };
                 if (routes[page]) {
                     setHistory(prev => [...prev, { type: 'output', content: `Opening ${page}...` }]);
@@ -429,41 +427,9 @@ drwxr-xr-x  skills/
 
 export default function TerminalPage() {
     return (
-        <PageLayout className="bg-[#0b0e11] min-h-screen">
-            {/* Header */}
-            <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#293338] px-6 py-4 lg:px-10 bg-[#111518] z-50 sticky top-0">
-                <div className="flex items-center gap-4 text-white">
-                    <div className="size-6 text-[#19a1e6] animate-pulse">
-                        <Icon name="terminal" />
-                    </div>
-                    <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Partha Saradhi // Terminal</h2>
-                </div>
-                <div className="flex flex-1 justify-end gap-8">
-                    <div className="hidden md:flex items-center gap-9">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.href}
-                                href={link.href}
-                                className="text-[#9dafb8] hover:text-white transition-colors text-sm font-medium leading-normal"
-                            >
-                                {link.label}
-                            </a>
-                        ))}
-                    </div>
-                    <a href="/">
-                        <Button
-                            variant="neon"
-                            size="sm"
-                            className="shadow-[0_0_20px_rgba(25,161,230,0.15)]"
-                        >
-                            Exit Terminal
-                        </Button>
-                    </a>
-                </div>
-            </header>
-
+        <div className="bg-[#0b0e11] min-h-screen">
             {/* Main Background with Effects */}
-            <div className="fixed inset-0 top-[60px] pointer-events-none z-0">
+            <div className="fixed inset-0 pointer-events-none z-0">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_#162026_0%,_#0b0e11_70%)] opacity-80" />
                 {/* Scanlines effect */}
                 <div
@@ -628,6 +594,6 @@ export default function TerminalPage() {
                     </div>
                 </div>
             </main>
-        </PageLayout>
+        </div>
     );
 }

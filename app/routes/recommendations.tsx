@@ -1,5 +1,4 @@
 import type { Route } from "./+types/recommendations";
-import { GlobalHeader, HeaderSpacer, GlobalFooter } from '~/components/layout';
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -56,28 +55,6 @@ export default function RecommendationsPage() {
             <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(43,108,238,0.15),rgba(17,19,24,0)_50%)]" />
             <div className="fixed top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#2b6cee]/20 to-transparent z-10" />
 
-            {/* Navbar */}
-            <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#282e39] bg-[#111318]/80 backdrop-blur-xl px-4 md:px-10 py-3 transition-all duration-300">
-                <div className="flex items-center gap-4 text-white">
-                    <div className="size-8 rounded bg-[#2b6cee]/20 flex items-center justify-center text-[#2b6cee]">
-                        <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>terminal</span>
-                    </div>
-                    <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Partha.Dev</h2>
-                </div>
-                <div className="flex flex-1 justify-end gap-8">
-                    <div className="hidden md:flex items-center gap-9">
-                        <a className="text-[#9da6b9] hover:text-white transition-colors text-sm font-medium leading-normal" href="/">Home</a>
-                        <a className="text-[#9da6b9] hover:text-white transition-colors text-sm font-medium leading-normal" href="/projects">Work</a>
-                        <a className="text-[#9da6b9] hover:text-white transition-colors text-sm font-medium leading-normal" href="/about">About</a>
-                        <a className="text-white text-sm font-medium leading-normal" href="/recommendations">Recommendations</a>
-                        <a className="text-[#9da6b9] hover:text-white transition-colors text-sm font-medium leading-normal" href="/contact">Contact</a>
-                    </div>
-                    <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-[#2b6cee] hover:bg-[#2b6cee]/90 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-[0_0_15px_rgba(43,108,238,0.3)]">
-                        <span className="truncate">Resume</span>
-                    </button>
-                </div>
-            </header>
-
             <main className="relative z-10 flex-1 flex flex-col items-center px-4 md:px-10 pb-20">
                 <div className="w-full max-w-[1200px] flex flex-col gap-8 mt-10">
 
@@ -130,8 +107,8 @@ export default function RecommendationsPage() {
                                 <button
                                     key={chip}
                                     className={`flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full pl-4 pr-4 transition-all ${i === 0
-                                            ? 'border border-[#2b6cee] bg-[#2b6cee]/10 text-[#2b6cee] hover:bg-[#2b6cee]/20'
-                                            : 'border border-[#282e39] bg-[#161a22] text-[#9da6b9] hover:border-[#9da6b9] hover:text-white'
+                                        ? 'border border-[#2b6cee] bg-[#2b6cee]/10 text-[#2b6cee] hover:bg-[#2b6cee]/20'
+                                        : 'border border-[#282e39] bg-[#161a22] text-[#9da6b9] hover:border-[#9da6b9] hover:text-white'
                                         }`}
                                 >
                                     <span className="text-xs font-medium">{chip}</span>

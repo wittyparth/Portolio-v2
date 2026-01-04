@@ -1,6 +1,4 @@
 import type { Route } from "./+types/logs";
-import { GlobalHeader, HeaderSpacer, GlobalFooter } from '~/components/layout';
-import { PageLayout } from "~/components/ui";
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -75,147 +73,97 @@ const filterButtons = [
     { label: 'Leadership', icon: 'groups', active: false },
 ];
 
-export default function LogsPage({ embedded = false }: { embedded?: boolean }) {
+export default function LogsPage() {
     return (
-        <PageLayout embedded={embedded} className={embedded ? "bg-transparent" : "bg-[#111318]"}>
-            <div className={`relative ${embedded ? '' : 'min-h-screen'} w-full flex flex-col z-10`}>
-                {/* Header - only when not embedded */}
-                {!embedded && (
-                    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#111318]/80 backdrop-blur-md">
-                        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
-                            <div className="flex items-center gap-4">
-                                <div className="flex size-8 items-center justify-center rounded-lg bg-[#2b6cee]/10 text-[#2b6cee]">
-                                    <span className="material-symbols-outlined text-xl">terminal</span>
+        <div className="bg-[#111318] min-h-screen w-full flex flex-col relative z-10">
+            <main className="flex-1 flex flex-col items-center">
+                {/* Hero Section */}
+                <section className="w-full max-w-5xl px-6 py-12 lg:py-20">
+                    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#181b21] shadow-2xl">
+                        <div
+                            className="absolute inset-0 z-0 opacity-40 mix-blend-overlay bg-cover bg-center"
+                            style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAADpdbcMzdoIoDCM4tyIC6TInna8BnXpDc48X-fCDGHDDzlUA7jM6abXGM7wV5N4DoGcROUGnalJfMFHeiJ9N8Ze5wghHNa_qJOUlQrKDgReglkCUqU9rTaHWnEjgcU89uNXKsyMASpirbf4JpRV2G4guX_4eigZsIiKPqjowOJbntWeW2AUrQfQlD5DHxL_swCS80vqBkJ_DBv1VP6rv7hm9mogjNBnjYLdAqx5QqRe4dBAWoSRU9ilsI6lrLusxqxnCn_PUonHaU')" }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#111318] via-[#111318]/90 to-transparent z-0" />
+
+                        <div className="relative z-10 grid gap-8 px-8 py-12 md:grid-cols-2 md:px-12 md:py-16 items-end">
+                            <div className="flex flex-col gap-4">
+                                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#2b6cee]/30 bg-[#2b6cee]/10 px-3 py-1 backdrop-blur-sm">
+                                    <div className="size-2 animate-pulse rounded-full bg-[#2b6cee]" />
+                                    <span className="text-xs font-mono font-medium text-[#2b6cee] uppercase tracking-wider">System Diagnostic Mode</span>
                                 </div>
-                                <h2 className="text-lg font-bold tracking-tight text-white">Partha Saradhi</h2>
+                                <h1 className="text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
+                                    Debugging <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2b6cee] to-white">The Career</span>
+                                </h1>
+                                <p className="max-w-md text-base leading-relaxed text-gray-400">
+                                    A transparent log of exceptions, timeouts, and the architectural patches that defined my growth as a backend engineer.
+                                </p>
                             </div>
-                            <div className="hidden md:flex items-center gap-8">
-                                <nav className="flex gap-6">
-                                    <a className="text-sm font-medium text-gray-400 hover:text-white transition-colors" href="/projects">Work</a>
-                                    <a className="text-sm font-medium text-gray-400 hover:text-white transition-colors" href="/about">About</a>
-                                    <a className="text-sm font-medium text-white" href="/logs">Lessons</a>
-                                    <a className="text-sm font-medium text-gray-400 hover:text-white transition-colors" href="/contact">Contact</a>
-                                </nav>
-                                <div className="h-4 w-px bg-white/10" />
-                                <button className="flex items-center gap-2 rounded-lg bg-white/5 px-4 py-2 text-sm font-bold text-white hover:bg-white/10 transition-colors border border-white/5">
-                                    <span className="material-symbols-outlined text-[18px]">download</span>
-                                    <span>Resume</span>
-                                </button>
-                            </div>
-                        </div>
-                    </header>
-                )}
 
-                <main className="flex-1 flex flex-col items-center">
-                    {/* Hero Section */}
-                    <section className="w-full max-w-5xl px-6 py-12 lg:py-20">
-                        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#181b21] shadow-2xl">
-                            <div
-                                className="absolute inset-0 z-0 opacity-40 mix-blend-overlay bg-cover bg-center"
-                                style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAADpdbcMzdoIoDCM4tyIC6TInna8BnXpDc48X-fCDGHDDzlUA7jM6abXGM7wV5N4DoGcROUGnalJfMFHeiJ9N8Ze5wghHNa_qJOUlQrKDgReglkCUqU9rTaHWnEjgcU89uNXKsyMASpirbf4JpRV2G4guX_4eigZsIiKPqjowOJbntWeW2AUrQfQlD5DHxL_swCS80vqBkJ_DBv1VP6rv7hm9mogjNBnjYLdAqx5QqRe4dBAWoSRU9ilsI6lrLusxqxnCn_PUonHaU')" }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#111318] via-[#111318]/90 to-transparent z-0" />
-
-                            <div className="relative z-10 grid gap-8 px-8 py-12 md:grid-cols-2 md:px-12 md:py-16 items-end">
-                                <div className="flex flex-col gap-4">
-                                    <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#2b6cee]/30 bg-[#2b6cee]/10 px-3 py-1 backdrop-blur-sm">
-                                        <div className="size-2 animate-pulse rounded-full bg-[#2b6cee]" />
-                                        <span className="text-xs font-mono font-medium text-[#2b6cee] uppercase tracking-wider">System Diagnostic Mode</span>
+                            {/* Stats Grid */}
+                            <div className="grid grid-cols-2 gap-3 md:gap-4">
+                                <StatCard label="EXCEPTIONS_LOGGED" value="42" subtext="12 Critical" icon="bug_report" iconColor="text-red-500" />
+                                <StatCard label="PATCH_RATE" value="100%" subtext="+Learning" icon="check_circle" iconColor="text-emerald-500" />
+                                <div className="col-span-2 flex flex-col gap-1 rounded-xl border border-white/5 bg-white/5 p-4 backdrop-blur-sm hover:border-[#2b6cee]/30 transition-colors group">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-xs font-mono text-gray-400">GROWTH_COEFFICIENT</span>
+                                        <span className="material-symbols-outlined text-[#2b6cee] text-[16px] opacity-60 group-hover:opacity-100">trending_up</span>
                                     </div>
-                                    <h1 className="text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
-                                        Debugging <br />
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2b6cee] to-white">The Career</span>
-                                    </h1>
-                                    <p className="max-w-md text-base leading-relaxed text-gray-400">
-                                        A transparent log of exceptions, timeouts, and the architectural patches that defined my growth as a backend engineer.
-                                    </p>
-                                </div>
-
-                                {/* Stats Grid */}
-                                <div className="grid grid-cols-2 gap-3 md:gap-4">
-                                    <StatCard label="EXCEPTIONS_LOGGED" value="42" subtext="12 Critical" icon="bug_report" iconColor="text-red-500" />
-                                    <StatCard label="PATCH_RATE" value="100%" subtext="+Learning" icon="check_circle" iconColor="text-emerald-500" />
-                                    <div className="col-span-2 flex flex-col gap-1 rounded-xl border border-white/5 bg-white/5 p-4 backdrop-blur-sm hover:border-[#2b6cee]/30 transition-colors group">
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-xs font-mono text-gray-400">GROWTH_COEFFICIENT</span>
-                                            <span className="material-symbols-outlined text-[#2b6cee] text-[16px] opacity-60 group-hover:opacity-100">trending_up</span>
-                                        </div>
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="text-2xl font-bold text-white font-mono">10x</span>
-                                            <span className="text-xs text-gray-500">Since Initial Commit</span>
-                                        </div>
-                                        <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/10">
-                                            <div className="h-full w-[85%] rounded-full bg-[#2b6cee]" />
-                                        </div>
+                                    <div className="flex items-baseline gap-2">
+                                        <span className="text-2xl font-bold text-white font-mono">10x</span>
+                                        <span className="text-xs text-gray-500">Since Initial Commit</span>
+                                    </div>
+                                    <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/10">
+                                        <div className="h-full w-[85%] rounded-full bg-[#2b6cee]" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
-                    {/* Filter Bar */}
-                    <section className="sticky top-[64px] z-40 w-full border-y border-white/5 bg-[#111318]/95 backdrop-blur-lg">
-                        <div className="mx-auto flex max-w-5xl items-center gap-4 overflow-x-auto px-6 py-4">
-                            <span className="flex items-center gap-2 text-xs font-mono font-bold text-gray-500 uppercase tracking-widest whitespace-nowrap">
-                                <span className="material-symbols-outlined text-[16px]">filter_list</span>
-                                Filter Log:
-                            </span>
-                            {filterButtons.map((btn, i) => (
-                                <button
-                                    key={btn.label}
-                                    className={`group relative flex h-9 min-w-fit items-center gap-2 rounded border px-4 text-xs font-bold uppercase tracking-wider transition-all ${btn.active
-                                        ? 'border-[#2b6cee] bg-[#2b6cee]/10 text-[#2b6cee] shadow-[0_0_15px_rgba(43,108,238,0.2)] hover:bg-[#2b6cee]/20'
-                                        : 'border-white/10 bg-white/5 text-gray-400 hover:border-white/30 hover:bg-white/10 hover:text-white'
-                                        }`}
-                                >
-                                    <span className="material-symbols-outlined text-[16px]">{btn.icon}</span>
-                                    {btn.label}
-                                </button>
-                            ))}
-                            <div className="ml-auto hidden md:flex items-center gap-2 border-l border-white/10 pl-4">
-                                <span className="text-[10px] font-mono text-gray-600 uppercase">Sort By:</span>
-                                <div className="flex items-center gap-1 text-xs text-gray-400">
-                                    <span className="text-white font-mono cursor-pointer hover:underline">Chronological</span>
-                                    <span className="material-symbols-outlined text-[14px]">arrow_drop_down</span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Log Entries */}
-                    <section className="w-full max-w-4xl px-6 py-12 flex flex-col gap-6 mx-auto">
-                        {logEntries.map((entry) => (
-                            <LogEntry key={entry.id} {...entry} />
+                {/* Filter Bar */}
+                <section className="sticky top-[64px] z-40 w-full border-y border-white/5 bg-[#111318]/95 backdrop-blur-lg">
+                    <div className="mx-auto flex max-w-5xl items-center gap-4 overflow-x-auto px-6 py-4">
+                        <span className="flex items-center gap-2 text-xs font-mono font-bold text-gray-500 uppercase tracking-widest whitespace-nowrap">
+                            <span className="material-symbols-outlined text-[16px]">filter_list</span>
+                            Filter Log:
+                        </span>
+                        {filterButtons.map((btn, i) => (
+                            <button
+                                key={btn.label}
+                                className={`group relative flex h-9 min-w-fit items-center gap-2 rounded border px-4 text-xs font-bold uppercase tracking-wider transition-all ${btn.active
+                                    ? 'border-[#2b6cee] bg-[#2b6cee]/10 text-[#2b6cee] shadow-[0_0_15px_rgba(43,108,238,0.2)] hover:bg-[#2b6cee]/20'
+                                    : 'border-white/10 bg-white/5 text-gray-400 hover:border-white/30 hover:bg-white/10 hover:text-white'
+                                    }`}
+                            >
+                                <span className="material-symbols-outlined text-[16px]">{btn.icon}</span>
+                                {btn.label}
+                            </button>
                         ))}
-
-                        <div className="pt-8 text-center border-t border-white/5">
-                            <span className="font-mono text-xs text-gray-600 uppercase tracking-widest">End of Public Log</span>
-                        </div>
-                    </section>
-                </main>
-
-                {/* Footer CTA - only when not embedded */}
-                {!embedded && (
-                    <footer className="border-t border-white/5 bg-[#181b21] py-12 text-center">
-                        <div className="mx-auto flex max-w-lg flex-col items-center gap-6 px-6">
-                            <h3 className="text-2xl font-bold text-white">Let's Build (and Break) Things Together</h3>
-                            <p className="text-sm text-gray-400">
-                                Failure is just data gathering for the next success. I'm currently open to complex backend challenges.
-                            </p>
-                            <div className="flex gap-4">
-                                <a href="/contact" className="flex h-10 min-w-[120px] items-center justify-center rounded-lg bg-[#2b6cee] px-6 text-sm font-bold text-white hover:bg-blue-600 transition-colors">
-                                    Contact Me
-                                </a>
-                                <a href="https://github.com" className="flex h-10 min-w-[120px] items-center justify-center rounded-lg border border-white/10 bg-white/5 px-6 text-sm font-bold text-white hover:bg-white/10 transition-colors">
-                                    View GitHub
-                                </a>
+                        <div className="ml-auto hidden md:flex items-center gap-2 border-l border-white/10 pl-4">
+                            <span className="text-[10px] font-mono text-gray-600 uppercase">Sort By:</span>
+                            <div className="flex items-center gap-1 text-xs text-gray-400">
+                                <span className="text-white font-mono cursor-pointer hover:underline">Chronological</span>
+                                <span className="material-symbols-outlined text-[14px]">arrow_drop_down</span>
                             </div>
-                            <p className="mt-8 text-xs text-gray-600">© 2024 Partha Saradhi. Designed with resilience.</p>
                         </div>
-                    </footer>
-                )}
-            </div>
-        </PageLayout>
+                    </div>
+                </section>
+
+                {/* Log Entries */}
+                <section className="w-full max-w-4xl px-6 py-12 flex flex-col gap-6 mx-auto">
+                    {logEntries.map((entry) => (
+                        <LogEntry key={entry.id} {...entry} />
+                    ))}
+
+                    <div className="pt-8 text-center border-t border-white/5">
+                        <span className="font-mono text-xs text-gray-600 uppercase tracking-widest">End of Public Log</span>
+                    </div>
+                </section>
+            </main>
+        </div>
     );
 }
 

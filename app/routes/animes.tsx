@@ -1,14 +1,9 @@
 import type { Route } from "./+types/animes";
 import { useState, useMemo } from 'react';
 import {
-    PageLayout,
-    Navigation,
-    Footer,
     Badge,
     Button,
     Icon,
-    SearchInput,
-    FilterBar,
     InlineStats,
     RatingBars,
     ProgressBar
@@ -211,10 +206,8 @@ export default function AnimesPage() {
     }));
 
     return (
-        <PageLayout>
-            <Navigation links={navLinks} showSearch showThemeToggle />
-
-            <main className="relative min-h-screen pt-16 flex flex-col">
+        <div className="bg-[#111318] min-h-screen">
+            <main className="relative flex flex-col">
                 {/* Cinematic Hero Section */}
                 <section className="relative w-full h-[600px] flex items-end justify-center overflow-hidden">
                     <div
@@ -380,16 +373,8 @@ export default function AnimesPage() {
                         </div>
                     </div>
                 </section>
-
-                <Footer
-                    links={[
-                        { label: 'Twitter', href: '#' },
-                        { label: 'GitHub', href: '#' },
-                        { label: 'MyAnimeList', href: '#' },
-                    ]}
-                />
             </main>
-        </PageLayout>
+        </div>
     );
 }
 

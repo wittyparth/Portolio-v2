@@ -1,20 +1,19 @@
 import type { Route } from "./+types/home";
 import { Icon } from "~/components/ui";
-import { GlobalHeader, HeaderSpacer, GlobalFooter } from "~/components/layout";
 import {
   Zap, Server, Code2, Palette, Wind, Braces, Atom,
   Package, Cog, Triangle, Figma, Container, Diamond, Database,
   type LucideIcon
 } from "lucide-react";
 
-// Import route pages to use as embedded sections
-import CurrentFocusPage from "~/routes/current-focus";
-import PersonalPage from "~/routes/personal";
-import ContactPage from "~/routes/contact";
-import SpeedStatsPage from "~/routes/speed-stats";
-import ProjectsPage from "~/routes/projects";
-import LogsPage from "~/routes/logs";
-import GuestbookPage from "~/routes/guestbook";
+// Import section components (clean, no headers/footers)
+import CurrentFocusSection from "~/components/sections/CurrentFocusSection";
+import PersonalSection from "~/components/sections/PersonalSection";
+import ProjectsSection from "~/components/sections/ProjectsSection";
+import SpeedStatsSection from "~/components/sections/SpeedStatsSection";
+import LessonsLogsSection from "~/components/sections/LessonsLogsSection";
+import ContactSection from "~/components/sections/ContactSection";
+import SocialPostsSection from "~/components/sections/SocialPostsSection";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -58,23 +57,19 @@ function TechCard({ name, IconComponent, color }: { name: string; IconComponent:
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white font-[Space_Grotesk,sans-serif] overflow-x-hidden selection:bg-[#2b6cee] selection:text-white">
-      {/* Global Header Component */}
-      <GlobalHeader />
-      <HeaderSpacer />
-
+    <>
       {/* Hero Section */}
-      <section className="min-h-[calc(100vh-80px)] flex flex-col justify-center">
+      <section className="min-h-[calc(100vh-80px)] flex flex-col justify-center bg-[#0a0a0f]">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20 w-full">
           {/* Profile Intro Row */}
           <div className="flex flex-wrap items-center gap-4 mb-12">
             <span className="text-gray-400 text-lg">Partha is</span>
-            <div className="">
-              <div className="w-full h-full rounded-full bg-[#0a0a0f] flex items-center justify-center overflow-hidden">
+            <div className="relative">
+              <div className="w-10 h-10 rounded-full bg-[#0a0a0f] flex items-center justify-center overflow-hidden ring-2 ring-white/10">
                 <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXbRbB2RYxtT7SPBVFZZHoKhje0RDUO06s6y8efWqyjS5MMMGKdE-j8Y_o45gVtHXkctCH1AWHlQ8JpxNwesJUz2b2zfeT9c-eL_CXEOUwt3O96mETSKFs1h0MP_tFvPYvv-s_GeIrwqviJf-TSRGrVNOSYeIK6v-5EBsd4pBx1LFcWHjVVzQxewv9wEypCb6aRVW7LtGhNRZUTk0fFxy8a2RK_1UXC8GfQD0SdNK-Jem7_FbpYpIx_wfs9xnNQ02u1q-qoVFm3nWB" alt="Partha Saradhi" className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#0a0a0f] flex items-center justify-center">
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+              <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-[#0a0a0f] flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               </div>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#2b6cee]/10 border border-[#2b6cee]/30">
@@ -151,59 +146,40 @@ export default function Home() {
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0a0f] to-transparent pointer-events-none z-10" />
       </section>
 
-      {/* Speed Stats - from routes/speed-stats.tsx */}
+      {/* Speed Stats Section */}
       <section className="border-t border-white/5 bg-[#0a0a0f]">
-        <SpeedStatsPage embedded={true} />
+        <SpeedStatsSection />
       </section>
 
-      {/* Projects - from routes/projects.tsx */}
+      {/* Projects Section */}
       <section className="border-t border-white/5 bg-[#0a0a0f]">
-        <ProjectsPage embedded={true} />
+        <ProjectsSection />
       </section>
 
       {/* Current Focus - from routes/current-focus.tsx */}
       <section className="border-t border-white/5 bg-[#0a0a0f]">
-        <CurrentFocusPage embedded={true} />
+        <CurrentFocusSection />
       </section>
 
       {/* Personal - from routes/personal.tsx */}
       <section className="border-t border-white/5 bg-[#0a0a0f]">
-        <PersonalPage embedded={true} />
+        <PersonalSection />
       </section>
 
-      {/* Lessons & Logs - from routes/logs.tsx */}
+      {/* Lessons & Logs Section */}
       <section className="border-t border-white/5 bg-[#0a0a0f]">
-        <LogsPage embedded={true} />
+        <LessonsLogsSection />
       </section>
 
-      {/* Guestbook/Social - from routes/guestbook.tsx */}
+      {/* Social Posts / Engineering Logs Section */}
       <section className="border-t border-white/5 bg-[#0a0a0f]">
-        <GuestbookPage embedded={true} />
+        <SocialPostsSection />
       </section>
 
-      {/* Contact - from routes/contact.tsx */}
+      {/* Contact Section */}
       <section className="border-t border-white/5 bg-[#0a0a0f]">
-        <ContactPage embedded={true} />
+        <ContactSection />
       </section>
-
-      {/* Global Footer Component */}
-      <GlobalFooter />
-
-      {/* CSS Animations */}
-      <style>{`
-        @keyframes scroll-left {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes scroll-right {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-        .animate-scroll-left { animation: scroll-left 30s linear infinite; }
-        .animate-scroll-right { animation: scroll-right 30s linear infinite; }
-        .animate-scroll-left:hover, .animate-scroll-right:hover { animation-play-state: paused; }
-      `}
-      </style>
-    </div>
+    </>
   );
 }

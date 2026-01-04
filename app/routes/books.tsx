@@ -1,7 +1,5 @@
 import type { Route } from "./+types/books";
 import {
-    PageLayout,
-    Navigation,
     Badge,
     Button,
     Icon,
@@ -91,38 +89,7 @@ const booksData = [
 
 export default function BooksPage() {
     return (
-        <PageLayout variant="library">
-            {/* Navigation */}
-            <div className="w-full flex justify-center sticky top-0 z-50 backdrop-blur-md bg-[#101622]/80 border-b border-[#282e39] transition-all duration-300">
-                <div className="w-full max-w-[1280px] px-4 md:px-10">
-                    <header className="flex items-center justify-between whitespace-nowrap py-4">
-                        <div className="flex items-center gap-4 text-white">
-                            <div className="size-8 flex items-center justify-center bg-[#2b6cee]/20 rounded-lg text-[#2b6cee]">
-                                <Icon name="terminal" size="lg" />
-                            </div>
-                            <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Partha Saradhi</h2>
-                        </div>
-                        <div className="flex flex-1 justify-end gap-8">
-                            <div className="hidden md:flex items-center gap-9">
-                                {navLinks.map((link) => (
-                                    <a
-                                        key={link.href}
-                                        href={link.href}
-                                        className={`text-sm font-medium leading-normal transition-colors ${link.isActive ? 'text-white border-b-2 border-[#2b6cee] pb-0.5' : 'text-slate-400 hover:text-white'
-                                            }`}
-                                    >
-                                        {link.label}
-                                    </a>
-                                ))}
-                            </div>
-                            <button className="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#282e39] text-white hover:bg-[#2b6cee] hover:text-white transition-all">
-                                <Icon name="light_mode" className="!text-[20px]" />
-                            </button>
-                        </div>
-                    </header>
-                </div>
-            </div>
-
+        <div className="bg-[#101622] min-h-screen text-white font-display">
             {/* Main Content Area */}
             <div className="flex flex-1 justify-center py-10 px-4 md:px-10 relative z-10">
                 <div className="flex flex-col max-w-[1280px] flex-1 w-full gap-12">
@@ -247,7 +214,7 @@ export default function BooksPage() {
                     </section>
                 </div>
             </div>
-        </PageLayout>
+        </div>
     );
 }
 

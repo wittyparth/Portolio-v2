@@ -1,13 +1,9 @@
 import type { Route } from "./+types/blog";
 import { useState, useMemo } from 'react';
 import {
-    PageLayout,
     Icon,
     Badge,
-    Button,
-    SearchInput,
-    TabFilter,
-    Footer
+    Button
 } from '~/components/ui';
 
 export function meta({ }: Route.MetaArgs) {
@@ -170,41 +166,9 @@ export default function BlogPage() {
     }));
 
     return (
-        <PageLayout className="bg-[#0a0a0f]">
+        <div className="min-h-screen bg-[#0a0a0f]">
             {/* Noise overlay */}
             <div className="fixed inset-0 pointer-events-none opacity-[0.4] mix-blend-overlay z-0 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')]" />
-
-            {/* Header */}
-            <header className="sticky top-0 z-50 w-full bg-[rgba(28,29,39,0.6)] backdrop-blur-xl border-b border-[#282b39]">
-                <div className="max-w-[1440px] mx-auto px-4 md:px-10 py-3 flex items-center justify-between">
-                    <div className="flex items-center gap-4 text-white">
-                        <div className="size-6 text-[#2b6cee]">
-                            <Icon name="terminal" size="lg" />
-                        </div>
-                        <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Partha.Dev</h2>
-                    </div>
-                    <div className="hidden md:flex flex-1 justify-end gap-8">
-                        <nav className="flex items-center gap-9">
-                            {navLinks.map((link) => (
-                                <a
-                                    key={link.href}
-                                    href={link.href}
-                                    className={`text-sm font-medium leading-normal transition-colors ${link.isActive
-                                        ? 'text-white relative after:content-[\'\'] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-[#2b6cee] after:rounded-full'
-                                        : 'text-slate-400 hover:text-white'
-                                        }`}
-                                >
-                                    {link.label}
-                                </a>
-                            ))}
-                        </nav>
-                        <Button variant="neon" size="sm">Resume</Button>
-                    </div>
-                    <button className="md:hidden text-white">
-                        <Icon name="menu" />
-                    </button>
-                </div>
-            </header>
 
             <main className="relative z-10 flex flex-col items-center w-full pb-20">
                 {/* Hero Section */}
@@ -252,8 +216,8 @@ export default function BlogPage() {
                                     key={tab.value}
                                     onClick={() => handleTabClick(tab.value)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${tab.isActive
-                                            ? 'bg-[#2b6cee] text-white'
-                                            : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                        ? 'bg-[#2b6cee] text-white'
+                                        : 'text-slate-400 hover:text-white hover:bg-white/5'
                                         }`}
                                 >
                                     {tab.icon && <Icon name={tab.icon} size="sm" />}
@@ -383,22 +347,12 @@ export default function BlogPage() {
                     </div>
                 )}
             </main>
-
-            <Footer
-                links={[
-                    { label: 'Twitter', href: '#' },
-                    { label: 'LinkedIn', href: '#' },
-                    { label: 'GitHub', href: '#' },
-                    { label: 'RSS', href: '#' },
-                ]}
-                showStatus={false}
-            />
-        </PageLayout>
+        </div>
     );
 }
 
-// Blog Card Component
 interface BlogCardProps {
+    id: number;
     title: string;
     description: string;
     category: string;
@@ -413,7 +367,7 @@ interface BlogCardProps {
     imageUrl: string;
 }
 
-function BlogCard({ title, description, category, categoryColor, date, readTime, views, likes, comments, retweets, type, imageUrl }: BlogCardProps) {
+function BlogCard({ id, title, description, category, categoryColor, date, readTime, views, likes, comments, retweets, type, imageUrl }: BlogCardProps) {
     const getTypeIcon = () => {
         switch (type) {
             case 'medium':
@@ -447,8 +401,14 @@ function BlogCard({ title, description, category, categoryColor, date, readTime,
         }
     };
 
+    // Determine link based on type
+    const getLink = () => {
+        if (type === 'blog') return `/blog-post?id=${id}`;
+        return '#'; // External links would be handled differently
+    };
+
     return (
-        <article className="group relative flex flex-col bg-[#1c1d27] border border-white/5 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(43,75,238,0.2)] hover:border-[rgba(43,75,238,0.4)] h-full">
+        <a href={getLink()} className="group relative flex flex-col bg-[#1c1d27] border border-white/5 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(43,75,238,0.2)] hover:border-[rgba(43,75,238,0.4)] h-full">
             <div className="relative w-full aspect-video overflow-hidden bg-[#15151e]">
                 <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
@@ -499,12 +459,12 @@ function BlogCard({ title, description, category, categoryColor, date, readTime,
                             </span>
                         )}
                     </div>
-                    <a href="#" className="flex items-center gap-1 text-sm font-medium text-white group-hover:text-[#2b6cee] transition-colors">
+                    <span className="flex items-center gap-1 text-sm font-medium text-white group-hover:text-[#2b6cee] transition-colors">
                         {type === 'blog' ? 'Read Article' : type === 'medium' ? 'Read on Medium' : type === 'linkedin' ? 'View Post' : 'Open Thread'}
                         <Icon name={type === 'blog' ? 'arrow_forward' : 'arrow_outward'} size="sm" className="transition-transform group-hover:translate-x-1" />
-                    </a>
+                    </span>
                 </div>
             </div>
-        </article>
+        </a>
     );
 }

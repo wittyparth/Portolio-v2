@@ -1,12 +1,6 @@
 import type { Route } from "./+types/contact";
 import { useState } from 'react';
-import {
-    PageLayout,
-    Icon,
-    Button,
-    TextInput,
-    TextArea
-} from '~/components/ui';
+import { Icon } from '~/components/ui';
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -21,7 +15,7 @@ const guestbookEntries = [
     { initials: 'SL', name: 'Sarah L.', message: '"Great portfolio structure."', time: '4h ago', faded: true },
 ];
 
-export default function ContactPage({ embedded = false }: { embedded?: boolean }) {
+export default function ContactPage() {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -74,8 +68,7 @@ export default function ContactPage({ embedded = false }: { embedded?: boolean }
     };
 
     return (
-        <PageLayout variant="contact" className={embedded ? "bg-transparent" : "bg-[#0B101B]"} embedded={embedded}>
-            {/* Background Effects are now handled by PageLayout's BackgroundEffects component */}
+        <div className="bg-[#0B101B] min-h-screen">
 
             {/* Guestbook Modal */}
             {showGuestbookModal && (
@@ -313,6 +306,7 @@ export default function ContactPage({ embedded = false }: { embedded?: boolean }
                     </div>
                 </div>
             </div>
-        </PageLayout>
+        </div>
     );
 }
+

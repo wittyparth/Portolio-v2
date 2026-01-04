@@ -1,7 +1,6 @@
 import type { Route } from "./+types/typing-test";
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {
-    PageLayout,
     Icon,
     Button
 } from '~/components/ui';
@@ -245,46 +244,10 @@ https://partha.dev/typing-test
     };
 
     return (
-        <PageLayout className="bg-[#0f1115]">
+        <div className="bg-[#0f1115] min-h-screen">
             {/* Background Effects */}
             <div className="fixed inset-0 z-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[length:40px_40px] opacity-[0.07] pointer-events-none" />
             <div className="fixed inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(43,108,238,0.15)_0%,rgba(15,17,21,0)_70%)] pointer-events-none" />
-
-            {/* Header */}
-            <header className="relative z-50 flex items-center justify-between border-b border-[#282e39] bg-[#161b22]/90 backdrop-blur-md px-6 py-4 lg:px-12">
-                <div className="flex items-center gap-4 text-white">
-                    <div className="size-8 flex items-center justify-center text-[#2b6cee]">
-                        <Icon name="terminal" className="!text-3xl" />
-                    </div>
-                    <h2 className="text-xl font-bold tracking-tight">Partha.dev</h2>
-                </div>
-                <nav className="hidden md:flex items-center gap-8">
-                    {[
-                        { label: 'Home', href: '/' },
-                        { label: 'Projects', href: '/projects' },
-                        { label: 'Typing Test', href: '/typing-test', isActive: true },
-                        { label: 'About', href: '/about' },
-                    ].map((link) => (
-                        <a
-                            key={link.href}
-                            href={link.href}
-                            className={`text-sm font-medium transition-colors ${link.isActive
-                                ? "text-white relative after:content-[''] after:absolute after:-bottom-5 after:left-0 after:w-full after:h-0.5 after:bg-[#2b6cee]"
-                                : 'text-[#9da6b9] hover:text-white'
-                                }`}
-                        >
-                            {link.label}
-                        </a>
-                    ))}
-                </nav>
-                <div className="flex items-center gap-4">
-                    <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#282e39]/50 border border-white/5">
-                        <Icon name="circle" className="text-[#0bda5e] !text-sm" />
-                        <span className="text-xs font-mono text-[#9da6b9]">SYSTEM ONLINE</span>
-                    </div>
-                    <Button variant="neon" size="sm">Hire Me</Button>
-                </div>
-            </header>
 
             {/* Results Modal - Improved */}
             {showResults && (
@@ -716,7 +679,7 @@ https://partha.dev/typing-test
                     animation: scale-in 0.3s ease-out forwards;
                 }
             `}</style>
-        </PageLayout>
+        </div>
     );
 }
 
