@@ -4,6 +4,7 @@ import {
     Icon,
     Button
 } from '~/components/ui';
+import { useTypingLeaderboard, getRankColor } from '~/lib/supabase';
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -21,14 +22,7 @@ const sampleTexts = {
 
 const timeLimits: Record<string, number> = { '15s': 15, '30s': 30, 'Words': 60, 'Code': 45 };
 
-const leaderboardData = [
-    { rank: 1, name: 'Cyber_Ninja', country: 'USA', accuracy: '100%', wpm: 184, color: 'gold' },
-    { rank: 2, name: 'KeyStroke_Legend', country: 'GER', accuracy: '99.8%', wpm: 172, color: 'silver' },
-    { rank: 3, name: 'Alex_Dev', country: 'UK', accuracy: '98%', wpm: 165, color: 'bronze' },
-    { rank: 4, name: 'Partha Saradhi', country: 'IND', accuracy: '99%', wpm: 142, color: 'primary', isUser: true },
-    { rank: 5, name: 'NullPointer', country: 'IND', accuracy: '96%', wpm: 130, color: 'default' },
-    { rank: 6, name: 'FastFingers_99', country: 'CAN', accuracy: '95%', wpm: 128, color: 'default' },
-];
+// Leaderboard is now fetched from Supabase via useTypingLeaderboard hook
 
 const achievements = [
     { icon: 'speed', label: '100 WPM', color: 'primary', unlocked: true },
@@ -50,8 +44,13 @@ export default function TypingTestPage() {
     const [wpm, setWpm] = useState(0);
     const [charStatus, setCharStatus] = useState<('correct' | 'incorrect' | 'pending')[]>([]);
     const [showResults, setShowResults] = useState(false);
+    const [scoreSubmitted, setScoreSubmitted] = useState(false);
+    const [newRank, setNewRank] = useState<number | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const startTimeRef = useRef<number>(0);
+
+    // Supabase leaderboard hook
+    const { leaderboard, loading: leaderboardLoading, userRank, submitScore } = useTypingLeaderboard({ mode, limit: 10 });
 
     // Initialize char status
     useEffect(() => {
@@ -160,6 +159,8 @@ export default function TypingTestPage() {
         setWpm(0);
         setCharStatus(Array(text.length).fill('pending'));
         setShowResults(false);
+        setScoreSubmitted(false);
+        setNewRank(null);
         startTimeRef.current = 0;
         inputRef.current?.focus();
     };
@@ -167,6 +168,28 @@ export default function TypingTestPage() {
     const accuracy = currentIndex > 0 ? Math.round((correctChars / currentIndex) * 100) : 100;
     const progress = Math.round((currentIndex / text.length) * 100);
     const timeProgress = Math.round((timeLeft / timeLimits[mode]) * 100);
+
+    // Submit score to Supabase when test finishes
+    useEffect(() => {
+        if (isFinished && wpm > 0 && !scoreSubmitted) {
+            setScoreSubmitted(true);
+            const timeTaken = timeLimits[mode] - timeLeft;
+
+            submitScore({
+                user_name: 'Anonymous Typist', // Could add a name input
+                wpm,
+                accuracy,
+                mode,
+                correct_chars: correctChars,
+                errors,
+                time_taken: timeTaken,
+            }).then((result) => {
+                if (result) {
+                    setNewRank(result.rank);
+                }
+            });
+        }
+    }, [isFinished, wpm, scoreSubmitted, submitScore, mode, timeLeft, accuracy, correctChars, errors]);
 
     // Generate downloadable report
     const downloadReport = () => {
@@ -645,9 +668,23 @@ https://partha.dev/typing-test
                         </div>
                         <div className="flex-1 overflow-y-auto pr-1">
                             <div className="flex flex-col">
-                                {leaderboardData.map((player) => (
-                                    <LeaderboardRow key={player.rank} {...player} />
-                                ))}
+                                {leaderboardLoading ? (
+                                    <div className="flex items-center justify-center py-8">
+                                        <div className="w-6 h-6 border-2 border-[#282e39] border-t-[#2b6cee] rounded-full animate-spin" />
+                                    </div>
+                                ) : (
+                                    leaderboard.map((player) => (
+                                        <LeaderboardRow
+                                            key={player.id}
+                                            rank={player.rank}
+                                            name={player.user_name}
+                                            country={player.country_code}
+                                            accuracy={`${player.accuracy}%`}
+                                            wpm={player.wpm}
+                                            isUser={player.is_user}
+                                        />
+                                    ))
+                                )}
                             </div>
                         </div>
                     </div>
@@ -733,7 +770,6 @@ function LeaderboardRow({
     country,
     accuracy,
     wpm,
-    color,
     isUser = false
 }: {
     rank: number;
@@ -741,23 +777,15 @@ function LeaderboardRow({
     country: string;
     accuracy: string;
     wpm: number;
-    color: string;
     isUser?: boolean;
 }) {
-    const getColorClasses = () => {
-        switch (color) {
-            case 'gold': return { border: 'border-[#ffd700]', bg: 'bg-[#ffd700]/5', text: 'text-[#ffd700]' };
-            case 'silver': return { border: 'border-[#c0c0c0]', bg: 'bg-[#c0c0c0]/5', text: 'text-[#c0c0c0]' };
-            case 'bronze': return { border: 'border-[#cd7f32]', bg: 'bg-[#cd7f32]/5', text: 'text-[#cd7f32]' };
-            case 'primary': return { border: 'border-[#2b6cee]', bg: 'bg-[#2b6cee]/10', text: 'text-[#2b6cee]' };
-            default: return { border: 'border-transparent', bg: '', text: 'text-[#9da6b9]' };
-        }
-    };
-    const colors = getColorClasses();
+    const colors = getRankColor(rank);
+    const isTopThree = rank <= 3;
+    const showUserHighlight = isUser && rank > 3;
 
     return (
-        <div className={`group flex items-center gap-3 p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 ${colors.border} ${colors.bg}`}>
-            <div className={`font-bold w-6 text-center ${colors.text}`}>{rank}</div>
+        <div className={`group flex items-center gap-3 p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 ${colors.border} ${colors.bg} ${showUserHighlight ? 'border-l-[#2b6cee] bg-[#2b6cee]/10' : ''}`}>
+            <div className={`font-bold w-6 text-center ${isTopThree ? colors.text : showUserHighlight ? 'text-[#2b6cee]' : 'text-[#9da6b9]'}`}>{rank}</div>
             <div className={`w-8 h-8 rounded-full bg-[#282e39] overflow-hidden ${isUser ? 'ring-2 ring-[#2b6cee] ring-offset-1 ring-offset-[#161b22]' : ''}`}>
                 <div className="w-full h-full bg-gradient-to-br from-gray-600 to-gray-800" />
             </div>

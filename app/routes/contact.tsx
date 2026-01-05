@@ -1,7 +1,7 @@
 import type { Route } from "./+types/contact";
 import { useState } from 'react';
 import { Icon } from '~/components/ui';
-
+import { useContactForm, useGuestbook, formatTimeAgo, useVisitorCount } from '~/lib/supabase';
 export function meta({ }: Route.MetaArgs) {
     return [
         { title: "Guestbook & Contact - Partha Saradhi" },
@@ -9,19 +9,19 @@ export function meta({ }: Route.MetaArgs) {
     ];
 }
 
-const guestbookEntries = [
-    { initials: 'AM', name: 'Alice M.', message: '"Incredible attention to detail!"', time: '2m ago' },
-    { initials: 'DK', name: 'David K.', message: '"Love the dark mode implementation."', time: '1h ago' },
-    { initials: 'SL', name: 'Sarah L.', message: '"Great portfolio structure."', time: '4h ago', faded: true },
-];
+// Guestbook entries now come from Supabase hook
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
     const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
     const [showGuestbookModal, setShowGuestbookModal] = useState(false);
     const [guestbookMessage, setGuestbookMessage] = useState('');
+    const [guestbookName, setGuestbookName] = useState('');
+
+    // Supabase hooks
+    const { submitting: isSubmitting, submitted: isSubmitted, error: contactError, submitContact, reset: resetContactForm } = useContactForm();
+    const { entries: guestbookEntries, totalCount, addEntry, loading: guestbookLoading } = useGuestbook({ limit: 3, orderBy: 'newest' });
+    const { formatted: visitorCount } = useVisitorCount();
     const [guestbookSubmitted, setGuestbookSubmitted] = useState(false);
 
     // Validate form
@@ -43,28 +43,40 @@ export default function ContactPage() {
         e.preventDefault();
         if (!validateForm()) return;
 
-        setIsSubmitting(true);
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        setFormData({ name: '', email: '', message: '' });
+        const success = await submitContact({
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+            inquiry_type: 'general',
+        });
 
-        // Reset after 5 seconds
-        setTimeout(() => setIsSubmitted(false), 5000);
+        if (success) {
+            setFormData({ name: '', email: '', message: '' });
+            // Reset after 5 seconds
+            setTimeout(() => resetContactForm(), 5000);
+        }
     };
 
     // Handle guestbook submission
     const handleGuestbookSubmit = async () => {
         if (!guestbookMessage.trim()) return;
 
-        setGuestbookSubmitted(true);
-        setGuestbookMessage('');
+        const entry = await addEntry({
+            name: guestbookName.trim() || 'Anonymous Visitor',
+            message: guestbookMessage,
+            is_anonymous: !guestbookName.trim(),
+        });
 
-        setTimeout(() => {
-            setShowGuestbookModal(false);
-            setGuestbookSubmitted(false);
-        }, 2000);
+        if (entry) {
+            setGuestbookSubmitted(true);
+            setGuestbookMessage('');
+            setGuestbookName('');
+
+            setTimeout(() => {
+                setShowGuestbookModal(false);
+                setGuestbookSubmitted(false);
+            }, 2000);
+        }
     };
 
     return (
@@ -167,23 +179,39 @@ export default function ContactPage() {
                                 <div className="mt-8 flex flex-col gap-3 relative">
                                     <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#151c2f] to-transparent z-20 pointer-events-none" />
 
-                                    {guestbookEntries.map((entry, index) => (
-                                        <div
-                                            key={index}
-                                            className={`flex items-center gap-4 p-3 rounded-lg bg-[#0f1420]/80 border border-[#2a3449]/50 hover:border-[#2b6cee]/30 transition-colors group/item backdrop-blur-sm ${entry.faded ? 'opacity-60' : ''}`}
-                                        >
-                                            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center border border-[#2a3449] text-xs font-bold text-gray-300 group-hover/item:text-white group-hover/item:border-[#2b6cee]/50 transition-colors">
-                                                {entry.initials}
-                                            </div>
-                                            <div className="flex flex-col flex-1 min-w-0">
-                                                <div className="flex items-center justify-between">
-                                                    <span className="text-sm font-bold text-white truncate">{entry.name}</span>
-                                                    <span className="text-[10px] font-mono text-slate-400">{entry.time}</span>
-                                                </div>
-                                                <p className="text-xs text-slate-400 truncate italic group-hover/item:text-[#2b6cee]/80 transition-colors">{entry.message}</p>
-                                            </div>
+                                    {guestbookLoading ? (
+                                        <div className="flex items-center justify-center py-6">
+                                            <div className="w-6 h-6 border-2 border-[#2a3449] border-t-[#2b6cee] rounded-full animate-spin" />
                                         </div>
-                                    ))}
+                                    ) : guestbookEntries.length > 0 ? (
+                                        guestbookEntries.map((entry, index) => (
+                                            <div
+                                                key={entry.id}
+                                                className={`flex items-center gap-4 p-3 rounded-lg bg-[#0f1420]/80 border border-[#2a3449]/50 hover:border-[#2b6cee]/30 transition-colors group/item backdrop-blur-sm ${index === guestbookEntries.length - 1 ? 'opacity-60' : ''}`}
+                                            >
+                                                {entry.is_anonymous ? (
+                                                    <div className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center border border-[#2a3449] text-gray-400">
+                                                        <Icon name="person" size="sm" />
+                                                    </div>
+                                                ) : (
+                                                    <div className={`h-10 w-10 rounded-full bg-gradient-to-br ${entry.gradient} flex items-center justify-center border border-[#2a3449] text-xs font-bold text-white group-hover/item:border-[#2b6cee]/50 transition-colors`}>
+                                                        {entry.initials}
+                                                    </div>
+                                                )}
+                                                <div className="flex flex-col flex-1 min-w-0">
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="text-sm font-bold text-white truncate">{entry.name}</span>
+                                                        <span className="text-[10px] font-mono text-slate-400">{formatTimeAgo(entry.created_at)}</span>
+                                                    </div>
+                                                    <p className="text-xs text-slate-400 truncate italic group-hover/item:text-[#2b6cee]/80 transition-colors">"{entry.message}"</p>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="text-center py-6 text-slate-400 text-sm">
+                                            Be the first to sign the guestbook!
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Sign Guestbook Button */}
@@ -195,7 +223,7 @@ export default function ContactPage() {
                                         <div className="absolute inset-0 bg-white/10 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
                                         <div className="flex flex-col items-start relative z-10">
                                             <span className="text-white font-bold text-lg tracking-wide">Sign the Guestbook</span>
-                                            <span className="text-blue-100 text-xs font-normal">Join 1,204 other visitors</span>
+                                            <span className="text-blue-100 text-xs font-normal">Join {totalCount > 0 ? totalCount.toLocaleString() : visitorCount} other visitors</span>
                                         </div>
                                         <Icon name="arrow_forward" className="text-white group-hover/btn:translate-x-1 transition-transform relative z-10" />
                                     </button>

@@ -1,6 +1,7 @@
 import type { Route } from "./+types/guestbook";
 import { useState, useMemo } from 'react';
-import { guestbook as guestbookData, profile } from "~/data";
+import { profile } from "~/data";
+import { useGuestbook, formatTimeAgo, useVisitorCount } from "~/lib/supabase";
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -9,35 +10,33 @@ export function meta({ }: Route.MetaArgs) {
     ];
 }
 
-interface GuestEntry {
-    id: number;
-    name: string;
-    initials: string;
-    role: string;
-    message: string;
-    time: string;
-    timeDisplay: string;
-    likes: number;
-    gradient: string;
-    featured: boolean;
-    tags?: string[];
-    isAnonymous: boolean;
-    avatar?: string;
-    showOnHomepage: boolean;
-}
-
 export default function GuestbookPage() {
-    const [entries, setEntries] = useState<GuestEntry[]>(guestbookData.entries as GuestEntry[]);
+    // Use Supabase hooks
+    const {
+        entries,
+        loading,
+        totalCount,
+        addEntry,
+        likeEntry,
+        hasLiked,
+    } = useGuestbook({ orderBy: 'newest' });
+
+    const { formatted: visitorCount } = useVisitorCount();
+
     const [searchQuery, setSearchQuery] = useState('');
     const [activeFilter, setActiveFilter] = useState('newest');
     const [showModal, setShowModal] = useState(false);
     const [newMessage, setNewMessage] = useState('');
     const [newName, setNewName] = useState('');
     const [isAnonymous, setIsAnonymous] = useState(false);
-    const [visibleCount, setVisibleCount] = useState(4);
-    const [likedEntries, setLikedEntries] = useState<number[]>([]);
+    const [visibleCount, setVisibleCount] = useState(8);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const filterOptions = guestbookData.filterOptions;
+    const filterOptions = [
+        { label: "Newest Arrival", value: "newest" },
+        { label: "Most Appreciated", value: "popular" },
+        { label: "Featured", value: "featured" }
+    ];
 
     // Filter and sort entries
     const filteredEntries = useMemo(() => {
@@ -55,50 +54,42 @@ export default function GuestbookPage() {
 
         // Sort/Filter by type
         if (activeFilter === 'popular') {
-            result.sort((a, b) => b.likes - a.likes);
+            result.sort((a, b) => b.likes_count - a.likes_count);
         } else if (activeFilter === 'featured') {
             result = result.filter(e => e.featured);
-        } else {
-            // newest - default order
         }
 
         return result;
     }, [entries, searchQuery, activeFilter]);
 
     // Handle like
-    const handleLike = (id: number) => {
-        if (likedEntries.includes(id)) return;
-
-        setLikedEntries(prev => [...prev, id]);
-        setEntries(prev => prev.map(e =>
-            e.id === id ? { ...e, likes: e.likes + 1 } : e
-        ));
+    const handleLike = async (id: string) => {
+        if (hasLiked(id)) return;
+        await likeEntry(id);
     };
 
     // Handle sign guestbook
-    const handleSign = () => {
-        if (!newMessage.trim()) return;
+    const handleSign = async () => {
+        if (!newMessage.trim() || isSubmitting) return;
 
-        const newEntry: GuestEntry = {
-            id: Date.now(),
-            name: isAnonymous ? 'Anonymous User' : (newName.trim() || 'Anonymous User'),
-            initials: isAnonymous ? '' : (newName.trim() ? newName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() : ''),
-            role: isAnonymous ? `Visitor #${Math.floor(1000 + Math.random() * 9000)}` : 'New Visitor',
-            message: newMessage,
-            time: new Date().toISOString(),
-            timeDisplay: 'Just now',
-            likes: 0,
-            gradient: `from-${['purple', 'emerald', 'orange', 'blue', 'pink'][Math.floor(Math.random() * 5)]}-500 to-${['indigo', 'cyan', 'pink', 'cyan', 'purple'][Math.floor(Math.random() * 5)]}-600`,
-            isAnonymous,
-            featured: false,
-            showOnHomepage: false,
-        };
+        setIsSubmitting(true);
+        try {
+            const entry = await addEntry({
+                name: isAnonymous ? 'Anonymous User' : (newName.trim() || 'Anonymous User'),
+                role: isAnonymous ? `Visitor #${Math.floor(1000 + Math.random() * 9000)}` : 'New Visitor',
+                message: newMessage,
+                is_anonymous: isAnonymous,
+            });
 
-        setEntries(prev => [newEntry, ...prev]);
-        setNewMessage('');
-        setNewName('');
-        setIsAnonymous(false);
-        setShowModal(false);
+            if (entry) {
+                setNewMessage('');
+                setNewName('');
+                setIsAnonymous(false);
+                setShowModal(false);
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const regularEntries = filteredEntries.filter(e => !e.featured);
@@ -162,9 +153,12 @@ export default function GuestbookPage() {
                                     </button>
                                     <button
                                         onClick={handleSign}
-                                        disabled={!newMessage.trim()}
-                                        className="px-6 py-2 bg-[#19a1e6] text-white font-bold rounded-lg hover:bg-[#19a1e6]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        disabled={!newMessage.trim() || isSubmitting}
+                                        className="px-6 py-2 bg-[#19a1e6] text-white font-bold rounded-lg hover:bg-[#19a1e6]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                                     >
+                                        {isSubmitting && (
+                                            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        )}
                                         Sign Guestbook
                                     </button>
                                 </div>
@@ -173,8 +167,6 @@ export default function GuestbookPage() {
                     </div>
                 )
             }
-
-
 
             <main className="flex-1 w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
                 {/* Header Section */}
@@ -195,12 +187,18 @@ export default function GuestbookPage() {
                             <div className="flex items-center gap-4 pt-2">
                                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#293338]/50 border border-[#293338]">
                                     <span className="material-symbols-outlined text-gray-400 text-base">database</span>
-                                    <span className="font-mono text-xs text-gray-300">Entries: <span className="text-white font-bold">{entries.length}</span></span>
+                                    <span className="font-mono text-xs text-gray-300">Entries: <span className="text-white font-bold">{totalCount}</span></span>
                                 </div>
                                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#293338]/50 border border-[#293338]">
-                                    <span className="material-symbols-outlined text-gray-400 text-base">update</span>
-                                    <span className="font-mono text-xs text-gray-300">Last Update: <span className="text-white font-bold">2m ago</span></span>
+                                    <span className="material-symbols-outlined text-gray-400 text-base">group</span>
+                                    <span className="font-mono text-xs text-gray-300">Visitors: <span className="text-white font-bold">{visitorCount}</span></span>
                                 </div>
+                                {loading && (
+                                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#19a1e6]/10 border border-[#19a1e6]/30">
+                                        <span className="w-2 h-2 rounded-full bg-[#19a1e6] animate-pulse" />
+                                        <span className="font-mono text-xs text-[#19a1e6]">Syncing...</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <button
@@ -255,12 +253,20 @@ export default function GuestbookPage() {
                     </div>
                 </section>
 
+                {/* Loading State */}
+                {loading && entries.length === 0 && (
+                    <div className="flex flex-col items-center justify-center py-20">
+                        <div className="w-12 h-12 border-4 border-[#293338] border-t-[#19a1e6] rounded-full animate-spin mb-4" />
+                        <p className="text-gray-400">Loading entries...</p>
+                    </div>
+                )}
+
                 {/* Guest Entries Grid */}
                 <section className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 pb-20">
                     {regularEntries.slice(0, visibleCount).map((entry) => (
                         <article key={entry.id} className="break-inside-avoid relative group bg-[#161b20] rounded-2xl p-6 border border-[#293338] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(25,161,230,0.15)] hover:border-[#19a1e6]/40">
                             <div className="flex items-center gap-4 mb-4">
-                                {entry.isAnonymous ? (
+                                {entry.is_anonymous ? (
                                     <div className="size-10 rounded-full bg-gray-800 flex items-center justify-center text-white border border-gray-700">
                                         <span className="material-symbols-outlined text-gray-400">person</span>
                                     </div>
@@ -278,7 +284,7 @@ export default function GuestbookPage() {
                                 <span className="absolute -left-3 top-0 bottom-0 w-0.5 bg-[#293338] group-hover:bg-[#19a1e6]/50 transition-colors" />
                                 <p className="text-gray-300 text-sm leading-relaxed pl-2">{entry.message}</p>
                             </div>
-                            {entry.tags && (
+                            {entry.tags && entry.tags.length > 0 && (
                                 <div className="flex items-center gap-2 mb-4 flex-wrap">
                                     {entry.tags.map((tag) => (
                                         <span key={tag} className="px-2 py-1 rounded bg-[#293338] text-[10px] text-gray-400 font-mono border border-gray-700">{tag}</span>
@@ -286,15 +292,15 @@ export default function GuestbookPage() {
                                 </div>
                             )}
                             <div className="flex items-center justify-between pt-4 border-t border-[#293338]/50">
-                                <span className="text-gray-500 text-xs font-mono">{entry.timeDisplay}</span>
+                                <span className="text-gray-500 text-xs font-mono">{formatTimeAgo(entry.created_at)}</span>
                                 <button
                                     onClick={() => handleLike(entry.id)}
-                                    className={`flex items-center gap-2 group/btn ${likedEntries.includes(entry.id) ? 'cursor-default' : 'cursor-pointer'}`}
+                                    className={`flex items-center gap-2 group/btn ${hasLiked(entry.id) ? 'cursor-default' : 'cursor-pointer'}`}
                                 >
-                                    <span className={`material-symbols-outlined text-[20px] transition-colors ${likedEntries.includes(entry.id) ? 'text-[#19a1e6]' : 'text-gray-500 group-hover/btn:text-[#19a1e6]'}`}>
-                                        {likedEntries.includes(entry.id) ? 'thumb_up' : 'thumb_up'}
+                                    <span className={`material-symbols-outlined text-[20px] transition-all ${hasLiked(entry.id) ? 'text-[#19a1e6] scale-110' : 'text-gray-500 group-hover/btn:text-[#19a1e6]'}`}>
+                                        thumb_up
                                     </span>
-                                    <span className={`text-sm font-medium transition-colors ${likedEntries.includes(entry.id) ? 'text-white' : 'text-gray-500 group-hover/btn:text-white'}`}>{entry.likes}</span>
+                                    <span className={`text-sm font-medium transition-colors ${hasLiked(entry.id) ? 'text-white' : 'text-gray-500 group-hover/btn:text-white'}`}>{entry.likes_count}</span>
                                 </button>
                             </div>
                         </article>
@@ -309,7 +315,7 @@ export default function GuestbookPage() {
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="size-12 rounded-full border-2 border-[#19a1e6] p-0.5">
                                     <div className="w-full h-full rounded-full bg-slate-700 overflow-hidden">
-                                        <img alt={featuredEntry.name} className="w-full h-full object-cover" src={featuredEntry.avatar} />
+                                        <img alt={featuredEntry.name} className="w-full h-full object-cover" src={featuredEntry.avatar_url || ''} />
                                     </div>
                                 </div>
                                 <div>
@@ -322,7 +328,7 @@ export default function GuestbookPage() {
                             </div>
                             <p className="text-gray-200 text-sm font-medium leading-relaxed mb-5">{featuredEntry.message}</p>
                             <div className="flex items-center justify-between pt-4 border-t border-[#293338]/50">
-                                <span className="text-gray-500 text-xs font-mono">{featuredEntry.timeDisplay}</span>
+                                <span className="text-gray-500 text-xs font-mono">{formatTimeAgo(featuredEntry.created_at)}</span>
                                 <button className="flex items-center gap-1.5 text-[#19a1e6] bg-[#19a1e6]/10 px-3 py-1 rounded-full border border-[#19a1e6]/20 hover:bg-[#19a1e6] hover:text-white transition-all">
                                     <span className="material-symbols-outlined text-[16px]">reply</span>
                                     <span className="text-xs font-bold">Reply</span>
@@ -333,7 +339,7 @@ export default function GuestbookPage() {
                 </section>
 
                 {/* No Results */}
-                {filteredEntries.length === 0 && (
+                {filteredEntries.length === 0 && !loading && (
                     <div className="flex flex-col items-center justify-center py-20 text-center">
                         <span className="material-symbols-outlined text-gray-600 text-6xl mb-4">search_off</span>
                         <h3 className="text-xl font-bold text-white mb-2">No entries found</h3>
@@ -352,10 +358,10 @@ export default function GuestbookPage() {
                     <div className="flex flex-col items-center justify-center py-8 border-t border-[#293338]">
                         <p className="text-gray-500 font-mono text-xs mb-4">Displaying {visibleCount} of {regularEntries.length} logs</p>
                         <button
-                            onClick={() => setVisibleCount(prev => prev + 4)}
+                            onClick={() => setVisibleCount(prev => prev + 8)}
                             className="group flex items-center justify-center gap-2 px-6 py-3 bg-[#161b20] border border-[#293338] hover:border-[#19a1e6]/50 text-white text-sm font-bold rounded-xl transition-all hover:bg-[#293338]/50"
                         >
-                            <span className="size-4 border-2 border-gray-400 border-t-white rounded-full animate-spin group-hover:border-[#19a1e6] group-hover:border-t-transparent" />
+                            <span className="material-symbols-outlined text-[18px] group-hover:text-[#19a1e6]">expand_more</span>
                             <span>Load More Entries</span>
                         </button>
                     </div>

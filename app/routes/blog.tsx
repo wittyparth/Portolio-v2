@@ -1,11 +1,12 @@
 import type { Route } from "./+types/blog";
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { blog as blogData, profile } from "~/data";
 import {
     Icon,
     Badge,
     Button
 } from '~/components/ui';
+import { useArticleStats } from '~/lib/supabase';
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -23,6 +24,9 @@ export default function BlogPage() {
     const [visibleCount, setVisibleCount] = useState(5);
     const [email, setEmail] = useState('');
     const [subscribed, setSubscribed] = useState(false);
+
+    // Supabase article stats hook
+    const { stats: articleStats, getStats, trackView, toggleLike, hasLiked, formatViews } = useArticleStats();
 
     // Filter and sort posts
     const filteredPosts = useMemo(() => {
@@ -194,9 +198,20 @@ export default function BlogPage() {
                 {/* Posts Grid */}
                 <div className="w-full max-w-[1280px] px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr pb-12">
                     {filteredPosts.length > 0 ? (
-                        filteredPosts.slice(0, visibleCount).map((post) => (
-                            <BlogCard key={post.id} {...post} />
-                        ))
+                        filteredPosts.slice(0, visibleCount).map((post) => {
+                            const stats = getStats(post.id);
+                            return (
+                                <BlogCard
+                                    key={post.id}
+                                    {...post}
+                                    views={stats ? formatViews(stats.views_count) : post.views}
+                                    likes={stats ? String(stats.likes_count) : post.likes}
+                                    isLiked={hasLiked(post.id)}
+                                    onLike={() => toggleLike(post.id)}
+                                    onView={() => trackView(post.id)}
+                                />
+                            );
+                        })
                     ) : (
                         <div className="col-span-full flex flex-col items-center justify-center py-20">
                             <Icon name="search_off" className="text-slate-600 !text-6xl mb-4" />
@@ -291,9 +306,16 @@ interface BlogCardProps {
     retweets?: string;
     type: string;
     imageUrl: string;
+    isLiked?: boolean;
+    onLike?: () => void;
+    onView?: () => void;
 }
 
-function BlogCard({ id, title, description, category, categoryColor, date, readTime, views, likes, comments, retweets, type, imageUrl }: BlogCardProps) {
+function BlogCard({ id, title, description, category, categoryColor, date, readTime, views, likes, comments, retweets, type, imageUrl, isLiked, onLike, onView }: BlogCardProps) {
+    // Track view when card is clicked
+    const handleClick = () => {
+        if (onView) onView();
+    };
     const getTypeIcon = () => {
         switch (type) {
             case 'medium':
@@ -370,9 +392,12 @@ function BlogCard({ id, title, description, category, categoryColor, date, readT
                             </span>
                         )}
                         {likes && (
-                            <span className="flex items-center gap-1">
-                                <Icon name="thumb_up" size="sm" className="!text-[14px]" />{likes}
-                            </span>
+                            <button
+                                onClick={(e) => { e.preventDefault(); e.stopPropagation(); if (onLike) onLike(); }}
+                                className={`flex items-center gap-1 transition-colors ${isLiked ? 'text-[#2b6cee]' : 'hover:text-[#2b6cee]'}`}
+                            >
+                                <Icon name={isLiked ? 'thumb_up' : 'thumb_up'} size="sm" className={`!text-[14px] ${isLiked ? 'scale-110' : ''}`} />{likes}
+                            </button>
                         )}
                         {comments && (
                             <span className="flex items-center gap-1">
