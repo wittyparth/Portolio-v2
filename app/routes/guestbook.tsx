@@ -1,9 +1,10 @@
 import type { Route } from "./+types/guestbook";
 import { useState, useMemo } from 'react';
+import { guestbook as guestbookData, profile } from "~/data";
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Guestbook - Partha.dev" },
+        { title: `Guestbook - ${profile.name}` },
         { name: "description", content: "A persistent stream of thoughts from visitors. Sign and leave your mark." },
     ];
 }
@@ -15,30 +16,18 @@ interface GuestEntry {
     role: string;
     message: string;
     time: string;
+    timeDisplay: string;
     likes: number;
-    gradient?: string;
+    gradient: string;
     featured: boolean;
     tags?: string[];
-    isAnonymous?: boolean;
+    isAnonymous: boolean;
     avatar?: string;
+    showOnHomepage: boolean;
 }
 
-const initialGuestEntries: GuestEntry[] = [
-    { id: 1, name: 'Alex Rivera', initials: 'AR', role: 'Frontend Dev • London', message: 'Incredible work on the backend architecture article. Keep shipping! 🚀', time: '2h ago', likes: 12, gradient: 'from-purple-500 to-indigo-600', featured: false },
-    { id: 2, name: 'Sarah Chen', initials: 'JD', role: 'Product Designer', message: 'Love the dark mode implementation here! The contrast ratios are perfect.', time: '5h ago', likes: 48, gradient: 'from-emerald-400 to-cyan-600', featured: false },
-    { id: 3, name: 'Elena Lin', initials: 'EL', role: 'UX Researcher', message: "I've been following your open source contributions. Would love a breakdown of the API design.", time: '2d ago', likes: 89, gradient: 'from-orange-500 to-pink-600', tags: ['#opensource', '#state-management'], featured: false },
-    { id: 4, name: 'Anonymous User', initials: '', role: 'Visitor #4291', message: '"Simplicity is the ultimate sophistication." - You nailed it.', time: '3d ago', isAnonymous: true, likes: 15, featured: false, gradient: 'from-gray-500 to-gray-600' },
-    { id: 5, name: 'David Kim', initials: 'DK', role: 'CTO @ TechFlow', message: "Partha, I'm seriously impressed by the database optimization techniques you detailed. We're facing similar challenges at scale. Sent you a DM!", time: '1w ago', likes: 156, gradient: 'from-blue-500 to-cyan-500', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDiQMc4ZS5tQgIHdInkjnLp20rtrsx-Z2Yt6ir-r98PGeCYdwq-vX-fKKSm88XCz0s538Aofh7WwWs62eBgygmXaLfm-_W1a_e6b9zT01_-NEKJu6qmQCNTdqtLDYhVXJCkv0zWEKe-xpQo6RV4V4f5j0cDYLIv5HVAvfjWaYRlW4OTP_xUTGgE-CiRJundn2POG6xK4I-8VGsI_jIgVZzyrdpdRNVpE0nkQpZyK5QZlTVy4pKmikUH_6JG08owCnhyK_XcMv9X724N', featured: true },
-];
-
-const filterOptions = [
-    { label: 'Newest Arrival', value: 'newest' },
-    { label: 'Most Appreciated', value: 'popular' },
-    { label: 'Featured', value: 'featured' },
-];
-
 export default function GuestbookPage() {
-    const [entries, setEntries] = useState(initialGuestEntries);
+    const [entries, setEntries] = useState<GuestEntry[]>(guestbookData.entries as GuestEntry[]);
     const [searchQuery, setSearchQuery] = useState('');
     const [activeFilter, setActiveFilter] = useState('newest');
     const [showModal, setShowModal] = useState(false);
@@ -47,6 +36,8 @@ export default function GuestbookPage() {
     const [isAnonymous, setIsAnonymous] = useState(false);
     const [visibleCount, setVisibleCount] = useState(4);
     const [likedEntries, setLikedEntries] = useState<number[]>([]);
+
+    const filterOptions = guestbookData.filterOptions;
 
     // Filter and sort entries
     const filteredEntries = useMemo(() => {
@@ -94,11 +85,13 @@ export default function GuestbookPage() {
             initials: isAnonymous ? '' : (newName.trim() ? newName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() : ''),
             role: isAnonymous ? `Visitor #${Math.floor(1000 + Math.random() * 9000)}` : 'New Visitor',
             message: newMessage,
-            time: 'Just now',
+            time: new Date().toISOString(),
+            timeDisplay: 'Just now',
             likes: 0,
             gradient: `from-${['purple', 'emerald', 'orange', 'blue', 'pink'][Math.floor(Math.random() * 5)]}-500 to-${['indigo', 'cyan', 'pink', 'cyan', 'purple'][Math.floor(Math.random() * 5)]}-600`,
             isAnonymous,
             featured: false,
+            showOnHomepage: false,
         };
 
         setEntries(prev => [newEntry, ...prev]);
@@ -293,7 +286,7 @@ export default function GuestbookPage() {
                                 </div>
                             )}
                             <div className="flex items-center justify-between pt-4 border-t border-[#293338]/50">
-                                <span className="text-gray-500 text-xs font-mono">{entry.time}</span>
+                                <span className="text-gray-500 text-xs font-mono">{entry.timeDisplay}</span>
                                 <button
                                     onClick={() => handleLike(entry.id)}
                                     className={`flex items-center gap-2 group/btn ${likedEntries.includes(entry.id) ? 'cursor-default' : 'cursor-pointer'}`}
@@ -329,7 +322,7 @@ export default function GuestbookPage() {
                             </div>
                             <p className="text-gray-200 text-sm font-medium leading-relaxed mb-5">{featuredEntry.message}</p>
                             <div className="flex items-center justify-between pt-4 border-t border-[#293338]/50">
-                                <span className="text-gray-500 text-xs font-mono">{featuredEntry.time}</span>
+                                <span className="text-gray-500 text-xs font-mono">{featuredEntry.timeDisplay}</span>
                                 <button className="flex items-center gap-1.5 text-[#19a1e6] bg-[#19a1e6]/10 px-3 py-1 rounded-full border border-[#19a1e6]/20 hover:bg-[#19a1e6] hover:text-white transition-all">
                                     <span className="material-symbols-outlined text-[16px]">reply</span>
                                     <span className="text-xs font-bold">Reply</span>

@@ -1,9 +1,10 @@
 import type { Route } from "./+types/projects";
 import { useState, useMemo } from 'react';
+import { projects as projectsData, profile } from "~/data";
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "All Projects - Partha Saradhi" },
+        { title: `All Projects - ${profile.name}` },
         { name: "description", content: "A collection of backend systems, distributed architectures, and experimental code. Designed for scale, built for performance." },
     ];
 }
@@ -16,109 +17,18 @@ const navLinks = [
     { label: 'Recommendations', href: '/recommendations' },
 ];
 
-const filterTags = [
-    { label: 'All Systems', value: 'all' },
-    { label: 'Distributed', value: 'distributed' },
-    { label: 'Full Stack', value: 'fullstack' },
-    { label: 'Cloud Native', value: 'cloud' },
-    { label: 'Golang', value: 'golang' },
-    { label: 'Rust', value: 'rust' },
-];
-
-interface Project {
-    id: number;
-    title: string;
-    description: string;
-    tech: string[];
-    category: string;
-    tags: string[];
-    imageUrl: string;
-    version?: string;
-    featured?: boolean;
-    lastUpdated: string;
-    githubUrl?: string;
-    liveUrl?: string;
-}
-
-const projectsData: Project[] = [
-    {
-        id: 1,
-        title: 'Vortex Stream',
-        description: 'A high-throughput event streaming platform capable of handling 1M+ events/sec. Built with Go and Apache Kafka, featuring real-time analytics dashboard and gRPC communication layers.',
-        tech: ['Golang', 'Kafka', 'Docker', 'gRPC'],
-        category: 'Distributed',
-        tags: ['distributed', 'golang', 'cloud'],
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBRabyJ2No8pXUQE18kSMvabzKgpoLAVtiLzqHzXKDBFKjo4zZSY6-Msh3zqDY5XM21gDfceb5evFbBUJfYpth1hFU1zepP0zIwqjhcdt7sCA85S7aaCRXqNG1NRyDf7epyKo2QR-UdVz1zyd9d93kGhZcC6e5plJKKyxLmzB-hoajY1PqmDrENq27H0sDjVd-iKXxlrTATFCmWBY03bkiZTOjgTyMuHyDCmBlaKH7TrlELsObKAyuG4VnFfY02INKUxm2l0oZDPden',
-        version: 'v2.4.0',
-        featured: true,
-        lastUpdated: '1d ago',
-        githubUrl: '#',
-        liveUrl: '#',
-    },
-    {
-        id: 2,
-        title: 'AuthMatrix',
-        description: 'Centralized authentication microservice supporting OAuth2, JWT, and MFA. Designed to be plug-and-play for any distributed architecture.',
-        tech: ['Python', 'FastAPI', 'Redis'],
-        category: 'Full Stack',
-        tags: ['fullstack', 'cloud'],
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC3hSXYdaA1rj6gxrOquecveCuP65Gg3PMi6ovHUFU2ZdGX1oqkGD6-DKDh9VMyQm0i6XZyC4DkJgTBaGmITymofcvsAkdzf_L9yu9bV8CN-THfGvYtUddY6Ee3MzHp81q0sfS_wBOGbf0i0EdHoKeQWRFDX5fv6xAZhYN6qADxDaGrGVIAWUFiNcUuN6eNhGH7XW34yVr3nKaVruPcekXJ0FJYEyFjANZE0_tPSm8VoNcdi1bfdxtzmtHFvNpXsLcnRpaqCojiltzX',
-        lastUpdated: '2d ago',
-        githubUrl: '#',
-        liveUrl: '#',
-    },
-    {
-        id: 3,
-        title: 'Sentinel CI',
-        description: 'A custom CI/CD pipeline tool that scans commits for secrets and vulnerabilities before allowing merge requests.',
-        tech: ['Rust', 'WebAssembly'],
-        category: 'Security',
-        tags: ['rust', 'cloud'],
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBPGUEtGaWnPprZuN5tEdSsfuB9cKXEhulX63vWvr8Dnwbme0wtqA4q31crfbXBT_5rSQyvP_5u5nw-6NGphZbUkSYYaSkYHWMISN39bVbaWzdITatxJs93G7dqmiRMNNBh-mqGoAq9xVwdu_qTP9cD1oX0DgxPW0KbtNDdPthep2ALM7wzqW1wEdt1jcPz-jAafsJLVvbdgfAHfJcb20xMxsLsVSMntTeksl6-3cCnxCmqhMc62JeDX_DgTmicYoe3M_WzaK7BVbXu',
-        lastUpdated: '1w ago',
-        githubUrl: '#',
-        liveUrl: '#',
-    },
-    {
-        id: 4,
-        title: 'MeshConnect',
-        description: 'Peer-to-peer file sharing protocol implemented over WebRTC. Focusing on privacy and ephemeral data transfer.',
-        tech: ['Node.js', 'WebRTC', 'Socket.io'],
-        category: 'Networking',
-        tags: ['distributed', 'fullstack'],
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB_Ugo7lx3II_MvDxgLywaoU6Ry0cfTanvHZioJ6yjjFFaUISBke5Kxu2SD-mavs4hz1Sr-J6HNe1aHpkfBVfzfk_GlT-BTvMUvaL4RJIhTJqzkzxj2DnWsWnn8fjOB4Z4UfPty5PUFjeqqCGbE1VqfdsjGHVVh0TsEy4Y-_Lzw2gh0yilviSBV2nLSfRC1B6WmdFTVStsF7gSCG-t9aBL9d8cuATGqUM7jS2IpPE5Wah33328Rtp6A8v72-wGecjX718sxi85jJAkJ',
-        lastUpdated: '1mo ago',
-        githubUrl: '#',
-        liveUrl: '#',
-    },
-    {
-        id: 5,
-        title: 'PathFinder Visualizer',
-        description: 'Interactive tool to visualize Dijkstra, A*, and BFS algorithms on a 3D grid. Built to teach graph theory concepts.',
-        tech: ['React', 'Three.js'],
-        category: 'Algorithms',
-        tags: ['fullstack'],
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAeCfyWBM5wEwvaIbm-o0YX0RNFgdjNzshbydOkIrx77fg4mRZw6bFB03n-0TZrRLy0DQ_7BTfVwNwNesde_kPEYRyAYL524NQrbtokD6AIgJs1JiaKu9mhqCsrVVt9LJ7AQuSHlsnx4YrRH6xH-JON0H8GgDNqEyve3dFJQngs7KxLMfNV-YLbPGSJGOkjSb2cCxEn-DGXDxHfijyQTZM36qjlg8WFkkjXVsOeygIMB04d4_IBeqvmBfBUMlDYJZLD6WK49zjVCe2e',
-        lastUpdated: '2mo ago',
-        githubUrl: '#',
-        liveUrl: '#',
-    },
-];
-
-const junkyardProjects = [
-    { name: 'cli-todo-rust', tech: 'Rust', description: 'Blazingly fast terminal based todo manager storing data in JSON.', link: '#' },
-    { name: 'scraper-bot-v1', tech: 'Python', description: 'Automated price tracking script for e-commerce sites using Selenium.', link: '#' },
-    { name: 'docker-postgres-backup', tech: 'Shell', description: 'Cron job script to automatically backup dockerized Postgres databases to S3.', link: '#' },
-    { name: 'vim-config-ultimate', tech: 'VimL', description: 'My personal .vimrc with 50+ plugins tailored for Go development.', link: '#' },
-];
-
 export default function ProjectsPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [activeFilter, setActiveFilter] = useState('all');
 
+    const allProjects = projectsData.projects;
+    const filterTags = projectsData.filterTags;
+    const junkyardProjects = projectsData.junkyardProjects;
+    const { totalProjects, totalLoc, activeProjects } = projectsData.archiveStats;
+
     // Filter projects
     const filteredProjects = useMemo(() => {
-        let result = [...projectsData];
+        let result = [...allProjects];
 
         // Tag filter
         if (activeFilter !== 'all') {
@@ -137,7 +47,7 @@ export default function ProjectsPage() {
         }
 
         return result;
-    }, [searchQuery, activeFilter]);
+    }, [searchQuery, activeFilter, allProjects]);
 
     const featuredProject = filteredProjects.find(p => p.featured);
     const regularProjects = filteredProjects.filter(p => !p.featured);
@@ -160,7 +70,7 @@ export default function ProjectsPage() {
                         </p>
                         <div className="pt-4 flex gap-4">
                             <a
-                                href="https://github.com"
+                                href={profile.social.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 px-4 py-2 bg-[#282e39] hover:bg-[#3b4354] transition-colors rounded-lg text-sm font-bold border border-[#3b4354]"
@@ -173,15 +83,15 @@ export default function ProjectsPage() {
                     {/* Stats Grid */}
                     <div className="grid grid-cols-3 gap-4 w-full lg:w-auto">
                         <div className="bg-[#1c2029] border border-[#282e39] p-4 rounded-xl flex flex-col items-center justify-center min-w-[100px] hover:border-[#2b6cee]/50 transition-colors cursor-default group">
-                            <span className="text-3xl font-bold font-mono group-hover:text-[#2b6cee] transition-colors">{projectsData.length}</span>
+                            <span className="text-3xl font-bold font-mono group-hover:text-[#2b6cee] transition-colors">{allProjects.length}</span>
                             <span className="text-xs text-[#9da6b9] uppercase tracking-wider font-semibold">Projects</span>
                         </div>
                         <div className="bg-[#1c2029] border border-[#282e39] p-4 rounded-xl flex flex-col items-center justify-center min-w-[100px] hover:border-[#2b6cee]/50 transition-colors cursor-default group">
-                            <span className="text-3xl font-bold font-mono group-hover:text-[#2b6cee] transition-colors">45k</span>
+                            <span className="text-3xl font-bold font-mono group-hover:text-[#2b6cee] transition-colors">{totalLoc}</span>
                             <span className="text-xs text-[#9da6b9] uppercase tracking-wider font-semibold">LOC</span>
                         </div>
                         <div className="bg-[#1c2029] border border-[#282e39] p-4 rounded-xl flex flex-col items-center justify-center min-w-[100px] hover:border-[#2b6cee]/50 transition-colors cursor-default group">
-                            <span className="text-3xl font-bold font-mono group-hover:text-[#2b6cee] transition-colors">3</span>
+                            <span className="text-3xl font-bold font-mono group-hover:text-[#2b6cee] transition-colors">{activeProjects}</span>
                             <span className="text-xs text-[#9da6b9] uppercase tracking-wider font-semibold">Active</span>
                         </div>
                     </div>
@@ -230,7 +140,7 @@ export default function ProjectsPage() {
                 {(searchQuery || activeFilter !== 'all') && (
                     <div className="w-full">
                         <p className="text-[#9da6b9] text-sm">
-                            Showing {filteredProjects.length} of {projectsData.length} projects
+                            Showing {filteredProjects.length} of {allProjects.length} projects
                             {searchQuery && <span className="text-[#2b6cee]"> matching "{searchQuery}"</span>}
                             {activeFilter !== 'all' && <span className="text-[#2b6cee]"> in {filterTags.find(f => f.value === activeFilter)?.label}</span>}
                         </p>

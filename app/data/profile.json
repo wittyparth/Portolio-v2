@@ -1,0 +1,32 @@
+{
+  "name": "Partha Saradhi",
+  "role": "Backend Engineer",
+  "tagline": "Building scalable systems for 1→1M users.",
+  "heroTitle": {
+    "line1": { "highlight": "ASYNC", "text": "BACKEND" },
+    "line2": "ENGINEER FOR",
+    "line3": "SCALE-UPS"
+  },
+  "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuAXbRbB2RYxtT7SPBVFZZHoKhje0RDUO06s6y8efWqyjS5MMMGKdE-j8Y_o45gVtHXkctCH1AWHlQ8JpxNwesJUz2b2zfeT9c-eL_CXEOUwt3O96mETSKFs1h0MP_tFvPYvv-s_GeIrwqviJf-TSRGrVNOSYeIK6v-5EBsd4pBx1LFcWHjVVzQxewv9wEypCb6aRVW7LtGhNRZUTk0fFxy8a2RK_1UXC8GfQD0SdNK-Jem7_FbpYpIx_wfs9xnNQ02u1q-qoVFm3nWB",
+  "status": "Open to Work",
+  "location": {
+    "city": "Bangalore",
+    "country": "IN",
+    "weather": { "temp": "24°C", "condition": "Clear Night" }
+  },
+  "social": {
+    "github": "https://github.com/parthasaradhi",
+    "linkedin": "https://linkedin.com/in/parthasaradhi",
+    "twitter": "https://twitter.com/username",
+    "email": "contact@partha.dev"
+  },
+  "cta": {
+    "primary": { "label": "Book intro", "href": "/contact", "icon": "calendar_today" },
+    "secondary": { "label": "View work", "href": "/projects", "icon": "grid_view" }
+  },
+  "systemStatus": {
+    "version": "v2.4.0",
+    "latency": "12ms",
+    "uptime": "99.9%"
+  }
+}

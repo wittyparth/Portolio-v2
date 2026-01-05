@@ -1,23 +1,31 @@
 <!DOCTYPE html>
+<html class="dark" lang="en">
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Partha Saradhi // Interactive Terminal</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Partha Saradhi // Interactive Terminal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
                         "primary": "#19a1e6",
+                        "secondary": "#a855f7",
+                        "danger": "#ef4444",
+                        "success": "#22c55e",
+                        "warning": "#eab308",
                         "background-light": "#f6f7f8",
-                        "background-dark": "#111c21",
-                        "surface-dark": "#1c2326",
+                        "background-dark": "#0b0e11",
+                        "surface-dark": "#161b1f",
                         "border-dark": "#293338",
                         "text-muted": "#9dafb8",
                     },
@@ -26,20 +34,23 @@
                         "mono": ["JetBrains Mono", "monospace"],
                     },
                     borderRadius: {
-                        "DEFAULT": "0.25rem", 
-                        "lg": "0.5rem", 
-                        "xl": "0.75rem", 
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
                         "full": "9999px"
                     },
                     boxShadow: {
                         'glow': '0 0 20px rgba(25, 161, 230, 0.15)',
                         'glow-lg': '0 0 40px rgba(25, 161, 230, 0.2)',
                         'glow-text': '0 0 8px rgba(25, 161, 230, 0.6)',
+                        'glow-danger': '0 0 15px rgba(239, 68, 68, 0.4)',
                     },
                     animation: {
                         'blink': 'blink 1.2s steps(2, start) infinite',
                         'scanline': 'scanline 8s linear infinite',
                         'flicker': 'flicker 0.15s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         blink: {
@@ -55,25 +66,25 @@
             },
         }
     </script>
-<style>
-        /* Custom Scrollbar for Terminal Area */
-        .scrollbar-terminal::-webkit-scrollbar {
-            width: 10px;
-        }
-        .scrollbar-terminal::-webkit-scrollbar-track {
-            background: #111518; 
-            border-left: 1px solid #293338;
-        }
-        .scrollbar-terminal::-webkit-scrollbar-thumb {
-            background: #293338; 
-            border: 2px solid #111518;
-            border-radius: 99px;
-        }
-        .scrollbar-terminal::-webkit-scrollbar-thumb:hover {
-            background: #19a1e6; 
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
         }
 
-        /* Scanline Overlay Effect */
+        ::-webkit-scrollbar-track {
+            background: #111518;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #293338;
+            border-radius: 99px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #19a1e6;
+        }
+
         .scanlines::before {
             content: " ";
             display: block;
@@ -88,236 +99,388 @@
             pointer-events: none;
         }
 
-        .crt-flicker {
-            animation: textShadow 1.6s infinite;
+        .cmd-text {
+            text-shadow: 0 0 2px rgba(25, 161, 230, 0.4);
         }
 
-        /* Text selection color */
         ::selection {
-            background: #19a1e6;
+            background: rgba(25, 161, 230, 0.3);
             color: #fff;
         }
     </style>
 </head>
-<body class="bg-[#0b0e11] dark text-white font-display overflow-x-hidden min-h-screen flex flex-col relative selection:bg-primary/30">
-<!-- Top Navigation -->
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark px-6 py-4 lg:px-10 bg-[#111518] z-50 sticky top-0">
-<div class="flex items-center gap-4 text-white">
-<div class="size-6 text-primary animate-pulse">
-<span class="material-symbols-outlined">terminal</span>
-</div>
-<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Partha Saradhi // Terminal</h2>
-</div>
-<div class="flex flex-1 justify-end gap-8">
-<div class="hidden md:flex items-center gap-9">
-<a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Home</a>
-<a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal" href="#">About</a>
-<a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Work</a>
-<a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Contact</a>
-</div>
-<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary hover:bg-primary/90 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-glow">
-<span class="truncate">Exit Terminal</span>
-</button>
-</div>
-</header>
-<!-- Main Background with Effects -->
-<div class="fixed inset-0 top-[60px] pointer-events-none z-0">
-<!-- Radial Gradient Center Spotlight -->
-<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_#162026_0%,_#0b0e11_70%)] opacity-80"></div>
-<!-- Scanlines -->
-<div class="scanlines w-full h-full opacity-30"></div>
-</div>
-<!-- Main Layout Container -->
-<main class="relative z-10 flex flex-col items-center justify-start flex-grow px-4 py-8 lg:px-10 max-w-7xl mx-auto w-full h-full gap-6">
-<!-- Header Section (HeadlineText + MetaText adapted) -->
-<div class="w-full max-w-[960px] text-center mb-2">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-dark border border-border-dark mb-4 shadow-sm">
-<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-<span class="text-xs font-mono text-text-muted uppercase tracking-widest">System Online</span>
-</div>
-<h1 class="text-white tracking-tight text-[32px] md:text-5xl font-bold leading-tight px-4 pb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-primary/50 to-white/80">
-                Interactive Environment
-            </h1>
-<p class="text-text-muted text-sm font-normal leading-normal max-w-2xl mx-auto">
-                Secure connection established. Use the command line interface below to navigate the portfolio database.
-            </p>
-</div>
-<!-- Terminal & Sidebar Layout -->
-<div class="flex flex-col lg:flex-row w-full h-auto min-h-[600px] gap-6 lg:gap-8 items-stretch justify-center">
-<!-- Terminal Window (Main) -->
-<div class="flex-1 flex flex-col bg-[#0d1114]/80 backdrop-blur-xl border border-border-dark rounded-xl shadow-glow-lg overflow-hidden relative group/terminal w-full">
-<!-- Window Controls -->
-<div class="flex items-center justify-between px-4 py-3 bg-[#151a1e] border-b border-border-dark select-none">
-<div class="flex items-center gap-2">
-<div class="w-3 h-3 rounded-full bg-[#FF5F57] hover:bg-[#ff3b30] transition-colors shadow-sm"></div>
-<div class="w-3 h-3 rounded-full bg-[#FEBC2E] hover:bg-[#ffcc00] transition-colors shadow-sm"></div>
-<div class="w-3 h-3 rounded-full bg-[#28C840] hover:bg-[#34c759] transition-colors shadow-sm"></div>
-</div>
-<div class="flex items-center gap-2 text-text-muted text-xs font-mono opacity-60">
-<span class="material-symbols-outlined text-[14px]">home</span>
-<span>partha — -zsh — 80x24</span>
-</div>
-<div class="w-12"></div> <!-- Spacer -->
-</div>
-<!-- Terminal Content Area -->
-<div class="flex-1 p-6 font-mono text-sm md:text-base text-gray-300 overflow-y-auto scrollbar-terminal relative bg-[#0d1114]/90" onclick="document.getElementById('cli-input').focus()">
-<!-- Boot Sequence / Static Log -->
-<div class="text-text-muted/60 mb-6 space-y-1 text-xs md:text-sm">
-<p class="flex items-center gap-2"><span class="text-green-500">✔</span> Loading core modules...</p>
-<p class="flex items-center gap-2"><span class="text-green-500">✔</span> Initializing UI components... <span class="text-primary/80">[Done]</span></p>
-<p class="flex items-center gap-2"><span class="text-green-500">✔</span> Mounting virtual file system... </p>
-<p class="mt-2 text-primary">&gt; Welcome guest. Access level: Read-Only.</p>
-</div>
-<!-- ASCII Banner -->
-<div class="mb-8 text-primary/90 font-bold leading-none select-none hidden sm:block shadow-glow-text opacity-90">
-   ___            _   _           
-  / _ \__ _ _ __| |_| |__   __ _ 
- / /_)/ _` | '__| __| '_ \ / _` |
-/ ___/ (_| | |  | |_| | | | (_| |
-\/    \__,_|_|   \__|_| |_|\__,_|
-                    </div>
-<div class="sm:hidden mb-6 text-primary font-bold text-xl tracking-wider">
-                        &gt;&gt; PARTHA_TERM_V1
-                    </div>
-<div class="mb-6 space-y-2">
-<p>Welcome to my interactive portfolio terminal. Type <span class="text-primary font-bold bg-primary/10 px-1 rounded">help</span> to see available commands.</p>
-<p class="text-text-muted italic text-xs">Try running 'projects' to see my latest work.</p>
-</div>
-<!-- Previous Command Interaction Example -->
-<div class="group mb-2 opacity-60 hover:opacity-100 transition-opacity">
-<div class="flex items-center gap-2">
-<span class="text-green-400 font-bold">➜</span>
-<span class="text-blue-400 font-bold">~</span>
-<span class="text-white">whoami</span>
-</div>
-<div class="pl-6 pt-1 text-text-muted">
-                            guest_user@portfolio.web
+
+<body
+    class="bg-background-dark text-white font-display overflow-x-hidden min-h-screen flex flex-col relative selection:bg-primary/30">
+    <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark px-6 py-4 lg:px-10 bg-[#0d1114]/90 backdrop-blur-md z-50 sticky top-0">
+        <div class="flex items-center gap-4 text-white">
+            <div class="size-6 text-primary animate-pulse-slow">
+                <span class="material-symbols-outlined">terminal</span>
+            </div>
+            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] font-mono">~/partha-saradhi</h2>
+        </div>
+        <div class="flex flex-1 justify-end gap-8">
+            <div class="hidden md:flex items-center gap-9">
+                <a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal"
+                    href="#">Home</a>
+                <a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal"
+                    href="#">About</a>
+                <a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal"
+                    href="#">Work</a>
+                <a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal"
+                    href="#">Contact</a>
+            </div>
+            <button
+                class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-surface-dark border border-border-dark hover:border-primary/50 hover:bg-white/5 transition-all text-white text-sm font-bold leading-normal tracking-[0.015em]">
+                <span class="truncate">Exit Shell</span>
+            </button>
+        </div>
+    </header>
+    <div class="fixed inset-0 top-[60px] pointer-events-none z-0">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_#162026_0%,_#0b0e11_80%)] opacity-60"></div>
+        <div class="scanlines w-full h-full opacity-40 mix-blend-overlay"></div>
+    </div>
+    <main
+        class="relative z-10 flex flex-col flex-grow px-4 py-6 lg:px-10 max-w-[1600px] mx-auto w-full h-[calc(100vh-80px)] gap-6">
+        <div class="flex flex-col lg:flex-row w-full h-full gap-6 lg:gap-8 items-stretch overflow-hidden">
+            <div
+                class="flex-1 flex flex-col bg-[#0d1114]/95 backdrop-blur-md border border-border-dark rounded-xl shadow-glow-lg overflow-hidden relative group/terminal h-full">
+                <div
+                    class="flex items-center justify-between px-4 py-3 bg-[#151a1e] border-b border-border-dark select-none z-20">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-[#FF5F57] hover:bg-[#ff3b30] transition-colors shadow-sm">
                         </div>
-</div>
-<!-- Active Input Line -->
-<div class="flex items-center gap-3 mt-4 relative">
-<span class="text-green-400 font-bold">➜</span>
-<span class="text-blue-400 font-bold">~</span>
-<div class="flex-1 relative">
-<!-- This input is styled to look like terminal text -->
-<input autocomplete="off" autofocus="" class="w-full bg-transparent border-none outline-none text-white p-0 m-0 font-mono caret-primary focus:ring-0 placeholder-gray-700" id="cli-input" placeholder="Type a command..." type="text"/>
-</div>
-</div>
-<!-- Decorative Floating Elements inside terminal -->
-<div class="absolute bottom-4 right-6 pointer-events-none opacity-20">
-<span class="material-symbols-outlined text-6xl text-primary animate-pulse">wifi</span>
-</div>
-</div>
-<!-- Status Bar -->
-<div class="bg-[#111518] border-t border-border-dark p-2 px-4 flex justify-between items-center text-[10px] uppercase tracking-widest text-text-muted/60 font-mono">
-<span class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div> Connected</span>
-<span>Lat: 24ms | Mem: 44%</span>
-</div>
-</div>
-<!-- HUD / Right Sidebar -->
-<div class="w-full lg:w-80 flex flex-col gap-5 shrink-0">
-<!-- Commands Panel -->
-<div class="bg-surface-dark border border-border-dark rounded-xl overflow-hidden shadow-lg">
-<div class="bg-[#151a1e] px-4 py-3 border-b border-border-dark">
-<h3 class="text-white text-sm font-bold uppercase tracking-wider flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-base">code</span>
-                            Directives
-                        </h3>
-</div>
-<div class="p-2 flex flex-col gap-1">
-<!-- Command Item -->
-<button class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group text-left w-full border border-transparent hover:border-border-dark">
-<div class="flex items-center gap-3">
-<span class="p-1.5 rounded bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-<span class="material-symbols-outlined text-sm">info</span>
-</span>
-<span class="font-mono text-primary text-sm font-bold group-hover:translate-x-1 transition-transform">about</span>
-</div>
-<span class="text-[10px] text-text-muted uppercase tracking-wider group-hover:text-white">Profile</span>
-</button>
-<!-- Command Item -->
-<button class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group text-left w-full border border-transparent hover:border-border-dark">
-<div class="flex items-center gap-3">
-<span class="p-1.5 rounded bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-<span class="material-symbols-outlined text-sm">rocket_launch</span>
-</span>
-<span class="font-mono text-primary text-sm font-bold group-hover:translate-x-1 transition-transform">projects</span>
-</div>
-<span class="text-[10px] text-text-muted uppercase tracking-wider group-hover:text-white">Portfolio</span>
-</button>
-<!-- Command Item -->
-<button class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group text-left w-full border border-transparent hover:border-border-dark">
-<div class="flex items-center gap-3">
-<span class="p-1.5 rounded bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-<span class="material-symbols-outlined text-sm">memory</span>
-</span>
-<span class="font-mono text-primary text-sm font-bold group-hover:translate-x-1 transition-transform">skills</span>
-</div>
-<span class="text-[10px] text-text-muted uppercase tracking-wider group-hover:text-white">Stack</span>
-</button>
-<!-- Command Item -->
-<button class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group text-left w-full border border-transparent hover:border-border-dark">
-<div class="flex items-center gap-3">
-<span class="p-1.5 rounded bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-<span class="material-symbols-outlined text-sm">mail</span>
-</span>
-<span class="font-mono text-primary text-sm font-bold group-hover:translate-x-1 transition-transform">contact</span>
-</div>
-<span class="text-[10px] text-text-muted uppercase tracking-wider group-hover:text-white">Email</span>
-</button>
-</div>
-</div>
-<!-- Typing Test Widget (Card Component Modified) -->
-<div class="@container">
-<div class="flex flex-col items-stretch justify-start rounded-xl shadow-glow bg-[#151a1e] border border-border-dark overflow-hidden group hover:border-primary/50 transition-colors cursor-pointer relative">
-<!-- Progress bar decoration top -->
-<div class="h-1 w-full bg-[#1c2326]">
-<div class="h-full bg-primary w-2/3 shadow-[0_0_10px_#19a1e6]"></div>
-</div>
-<div class="w-full bg-center bg-no-repeat bg-cover h-24 relative" data-alt="Abstract digital grid gradient pattern representing speed" style="background-image: linear-gradient(to bottom right, #111c21, #1c2326);">
-<!-- Overlay Pattern -->
-<div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(25,161,230,0.05)_25%,rgba(25,161,230,0.05)_50%,transparent_50%,transparent_75%,rgba(25,161,230,0.05)_75%,rgba(25,161,230,0.05)_100%)] bg-[length:10px_10px]"></div>
-<div class="absolute bottom-3 left-4 flex items-center gap-2">
-<div class="bg-black/50 backdrop-blur px-2 py-1 rounded text-[10px] font-mono text-primary border border-primary/20">WPM TEST</div>
-</div>
-</div>
-<div class="flex w-full grow flex-col gap-2 p-4">
-<div class="flex justify-between items-start">
-<p class="text-white text-base font-bold leading-tight tracking-[-0.015em] group-hover:text-primary transition-colors">Test Your Speed</p>
-<span class="material-symbols-outlined text-text-muted group-hover:text-white transition-colors">keyboard</span>
-</div>
-<p class="text-text-muted text-xs font-normal leading-normal">
-                                Challenge your typing efficiency in the terminal environment.
+                        <div class="w-3 h-3 rounded-full bg-[#FEBC2E] hover:bg-[#ffcc00] transition-colors shadow-sm">
+                        </div>
+                        <div class="w-3 h-3 rounded-full bg-[#28C840] hover:bg-[#34c759] transition-colors shadow-sm">
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 text-text-muted text-xs font-mono opacity-60">
+                        <span class="material-symbols-outlined text-[14px]">lock</span>
+                        <span>partha@portfolio: ~</span>
+                    </div>
+                    <div class="w-12 text-right">
+                        <span
+                            class="material-symbols-outlined text-text-muted text-[16px] hover:text-white cursor-pointer">settings</span>
+                    </div>
+                </div>
+                <div class="flex-1 p-6 font-mono text-sm md:text-base text-gray-300 overflow-y-auto scrollbar-terminal relative bg-[#090c0f]"
+                    onclick="document.getElementById('cli-input').focus()">
+                    <div class="text-text-muted/50 mb-8 space-y-1 text-xs select-none">
+                        <p class="flex items-center gap-2"><span class="text-success">✔</span> [SYSTEM] Kernel loaded
+                            successfully.</p>
+                        <p class="flex items-center gap-2"><span class="text-success">✔</span> [SYSTEM] Interface v4.2.0
+                            initialized.</p>
+                        <p class="flex items-center gap-2"><span class="text-success">✔</span> [SECURITY] Encryption
+                            keys verified.</p>
+                        <p class="mt-2 text-primary/80">&gt; Establishing secure connection...</p>
+                        <p class="text-primary/80">&gt; Access granted. Level: Visitor.</p>
+                    </div>
+                    <div
+                        class="mb-10 text-primary/90 font-bold leading-none select-none hidden sm:block opacity-80 animate-pulse-slow">
+                        ___ _ _
+                        / _ \__ _ _ __| |_| |__ __ _
+                        / /_)/ _` | '__| __| '_ \ / _` |
+                        / ___/ (_| | | | |_| | | | (_| |
+                        \/ \__,_|_| \__|_| |_|\__,_|
+                    </div>
+                    <div class="sm:hidden mb-6 text-primary font-bold text-xl tracking-wider">
+                        &gt;&gt; PARTHA_TERM_V2
+                    </div>
+                    <div class="mb-8 space-y-3 max-w-3xl">
+                        <p class="text-white">Welcome to the interactive portfolio environment.</p>
+                        <p class="text-text-muted">This terminal provides direct access to my projects, skills, and
+                            background information. </p>
+                        <div class="p-3 border border-dashed border-border-dark bg-white/5 rounded w-fit mt-2">
+                            <p class="text-sm">
+                                <span class="text-warning">⚠ HINT:</span> There are <span class="text-white font-bold">5
+                                    hidden Easter Eggs</span> in this system.
+                                Use commands to find them.
                             </p>
-<div class="mt-2 flex items-center justify-between">
-<div class="flex -space-x-2">
-<div class="w-6 h-6 rounded-full bg-gray-700 border border-[#151a1e] flex items-center justify-center text-[8px] text-white">JD</div>
-<div class="w-6 h-6 rounded-full bg-gray-600 border border-[#151a1e] flex items-center justify-center text-[8px] text-white">AS</div>
-<div class="w-6 h-6 rounded-full bg-primary border border-[#151a1e] flex items-center justify-center text-[8px] text-white font-bold">+42</div>
-</div>
-<span class="text-[10px] font-bold text-primary uppercase tracking-widest group-hover:translate-x-1 transition-transform">Start <span class="text-xs">→</span></span>
-</div>
-</div>
-</div>
-</div>
-<!-- System Stats Mini-Widget -->
-<div class="grid grid-cols-2 gap-3">
-<div class="bg-surface-dark border border-border-dark p-3 rounded-lg">
-<div class="text-[10px] text-text-muted uppercase mb-1">CPU Load</div>
-<div class="text-lg text-white font-mono font-bold">12%</div>
-<div class="w-full bg-[#111518] h-1 rounded-full mt-2 overflow-hidden">
-<div class="bg-green-500 h-full w-[12%]"></div>
-</div>
-</div>
-<div class="bg-surface-dark border border-border-dark p-3 rounded-lg">
-<div class="text-[10px] text-text-muted uppercase mb-1">Uptime</div>
-<div class="text-lg text-white font-mono font-bold">04:20</div>
-<div class="w-full bg-[#111518] h-1 rounded-full mt-2 overflow-hidden">
-<div class="bg-primary h-full w-[80%] animate-pulse"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-</body></html>
+                        </div>
+                    </div>
+                    <div class="group mb-2 opacity-50 hover:opacity-100 transition-opacity">
+                        <div class="flex items-center gap-2">
+                            <span class="text-success font-bold">➜</span>
+                            <span class="text-primary font-bold">~</span>
+                            <span class="text-white">whoami</span>
+                        </div>
+                        <div class="pl-6 pt-1 text-text-muted text-sm">
+                            visitor@partha.dev
+                        </div>
+                    </div>
+                    <div class="group mb-2 opacity-50 hover:opacity-100 transition-opacity">
+                        <div class="flex items-center gap-2">
+                            <span class="text-success font-bold">➜</span>
+                            <span class="text-primary font-bold">~</span>
+                            <span class="text-white">date</span>
+                        </div>
+                        <div class="pl-6 pt-1 text-text-muted text-sm">
+                            <span id="current-date">Wed Oct 25 2023 10:42:00 GMT+0000 (Coordinated Universal
+                                Time)</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 mt-4 relative">
+                        <span class="text-success font-bold">➜</span>
+                        <span class="text-primary font-bold">~</span>
+                        <div class="flex-1 relative group">
+                            <input autocomplete="off" autofocus=""
+                                class="w-full bg-transparent border-none outline-none text-white p-0 m-0 font-mono caret-primary focus:ring-0 placeholder-gray-700/50 text-base font-medium"
+                                id="cli-input" placeholder="Type a command (e.g., 'help')..." type="text" />
+                        </div>
+                    </div>
+                    <div class="absolute bottom-6 right-8 pointer-events-none opacity-10 flex flex-col items-end gap-1">
+                        <span class="font-mono text-xs">STATUS: ONLINE</span>
+                        <div class="flex gap-1">
+                            <div class="w-1 h-1 bg-primary"></div>
+                            <div class="w-1 h-1 bg-primary"></div>
+                            <div class="w-1 h-1 bg-primary"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="w-full lg:w-96 flex flex-col gap-0 shrink-0 bg-[#0d1114] border border-border-dark rounded-xl shadow-xl overflow-hidden h-full">
+                <div class="bg-[#111518] p-5 border-b border-border-dark relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-4xl">egg</span>
+                    </div>
+                    <div class="flex justify-between items-end mb-3 relative z-10">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-warning text-sm animate-pulse">stars</span>
+                            <span class="text-xs uppercase tracking-widest text-text-muted font-bold">Easter Eggs</span>
+                        </div>
+                        <span class="font-mono text-white font-bold text-sm">0 <span
+                                class="text-text-muted font-normal">/ 5</span></span>
+                    </div>
+                    <div
+                        class="h-2 w-full bg-[#1c2326] rounded-full overflow-hidden relative z-10 border border-white/5">
+                        <div
+                            class="h-full bg-gradient-to-r from-warning to-orange-500 w-[5%] shadow-[0_0_10px_rgba(234,179,8,0.4)]">
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-text-muted/60 mt-3 font-mono">
+                        &gt; Hint: Try commands that don't exist, or look for secrets in the 'about' section.
+                    </p>
+                </div>
+                <div
+                    class="bg-[#151a1e] px-5 py-3 border-b border-border-dark flex justify-between items-center shadow-md z-10">
+                    <h3 class="text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-sm">code</span>
+                        Available Directives
+                    </h3>
+                    <div class="flex gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    </div>
+                </div>
+                <div class="flex-1 overflow-y-auto p-2 scrollbar-terminal bg-surface-dark/50">
+                    <div class="flex flex-col gap-1">
+                        <div class="px-3 py-2 text-[10px] uppercase text-text-muted/40 font-bold tracking-widest mt-1">
+                            Core</div>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors shadow-glow-text">
+                                    <span class="material-symbols-outlined text-sm">help</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-primary transition-colors">help</span>
+                                    <span class="text-[10px] text-text-muted block">List all commands</span>
+                                </div>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-text-muted/20 text-sm group-hover:text-primary/50 group-hover:translate-x-1 transition-all">chevron_right</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">cleaning_services</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-primary transition-colors">clear</span>
+                                    <span class="text-[10px] text-text-muted block">Clear terminal output</span>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="px-3 py-2 text-[10px] uppercase text-text-muted/40 font-bold tracking-widest mt-2">
+                            Profile</div>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">person</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-blue-400 transition-colors">about</span>
+                                    <span class="text-[10px] text-text-muted block">Who is Partha?</span>
+                                </div>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-purple-500/10 text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">rocket_launch</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-purple-400 transition-colors">projects</span>
+                                    <span class="text-[10px] text-text-muted block">View portfolio work</span>
+                                </div>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-indigo-500/10 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">memory</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-indigo-400 transition-colors">skills</span>
+                                    <span class="text-[10px] text-text-muted block">Technical capabilities</span>
+                                </div>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-teal-500/10 text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">description</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-teal-400 transition-colors">resume</span>
+                                    <span class="text-[10px] text-text-muted block">Download CV/PDF</span>
+                                </div>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-pink-500/10 text-pink-400 group-hover:bg-pink-500 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">mail</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-pink-400 transition-colors">contact</span>
+                                    <span class="text-[10px] text-text-muted block">Connect with me</span>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="px-3 py-2 text-[10px] uppercase text-text-muted/40 font-bold tracking-widest mt-2">
+                            System</div>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-gray-700/30 text-gray-400 group-hover:bg-gray-600 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">list</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-gray-300 transition-colors">ls
+                                        -la</span>
+                                    <span class="text-[10px] text-text-muted block">List files (Detailed)</span>
+                                </div>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-gray-700/30 text-gray-400 group-hover:bg-gray-600 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">folder_open</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-gray-300 transition-colors">pwd</span>
+                                    <span class="text-[10px] text-text-muted block">Print working directory</span>
+                                </div>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-gray-700/30 text-gray-400 group-hover:bg-gray-600 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">perm_identity</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-gray-300 transition-colors">whoami</span>
+                                    <span class="text-[10px] text-text-muted block">Current user session</span>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="px-3 py-2 text-[10px] uppercase text-danger/60 font-bold tracking-widest mt-2">
+                            Restricted</div>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-danger/10 transition-all group text-left w-full border border-transparent hover:border-danger/30">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-danger/10 text-danger group-hover:bg-danger group-hover:text-white transition-colors shadow-glow-danger">
+                                    <span class="material-symbols-outlined text-sm">dangerous</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-danger text-sm font-bold block group-hover:text-white transition-colors">sudo
+                                        rm -rf /</span>
+                                    <span class="text-[10px] text-text-muted block group-hover:text-danger/80">DO NOT
+                                        EXECUTE</span>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-danger text-sm animate-pulse">warning</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-warning/10 transition-all group text-left w-full border border-transparent hover:border-warning/30">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-warning/10 text-warning group-hover:bg-warning group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">vpn_key</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-warning text-sm font-bold block group-hover:text-white transition-colors">secret</span>
+                                    <span class="text-[10px] text-text-muted block">Encrypted data</span>
+                                </div>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center justify-between p-3 rounded-lg hover:bg-[#1c2326] transition-all group text-left w-full border border-transparent hover:border-border-dark/50">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="p-1.5 rounded bg-gray-700/30 text-gray-400 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">terminal</span>
+                                </span>
+                                <div>
+                                    <span
+                                        class="font-mono text-white text-sm font-bold block group-hover:text-green-400 transition-colors">vim</span>
+                                    <span class="text-[10px] text-text-muted block">Text editor</span>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-3 bg-[#111518] border-t border-border-dark text-center">
+                    <p class="text-[10px] text-text-muted/40 font-mono">System Build v2.5.8 // Partha Saradhi</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

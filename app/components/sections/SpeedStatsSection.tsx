@@ -3,6 +3,8 @@
  * Bento grid with typing speed, latency, shipped projects, LOC, contribution graph, and caffeine level
  */
 
+import { speedStats } from "~/data";
+
 // Generate contribution grid data
 const generateContributions = () => {
     const levels = ['bg-[#161b22]', 'bg-[#0e4429]', 'bg-[#006d32]', 'bg-[#26a641]', 'bg-[#39d353]'];
@@ -21,14 +23,9 @@ const generateContributions = () => {
 
 const contributions = generateContributions();
 
-const shippedProjects = [
-    { name: "Hydra API Gateway", version: "v2.4.0 • release-prod", icon: "api", status: "LIVE", statusColor: "emerald", desc: "High-performance gateway with improved rate limiting and Rust backend.", tags: ["Rust", "gRPC"] },
-    { name: "ScaleDB Proxy", version: "v1.1.2 • Oct 12", icon: "database", status: "LIVE", statusColor: "emerald", desc: "Intelligent connection pooling for PostgreSQL clusters." },
-    { name: "Auth Service V3", version: "v3.0.0 • Sep 28", icon: "lock", status: "BETA", statusColor: "amber" },
-    { name: "CLI Toolchain", version: "v0.9.4 • Sep 15", icon: "terminal", status: "ARCHIVED", statusColor: "gray" },
-];
-
 export default function SpeedStatsSection() {
+    const { typingVelocity, latency, locPerMonth, contributions: contribData, caffeineLevel, shippedProjects, shippedCount } = speedStats;
+
     return (
         <section className="py-20">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -63,12 +60,12 @@ export default function SpeedStatsSection() {
                                     <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400">Typing Velocity</h3>
                                 </div>
                                 <div className="mt-2 flex items-baseline gap-2">
-                                    <span className="text-6xl md:text-7xl font-bold text-white tracking-tighter drop-shadow-[0_0_15px_rgba(43,108,238,0.3)]">125</span>
+                                    <span className="text-6xl md:text-7xl font-bold text-white tracking-tighter drop-shadow-[0_0_15px_rgba(43,108,238,0.3)]">{typingVelocity.wpm}</span>
                                     <span className="text-xl md:text-2xl text-gray-500 font-medium">WPM</span>
                                 </div>
                                 <div className="mt-3 flex items-center gap-2 text-emerald-400 bg-emerald-500/5 ring-1 ring-emerald-500/20 px-3 py-1.5 rounded-full w-fit backdrop-blur-sm">
                                     <span className="material-symbols-outlined text-sm">trending_up</span>
-                                    <span className="text-[10px] md:text-xs font-bold uppercase tracking-wide">Top 1% Global</span>
+                                    <span className="text-[10px] md:text-xs font-bold uppercase tracking-wide">{typingVelocity.percentile}</span>
                                 </div>
                             </div>
                         </div>
@@ -114,12 +111,12 @@ export default function SpeedStatsSection() {
                         </div>
                         <div className="relative z-10">
                             <div className="flex items-baseline gap-2">
-                                <span className="text-3xl md:text-4xl font-bold text-white tracking-tight">35</span>
-                                <span className="text-sm text-gray-500 font-medium">ms avg</span>
+                                <span className="text-3xl md:text-4xl font-bold text-white tracking-tight">{latency.avg}</span>
+                                <span className="text-sm text-gray-500 font-medium">{latency.unit} avg</span>
                             </div>
                             <div className="flex items-center gap-1 mt-1">
                                 <span className="material-symbols-outlined text-purple-500 text-[14px]">arrow_downward</span>
-                                <span className="text-purple-500 text-[11px] font-bold tracking-wide">-12% vs last month</span>
+                                <span className="text-purple-500 text-[11px] font-bold tracking-wide">{latency.trend}</span>
                             </div>
                         </div>
                         <div className="h-12 w-full mt-4 relative">
@@ -158,7 +155,7 @@ export default function SpeedStatsSection() {
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75" />
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
                                 </span>
-                                <span className="text-[10px] text-amber-500 font-bold">12 YTD</span>
+                                <span className="text-[10px] text-amber-500 font-bold">{shippedCount} YTD</span>
                             </div>
                         </div>
 
@@ -181,9 +178,9 @@ export default function SpeedStatsSection() {
                                                 'text-gray-400 bg-gray-500/10 border-gray-500/20'
                                             }`}>{project.status}</span>
                                     </div>
-                                    {project.desc && (
+                                    {project.description && (
                                         <div className="pl-[52px]">
-                                            <p className="text-[11px] text-gray-400 leading-relaxed border-l-2 border-white/5 pl-2 group-hover/item:border-amber-500/30 transition-colors">{project.desc}</p>
+                                            <p className="text-[11px] text-gray-400 leading-relaxed border-l-2 border-white/5 pl-2 group-hover/item:border-amber-500/30 transition-colors">{project.description}</p>
                                             {project.tags && (
                                                 <div className="flex gap-2 mt-2">
                                                     {project.tags.map((tag, i) => (
@@ -211,15 +208,15 @@ export default function SpeedStatsSection() {
                         </div>
                         <div className="mt-4">
                             <div className="flex justify-between items-end mb-2">
-                                <span className="text-3xl font-bold text-white tracking-tight">12.4k</span>
-                                <span className="text-[10px] text-sky-500 font-bold bg-sky-500/10 px-1.5 py-0.5 rounded">+2.4k</span>
+                                <span className="text-3xl font-bold text-white tracking-tight">{locPerMonth.current}</span>
+                                <span className="text-[10px] text-sky-500 font-bold bg-sky-500/10 px-1.5 py-0.5 rounded">{locPerMonth.growth}</span>
                             </div>
                             <div className="w-full bg-[#21262d] h-2 rounded-full mt-1 overflow-hidden relative">
-                                <div className="bg-sky-500 h-full rounded-full w-[75%] shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
+                                <div className="bg-sky-500 h-full rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" style={{ width: `${locPerMonth.progressPercent}%` }} />
                             </div>
                             <div className="flex justify-between mt-2">
                                 <p className="text-[10px] text-gray-500">Current Progress</p>
-                                <p className="text-[10px] text-white font-medium">75%</p>
+                                <p className="text-[10px] text-white font-medium">{locPerMonth.progressPercent}%</p>
                             </div>
                         </div>
                     </div>
@@ -235,7 +232,7 @@ export default function SpeedStatsSection() {
                                 </div>
                                 <div>
                                     <h3 className="text-xs font-bold uppercase tracking-widest text-gray-300">Contribution Graph</h3>
-                                    <p className="text-[10px] text-emerald-400 font-mono">5,502 contributions in 2024</p>
+                                    <p className="text-[10px] text-emerald-400 font-mono">{contribData.total.toLocaleString()} contributions in {contribData.year}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
@@ -274,7 +271,7 @@ export default function SpeedStatsSection() {
                                 <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Caffeine Level</h3>
                             </div>
                             <div className="flex items-baseline gap-2">
-                                <span className="text-4xl md:text-5xl font-bold text-white tracking-tight">42</span>
+                                <span className="text-4xl md:text-5xl font-bold text-white tracking-tight">{caffeineLevel.cups}</span>
                                 <span className="text-base text-gray-500 font-medium">Cups</span>
                             </div>
                             <p className="text-xs text-orange-400 mt-1 font-medium tracking-wide">Fueling backend architecture</p>
@@ -282,7 +279,7 @@ export default function SpeedStatsSection() {
                         {/* Coffee Cup Visual */}
                         <div className="relative w-20 h-24 mr-6 group">
                             <div className="absolute bottom-0 w-full h-[85%] bg-[#21262d] rounded-b-2xl rounded-t-sm border border-gray-700 overflow-hidden shadow-lg z-10">
-                                <div className="absolute bottom-0 left-0 w-full bg-orange-900/60 h-[65%] group-hover:h-[75%] transition-all duration-1000">
+                                <div className="absolute bottom-0 left-0 w-full bg-orange-900/60 group-hover:h-[75%] transition-all duration-1000" style={{ height: `${caffeineLevel.fillPercent}%` }}>
                                     <div className="w-full h-full animate-pulse bg-gradient-to-t from-orange-950 to-orange-800" />
                                 </div>
                                 <div className="absolute top-0 right-2 w-2 h-full bg-white/5 skew-x-[-10deg]" />

@@ -1,0 +1,122 @@
+{
+  "animes": [
+    {
+      "id": 1,
+      "title": "Cyberpunk: Edgerunners",
+      "genres": ["Sci-Fi", "Tragedy"],
+      "badge": { "text": "Masterpiece", "color": "yellow" },
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAQrix49s3avgCV-xGOEhwgQXODIYY247CI_vXQ9ZjE4GXA0cckuhEcY2K96pPXJDgdD5LbBPL1ITY7KAg6V-ZOvyKBjVgi0YYbMBDL23MmJnHZwgvhpEhw-w4by3Bi6IfL93fnxFVsW5wCmqgXuFBtb7vuZvgZL1J0CNpHn7gG6upp1naFN6vd3BmNwzbbsBdBSpTu5yqusGU9ojg0iTfB7W4VRmwKmBLxGVjORoYDMP6M9ZTOQrSri-mQNokTrAX9Pj6nejVDkeM6",
+      "description": "A kid from the streets tries to survive in a technology and body modification-obsessed city of the future. The visual style is absolutely insane.",
+      "rating": "10/10",
+      "ratingBars": 5,
+      "showArrow": true
+    },
+    {
+      "id": 2,
+      "title": "Attack on Titan",
+      "genres": ["Action", "Mystery"],
+      "badge": { "text": "Watching", "color": "primary", "pulse": true },
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDYKgMCZDQvmxuueuFb27nwKKqT3fTHTkMZY3IQeceI5agD5cQjlO4SDo8QStYIVESLLhEw3c1g_Xia7PJGUdeDj3nn82EYhroRRGFr_sUG_TjHNLUnqdsdXvXF1kYf6vpzzYNndYOg_eA1r8hiW3jbdpn697pe6p8pc-5aXl_GdBP-G3umqtXcU416xoLyqEx_7Dp9oBBaapUNNqvXcMZqOpUAstxsUp4VDIIXpzCpq__VrltNdNnatDOWI-StQUCVykmIby_WQquQ",
+      "description": "Humanity lives inside cities surrounded by enormous walls. The mystery of the Titans keeps unraveling in ways I never expected.",
+      "status": "Season 4, Part 2",
+      "progress": { "current": 75, "total": 89 },
+      "isWatching": true
+    },
+    {
+      "id": 3,
+      "title": "Steins;Gate",
+      "genres": ["Thriller", "Sci-Fi"],
+      "badge": { "text": "Completed", "color": "green" },
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuD5AqJ0ssYruG_FSxYwwHJx4ZbKH6u_27CMQJ0nIqlj-Msy3HaXcR1gMBCusBtlSeMXA1lme94jWMsj-zvyZImLC8dszSCIMptiLUOGUCgVqz_muxoqkS2JvkpGIHsavCfUXBcJwniM1Sup9uzM8ZphLX5bw0f2z6xvFaunqXTGU1VFQeDQ5tmtBg7iwo1sKDPmZm0fdg00xq6jFaMR0T1Q_mkhtuVAlJ3JmOtZbqlFXWlNKOywo65j8Yzr9flZ1yCUjpxvFn4oyGkh",
+      "description": "The ultimate time travel story. It starts slow but the second half is an emotional rollercoaster that hits perfectly.",
+      "rating": "9.8/10",
+      "ratingBars": 4
+    },
+    {
+      "id": 4,
+      "title": "Violet Evergarden",
+      "genres": ["Drama", "Slice of Life"],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAn4SzhIqQ_7u-jgqZQlHd3OmAaJZjvDIOLbjI_tCFapHOIwCSZzLCWAZNRWa9tGiqVDoTphHvTCokLJZ0OoVYuewJfoOFzf9fwNxMpLi7p2SGey5sLqtUdQVIkNcuJCXSYXvGbrDFPP5DmVmWf91ZbUGGDjESxA6LstYPzSMzrFcDvQtaNyTyQjj_odDdg5IoFlTMr6qvsRACndNh6sgZqfv5eRHO1W0CpGwL9iX2sBbcgCKnI-xev5BeUo_GSa-atpQxUw6Lz6TTN",
+      "description": "Visually stunning animation by Kyoto Animation. A touching story about learning what 'I love you' means.",
+      "rating": "9.5/10",
+      "ratingBars": 4
+    },
+    {
+      "id": 5,
+      "title": "Chainsaw Man",
+      "genres": ["Action", "Dark Fantasy"],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuD306XqWBacCpVTDmkc-nHVEKe1Z1oAWuVWyRe6KxR2R8rCW_rwbZzmoQlalSVVjzidH9PSv77OYAKJGhQG3mxRsTkesM-ZM6W9pL3D8gmPcM-K5cXmo10OpyGDNgGhVdW5j0eZpyeY_RVC98Yue_pUNmIiwB1kLQyks-raknQZLnA_OQa0nNZNB7gH2CZVr2LSnpyBfH5kOZ0rkZf1PeHNYb8NKAnDJ4SW0ZSn2o2O_AG0sgPtkJIENhxqexweD3u_-5O6qd-iozWV",
+      "description": "Pure chaos and adrenaline. It subverts shonen tropes in the most brutal ways possible.",
+      "rating": "8.8/10",
+      "ratingBars": 3,
+      "grayscale": true
+    },
+    {
+      "id": 6,
+      "title": "Neon Genesis Evangelion",
+      "genres": ["Mecha", "Psychological"],
+      "badge": { "text": "Classic", "color": "purple" },
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBTgR3EBYTW8Drt_g7RCXIS96hjHFYAqTjRQV-0itOfu8KgdFldgAVYq3U93NtBx-nmT-Lj1-JhsfxiOdglFXUowvLZn4vZB14XjaaPYLcQhA7DKIkCVYCpK5Hc58wPjRNXqou6tv1KiRIlWSM1lKCSLZfQTVRz1kjmd2WJC4JOEi6W-lky8pQ9hgyO7jESTaoR0OoJuyt3VD8e5beUP9_0Q8bs1HmPFCA-UcIh4Ql32EkyjWSxaos_B4WO0xMBodeY56eRquqTq4Us",
+      "description": "A deconstruction of the mecha genre that dives deep into depression, philosophy, and what it means to be human.",
+      "rating": "10/10",
+      "ratingBars": 5
+    },
+    {
+      "id": 7,
+      "title": "Mob Psycho 100",
+      "genres": ["Action", "Comedy"],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBhc-B1dJYcrXUA4dbptw5v8rsKbXHow_LJXhnRr0WgDfeR1dp4On0BmQC_xe9KzwHCroGVf7eEI7XNW8pbBVEJB66QZMmJPOKo6aadQyBsq2-NScc-DcMlmpd8sR2TTliiDRF34RW3nRFBqd-H35grhcEJtpgBuOheXguzZNLRst1sesZctKJX5zOh8Yp7pMLQ7fTmhB5ktsrXq5GlUrkNe5lfE_eXZ3hfgZe_lYEgaTOirvhW54pDI89h9EAP1gclQoS_lksj3aHh",
+      "description": "Unique animation style and a heartfelt story about self-improvement wrapped in psychic battles.",
+      "rating": "9.2/10",
+      "ratingBars": 4
+    },
+    {
+      "id": 8,
+      "title": "Mushishi",
+      "genres": ["Supernatural", "Iyashikei"],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAO--G1_Mz1wu5f6X87ka_b7ygdr03sOH99jbTQag1gKn3-HNH6yjST_V_2iUPJE7o2u38YHgpxGDgE1zYYaTVMJwwUzVjNwfR-o1oM3ptHJQVMz3ExVxsqIWQQKqgLPGuk8kZLhiG0PVZ69Go_2xyhOIl-ekbMHWNebqFgRbgdSxb_WVBPwbQMEqoOYKctt8rVvLRZytrsuC8e4aDrbUJeVZKEKh64nirTx5--7qIxwKu0ozkpKLxdLVnwHlgb_ev45VW5w2hKiBDj",
+      "description": "An episodic, atmospheric masterpiece exploring the relationship between nature and humanity. Very calming.",
+      "rating": "9.0/10",
+      "ratingBars": 4
+    }
+  ],
+  "timeline": [
+    {
+      "date": "OCT 12, 2023",
+      "title": "Vinland Saga S2",
+      "status": "Completed",
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBcsZtqyAanU5IteccyJ4nj-uyGsdNaTJF9KWkHGj2k_qHImdK94ou7jjmvz04nN9H3IYGuDIwKjsH3k1sDnyFF5XLh1TX4IAy-087WOYC6sGJAFkS6mFpOHmyOAns4ROLiL5ZqgeH9qTdYGiN2pQDLeLv1487hlTTpkJIvEEgeDOi9ahne4pzKxJbf3p6IzA-yKT15gIAucI_VYS3mS2ISnVq6r8KSyk5fPL-ZTEYMGSCFQ9g7z52nyXzRADhL-oyDklM5hWp1wbjd"
+    },
+    {
+      "date": "NOV 05, 2023",
+      "title": "Pluto",
+      "status": "Started",
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBmtHQTKtkxA9Wh-3ndDlyrnHkgT3u6TIjRW6KfYnQ0bekyoEygIMY5aJyHdSxyvzaP_TEXhLSxQXMwBr5whnqmrhgOyytJGpnpSLjoLGi8V2xGVMDtVjbu2gO4RtyebhPbkhVdsa74y2YAS1JW2H-6Zn6XAKGKMKBb0u0gkTH8BDmpBK27h1iSwEvypffezwMcX_6ZEDAqZmRB93wsXs57c9CJecBXBADHfH4tc_gbwq9zirg2QxS9seWYRe3MwPmHpYG4VBpAL8W_"
+    },
+    {
+      "date": "TODAY",
+      "title": "Solo Leveling",
+      "status": "Ep 6 Watched",
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBzOosd9MFgsTQNqNeNZexBnXZ2vvsirMO84_QxWnmApG8OeEyg6gAd_H-Jznf_0hNp2nRD3FblQPRqevoDkYPPKcYsdAgjgBB59xn6ZUDIE_0cPIxM9xSYH9XjV0Q1dtBW9S36HHz5Bw4cIrhMpP4FXn6m853xoNBBdOTmYTo5TyBu41XR0XuBUe9kJ-KSULAJGRk8n3ACSOSHm_yrijpCos8RLv4Zf3V4Tg51OekyZkKKzywXtLxAv4J6hl7akA-SgLde6Lg1rhZ3",
+      "isActive": true
+    },
+    {
+      "date": "UPCOMING",
+      "title": "Kaiju No. 8",
+      "status": "Plan to Watch",
+      "isFuture": true
+    }
+  ],
+  "filters": [
+    { "label": "All Animes", "value": "all", "isActive": true },
+    { "label": "Currently Watching", "value": "watching" },
+    { "label": "Masterpieces", "value": "masterpieces" },
+    { "label": "Cyberpunk", "value": "cyberpunk" }
+  ],
+  "heroImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDgTVF4-PUUe1SF9kFQmT74X0xCfdIokCF8fXp2YGsG9BPcETK5fzqJN3l9qdafdXr7aAbwXvqsfYq8T7DsUwSKXTKD7mKh54Mv-5E4yKBK57dGuJMIxlAOn9lfQW3bwgWEt5kbY9JymTIYw1Ld4DcDI8R7RTi7EGkNnlT7PU_oWSusyYX4L78xqcF3vnpPWItbkxkTxGl0ctJq0BhZULjD7oKjjwJFZzd7rOCidWyOSZ3OQvwJ-cu34JFw7_BPQpvMGDCHbhaItKxJ",
+  "stats": {
+    "watchTime": "2,450h",
+    "completed": 312,
+    "avgRating": "9.4"
+  }
+}

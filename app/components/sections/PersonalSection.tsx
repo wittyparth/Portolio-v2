@@ -1,4 +1,8 @@
+import { personal } from "~/data";
+
 export default function PersonalSection() {
+    const { currentRead, currentWatch, nowPlaying, hardware, location } = personal;
+
     return (
         <main className="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-6 px-4 lg:px-8 py-8">
             {/* Header */}
@@ -16,12 +20,12 @@ export default function PersonalSection() {
                     <div className="flex flex-col items-end">
                         <div className="flex items-center gap-2 text-[11px] text-gray-400 uppercase tracking-wider font-mono">
                             <span className="material-symbols-outlined text-[14px]">my_location</span>
-                            <span>Bangalore, IN</span>
+                            <span>{location.city}, {location.country}</span>
                         </div>
                         <div className="flex items-center gap-2 text-sm font-medium">
-                            <span className="text-white group-hover:text-[#2b6cee] transition-colors">24°C</span>
+                            <span className="text-white group-hover:text-[#2b6cee] transition-colors">{location.weather.temp}</span>
                             <span className="text-gray-600">//</span>
-                            <span className="text-gray-300">Clear Night</span>
+                            <span className="text-gray-300">{location.weather.condition}</span>
                         </div>
                     </div>
                     <div className="h-9 w-9 rounded-md bg-gradient-to-br from-[#2b6cee]/20 to-transparent border border-white/5 flex items-center justify-center text-[#2b6cee]">
@@ -49,16 +53,16 @@ export default function PersonalSection() {
                             <div className="w-32 md:w-36 aspect-[2/3] shrink-0 rounded shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden relative transform transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_-10px_rgba(43,108,238,0.2)]">
                                 <div
                                     className="absolute inset-0 bg-cover bg-center"
-                                    style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBuGBrwGg6xsMigXUEL9-4UFxJ4zGrhlFP3D4kEHmPVFQM8ef8zlMZ_T1a-A_LhG0-NMzGYLAjFWsaDiFb3uRnskGjXLMoEUtBQrTftDFU-XMSd6MS93WzLp4CKXdmMjf32w20EHu1HDyDowR2Rsq7647VNF00GsW1AbN1IFru7jzghcwYg6jcTYBN2fx68Mrhql0gFSypND172gcaKhZes-svyBcjicp0e1Q5H6iEivxCMqs-zLrQMojOvz-ZDSu9If9SRF8MB_TjU')" }}
+                                    style={{ backgroundImage: `url('${currentRead.imageUrl}')` }}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10" />
                             </div>
                             <div className="flex flex-col gap-1 pb-1">
-                                <h3 className="text-2xl md:text-3xl font-bold leading-none tracking-tight text-white mb-1">Dune Messiah</h3>
-                                <p className="text-gray-400 text-sm font-medium">Frank Herbert</p>
+                                <h3 className="text-2xl md:text-3xl font-bold leading-none tracking-tight text-white mb-1">{currentRead.title}</h3>
+                                <p className="text-gray-400 text-sm font-medium">{currentRead.author}</p>
                                 <div className="h-px w-12 bg-white/10 my-2" />
-                                <p className="text-[10px] text-[#2b6cee]/80 font-mono tracking-wider">SECTOR: SCI-FI</p>
-                                <p className="text-[10px] text-gray-500 font-mono tracking-wider">EPISODE: 02</p>
+                                <p className="text-[10px] text-[#2b6cee]/80 font-mono tracking-wider">SECTOR: {currentRead.sector}</p>
+                                <p className="text-[10px] text-gray-500 font-mono tracking-wider">EPISODE: {String(currentRead.episode).padStart(2, '0')}</p>
                             </div>
                         </div>
 
@@ -66,10 +70,10 @@ export default function PersonalSection() {
                         <div className="mt-8 flex flex-col gap-2.5">
                             <div className="flex justify-between text-[11px] font-mono text-gray-400 uppercase tracking-wider">
                                 <span>Memory Upload</span>
-                                <span className="text-white">74%</span>
+                                <span className="text-white">{currentRead.progress}%</span>
                             </div>
                             <div className="h-1.5 w-full bg-[#111318] rounded-full overflow-hidden border border-white/5">
-                                <div className="h-full bg-[#2b6cee] shadow-[0_0_12px_rgba(43,108,238,0.8)] w-[74%] rounded-full relative">
+                                <div className="h-full bg-[#2b6cee] shadow-[0_0_12px_rgba(43,108,238,0.8)] rounded-full relative" style={{ width: `${currentRead.progress}%` }}>
                                     <div className="absolute right-0 top-0 bottom-0 w-2 bg-white/40 blur-[1px]" />
                                 </div>
                             </div>
@@ -89,7 +93,7 @@ export default function PersonalSection() {
                         <div className="absolute inset-0 z-0">
                             <div
                                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 grayscale-[30%] group-hover:grayscale-0"
-                                style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTukshYEqxfrP4XjqmSOAuf-1cUjdiF0q7kqPT7hvmA1IlFUE9EvNJQhR216CtbhYtlUPNx-kjRFMPRI8eIv4m0DZQlqJUYN80YxYITwaZCJnPqtDOvwaIJd2Ullas49iY-s1hSYeQ7oSS8gwCclRfdABwpYhRiNTyNiQVRJZEXdcsnLzK3rNInSj5ofm0tceDNwpsMCFGU_nULmvaAa-40LoDyEZyBc4-qdhbz8wO4zxtLB4MH9_BzoVvR88df5EQymzEIHPhi0oa')" }}
+                                style={{ backgroundImage: `url('${currentWatch.imageUrl}')` }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-r from-[#111318] via-[#111318]/90 to-transparent" />
                         </div>
@@ -104,7 +108,7 @@ export default function PersonalSection() {
                                         <span className="text-[10px] font-bold tracking-[0.15em] text-gray-300 uppercase">Visual_Feed</span>
                                     </div>
                                     <div>
-                                        <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">Cyberpunk:<br />Edgerunners</h3>
+                                        <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{currentWatch.title.split(':')[0]}:<br />{currentWatch.title.split(':')[1]}</h3>
                                     </div>
                                 </div>
                                 <button className="h-10 w-10 rounded-full bg-white/10 hover:bg-[#2b6cee] border border-white/10 hover:border-[#2b6cee]/50 flex items-center justify-center transition-all shadow-lg backdrop-blur-sm group-hover:scale-110">
@@ -116,9 +120,9 @@ export default function PersonalSection() {
                                 <div className="flex flex-col gap-1">
                                     <p className="text-xs text-gray-400 font-mono flex items-center gap-2">
                                         <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                                        STATUS: REWATCHING
+                                        STATUS: {currentWatch.status}
                                     </p>
-                                    <p className="text-xs text-gray-500 font-mono pl-3.5">EPISODE: 04</p>
+                                    <p className="text-xs text-gray-500 font-mono pl-3.5">EPISODE: {String(currentWatch.episode).padStart(2, '0')}</p>
                                 </div>
                                 <span className="text-xs text-[#2b6cee]/80 font-medium group-hover:text-[#2b6cee] transition-colors flex items-center gap-1 bg-[#111318]/80 px-3 py-1.5 rounded-full border border-[#2b6cee]/20">
                                     Open Visual Log <span className="material-symbols-outlined text-[14px]">north_east</span>
@@ -136,7 +140,7 @@ export default function PersonalSection() {
                             {/* Album Art */}
                             <div className="relative shrink-0 group-hover:scale-105 transition-transform duration-500 ease-out">
                                 <div className="w-24 h-24 rounded-lg bg-black border border-white/10 shadow-[0_15px_30px_-5px_rgba(0,0,0,0.6)] relative overflow-hidden flex items-center justify-center">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-[#ff0055] via-[#240046] to-[#000000]" />
+                                    <div className={`absolute inset-0 bg-gradient-to-br ${nowPlaying.albumGradient}`} />
                                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.2),transparent_60%)]" />
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
                                 </div>
@@ -166,27 +170,27 @@ export default function PersonalSection() {
                                         <span className="text-[9px] font-bold tracking-[0.25em] text-[#1DB954] uppercase">Spotify_Signal</span>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <span className="hidden sm:block text-[8px] font-mono text-gray-500 border border-white/5 bg-white/5 px-1.5 py-0.5 rounded tracking-widest">AAC_256</span>
+                                        <span className="hidden sm:block text-[8px] font-mono text-gray-500 border border-white/5 bg-white/5 px-1.5 py-0.5 rounded tracking-widest">{nowPlaying.codec}</span>
                                     </div>
                                 </div>
 
                                 <div className="group/text cursor-default">
-                                    <h3 className="text-2xl font-bold text-white leading-none truncate tracking-tight group-hover/text:text-[#1DB954] transition-colors duration-300 drop-shadow-sm">Starboy</h3>
+                                    <h3 className="text-2xl font-bold text-white leading-none truncate tracking-tight group-hover/text:text-[#1DB954] transition-colors duration-300 drop-shadow-sm">{nowPlaying.title}</h3>
                                     <div className="flex items-center gap-2 mt-1">
-                                        <p className="text-sm text-gray-400 font-medium truncate font-mono">The Weeknd</p>
+                                        <p className="text-sm text-gray-400 font-medium truncate font-mono">{nowPlaying.artist}</p>
                                         <span className="text-gray-600 text-[10px] font-bold">FEAT</span>
-                                        <p className="text-sm text-gray-400 font-medium truncate font-mono">Daft Punk</p>
+                                        <p className="text-sm text-gray-400 font-medium truncate font-mono">{nowPlaying.featuring}</p>
                                     </div>
                                 </div>
 
                                 {/* Progress */}
                                 <div className="w-full space-y-1.5 mt-2">
                                     <div className="relative h-1 w-full bg-[#111318] rounded-full overflow-hidden border border-white/5 group/bar cursor-pointer">
-                                        <div className="absolute top-0 left-0 h-full w-[65%] bg-[#1DB954] shadow-[0_0_8px_rgba(29,185,84,0.5)] rounded-full" />
+                                        <div className="absolute top-0 left-0 h-full bg-[#1DB954] shadow-[0_0_8px_rgba(29,185,84,0.5)] rounded-full" style={{ width: `${nowPlaying.progress.percent}%` }} />
                                     </div>
                                     <div className="flex justify-between text-[9px] font-mono text-gray-500 font-medium tracking-wide">
-                                        <span>02:01</span>
-                                        <span>-01:49</span>
+                                        <span>{nowPlaying.progress.current}</span>
+                                        <span>{nowPlaying.progress.remaining}</span>
                                     </div>
                                 </div>
                             </div>
@@ -215,15 +219,15 @@ export default function PersonalSection() {
                                         <span className="material-symbols-outlined text-[14px]">tune</span>
                                     </button>
                                 </div>
-                                <h3 className="text-xl font-bold text-white">Keychron Q1 Pro</h3>
+                                <h3 className="text-xl font-bold text-white">{hardware.keyboard}</h3>
                                 <div className="flex flex-wrap gap-2 mt-2">
                                     <div className="text-[10px] font-mono bg-[#111318] border border-white/10 px-2 py-1 rounded text-gray-400 flex items-center gap-1">
                                         <span className="w-1 h-1 rounded-full bg-yellow-500" />
-                                        SWITCH: BANANA
+                                        SWITCH: {hardware.switches}
                                     </div>
                                     <div className="text-[10px] font-mono bg-[#111318] border border-white/10 px-2 py-1 rounded text-gray-400 flex items-center gap-1">
                                         <span className="w-1 h-1 rounded-full bg-blue-500" />
-                                        MODS: TAPE
+                                        MODS: {hardware.mods}
                                     </div>
                                 </div>
                             </div>

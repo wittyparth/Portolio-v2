@@ -1,0 +1,47 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "platform": "Medium",
+      "platformIcon": "medium",
+      "title": "Scaling Go Microservices at High Velocity",
+      "date": "Oct 24",
+      "readTime": "5 min read",
+      "url": "https://medium.com/",
+      "showOnHomepage": true
+    },
+    {
+      "id": 2,
+      "platform": "Dev.to",
+      "platformIcon": "devto",
+      "title": "Why I switched to Rust for Systems",
+      "date": "Oct 12",
+      "readTime": "8 min read",
+      "url": "https://dev.to/",
+      "showOnHomepage": true
+    },
+    {
+      "id": 3,
+      "platform": "X (Twitter)",
+      "platformIcon": "twitter",
+      "title": "Thread: System Design Thoughts",
+      "date": "Sep 28",
+      "readTime": "14 Tweets",
+      "url": "https://twitter.com/",
+      "showOnHomepage": true
+    }
+  ],
+  "stats": {
+    "totalArticles": 50
+  },
+  "sectionHeader": {
+    "badge": "Latest Updates",
+    "title": "Engineering Logs &\nSocial Transmissions",
+    "description": "Thoughts on distributed systems, backend architecture, and the occasional rant about Rust borrow checker."
+  },
+  "ctaCard": {
+    "title": "Deep Dive",
+    "description": "Explore over 50+ articles on engineering, system design, and product scaling.",
+    "buttonText": "Read the Blog"
+  }
+}

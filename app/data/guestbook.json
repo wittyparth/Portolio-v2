@@ -1,0 +1,127 @@
+{
+  "entries": [
+    {
+      "id": 1,
+      "name": "Alice M.",
+      "initials": "AM",
+      "role": "Frontend Dev • London",
+      "message": "Incredible attention to detail!",
+      "time": "2024-01-04T10:00:00Z",
+      "timeDisplay": "2m ago",
+      "likes": 12,
+      "gradient": "from-purple-500 to-indigo-600",
+      "featured": false,
+      "showOnHomepage": true,
+      "isAnonymous": false
+    },
+    {
+      "id": 2,
+      "name": "David K.",
+      "initials": "DK",
+      "role": "Backend Dev • NYC",
+      "message": "Love the dark mode implementation.",
+      "time": "2024-01-04T09:00:00Z",
+      "timeDisplay": "1h ago",
+      "likes": 8,
+      "gradient": "from-blue-500 to-cyan-600",
+      "featured": false,
+      "showOnHomepage": true,
+      "isAnonymous": false
+    },
+    {
+      "id": 3,
+      "name": "Sarah L.",
+      "initials": "SL",
+      "role": "Full Stack • Berlin",
+      "message": "Great portfolio structure.",
+      "time": "2024-01-04T06:00:00Z",
+      "timeDisplay": "4h ago",
+      "likes": 5,
+      "gradient": "from-green-500 to-emerald-600",
+      "featured": false,
+      "showOnHomepage": true,
+      "isAnonymous": false
+    },
+    {
+      "id": 4,
+      "name": "Alex Rivera",
+      "initials": "AR",
+      "role": "Frontend Dev • London",
+      "message": "Incredible work on the backend architecture article. Keep shipping! 🚀",
+      "time": "2024-01-04T08:00:00Z",
+      "timeDisplay": "2h ago",
+      "likes": 12,
+      "gradient": "from-purple-500 to-indigo-600",
+      "featured": false,
+      "showOnHomepage": false,
+      "isAnonymous": false
+    },
+    {
+      "id": 5,
+      "name": "Sarah Chen",
+      "initials": "SC",
+      "role": "Product Designer",
+      "message": "Love the dark mode implementation here! The contrast ratios are perfect.",
+      "time": "2024-01-04T05:00:00Z",
+      "timeDisplay": "5h ago",
+      "likes": 48,
+      "gradient": "from-emerald-400 to-cyan-600",
+      "featured": false,
+      "showOnHomepage": false,
+      "isAnonymous": false
+    },
+    {
+      "id": 6,
+      "name": "Elena Lin",
+      "initials": "EL",
+      "role": "UX Researcher",
+      "message": "I've been following your open source contributions. Would love a breakdown of the API design.",
+      "time": "2024-01-02T10:00:00Z",
+      "timeDisplay": "2d ago",
+      "likes": 89,
+      "gradient": "from-orange-500 to-pink-600",
+      "featured": false,
+      "showOnHomepage": false,
+      "isAnonymous": false,
+      "tags": ["#opensource", "#state-management"]
+    },
+    {
+      "id": 7,
+      "name": "Anonymous User",
+      "initials": "",
+      "role": "Visitor #4291",
+      "message": "\"Simplicity is the ultimate sophistication.\" - You nailed it.",
+      "time": "2024-01-01T10:00:00Z",
+      "timeDisplay": "3d ago",
+      "likes": 15,
+      "gradient": "from-gray-500 to-gray-600",
+      "featured": false,
+      "showOnHomepage": false,
+      "isAnonymous": true
+    },
+    {
+      "id": 8,
+      "name": "David Kim",
+      "initials": "DK",
+      "role": "CTO @ TechFlow",
+      "message": "Partha, I'm seriously impressed by the database optimization techniques you detailed. We're facing similar challenges at scale. Sent you a DM!",
+      "time": "2023-12-28T10:00:00Z",
+      "timeDisplay": "1w ago",
+      "likes": 156,
+      "gradient": "from-blue-500 to-cyan-500",
+      "featured": true,
+      "showOnHomepage": false,
+      "isAnonymous": false,
+      "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuDiQMc4ZS5tQgIHdInkjnLp20rtrsx-Z2Yt6ir-r98PGeCYdwq-vX-fKKSm88XCz0s538Aofh7WwWs62eBgygmXaLfm-_W1a_e6b9zT01_-NEKJu6qmQCNTdqtLDYhVXJCkv0zWEKe-xpQo6RV4V4f5j0cDYLIv5HVAvfjWaYRlW4OTP_xUTGgE-CiRJundn2POG6xK4I-8VGsI_jIgVZzyrdpdRNVpE0nkQpZyK5QZlTVy4pKmikUH_6JG08owCnhyK_XcMv9X724N"
+    }
+  ],
+  "stats": {
+    "totalSignatures": 1204,
+    "thisWeek": 23
+  },
+  "filterOptions": [
+    { "label": "Newest Arrival", "value": "newest" },
+    { "label": "Most Appreciated", "value": "popular" },
+    { "label": "Featured", "value": "featured" }
+  ]
+}

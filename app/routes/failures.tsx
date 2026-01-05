@@ -1,89 +1,16 @@
 import type { Route } from "./+types/failures";
+import { failures as failuresData, profile } from "~/data";
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Failures & Lessons - Partha Saradhi" },
+        { title: `Failures & Lessons - ${profile.name}` },
         { name: "description", content: "A dynamic log of post-mortems, architectural insights, and tooling recommendations." },
     ];
 }
 
-const entriesData = [
-    {
-        id: 1,
-        type: 'failure',
-        severity: 'CRITICAL',
-        title: 'Production DB Deadlock',
-        description: 'Circular dependency in transaction logic caused cascading failure during peak load. Required manual session termination.',
-        category: 'Post-Mortem',
-        color: 'red',
-        timeAgo: '2 days ago',
-        icon: 'warning',
-    },
-    {
-        id: 2,
-        type: 'recommendation',
-        severity: 'REC',
-        title: 'Biome JS Tooling',
-        description: 'Replaced ESLint and Prettier. 30x faster linting and formatting pipeline. A massive DX improvement for the team.',
-        category: 'Tooling',
-        color: 'purple',
-        timeAgo: '4 days ago',
-        icon: 'star',
-    },
-    {
-        id: 3,
-        type: 'lesson',
-        severity: 'LESSON',
-        title: 'The Value of Strict Typing',
-        description: "Moving to strict TypeScript reduced our runtime errors by 40%. It's not just tooling; it's documentation that never lies.",
-        category: 'Architecture',
-        color: 'blue',
-        timeAgo: '1 week ago',
-        icon: 'lightbulb',
-    },
-    {
-        id: 4,
-        type: 'failure',
-        severity: 'RECOVERED',
-        title: 'Memory Leak in Workers',
-        description: 'Identified zombie processes in image processing pipeline. Implemented graceful shutdowns and active monitoring on heap usage.',
-        category: 'Performance',
-        color: 'orange',
-        timeAgo: '2 weeks ago',
-        icon: 'sync_problem',
-    },
-    {
-        id: 5,
-        type: 'recommendation',
-        severity: 'REC',
-        title: '"Staff Engineer" Book',
-        description: 'Essential reading for understanding technical leadership beyond code. It redefined how I approach architectural buy-in.',
-        category: 'Career',
-        color: 'pink',
-        timeAgo: '3 weeks ago',
-        icon: 'menu_book',
-    },
-    {
-        id: 6,
-        type: 'lesson',
-        severity: 'LESSON',
-        title: 'Event Sourcing Patterns',
-        description: 'Complex domains benefit from storing state changes, not just current state. Audit trails became essentially free.',
-        category: 'Design Patterns',
-        color: 'emerald',
-        timeAgo: '1 month ago',
-        icon: 'extension',
-    },
-];
-
-const recentLogs = [
-    { type: 'lesson', title: 'Early Abstractions', desc: 'Wait for the rule of three before extracting a shared component.', time: 'Today, 10:00 AM', color: 'blue' },
-    { type: 'rec', title: '"Staff Engineer" Book', desc: 'Understanding technical leadership beyond code.', time: 'Yesterday', color: 'purple' },
-    { type: 'failure', title: 'API Rate Limiting', desc: 'Forgot to implement sliding window on the public endpoint.', time: '3 days ago', color: 'red' },
-    { type: 'lesson', title: 'Testing Pyramid', desc: 'Shifted focus from E2E to integration tests.', time: '1 week ago', color: 'blue' },
-];
-
 export default function FailuresPage() {
+    const { entries: entriesData, recentLogs, stats, filterTabs } = failuresData;
+
     return (
         <div className="bg-[#101622] min-h-screen text-slate-200 font-display selection:bg-[#2b6cee] selection:text-white overflow-x-hidden">
             {/* Background Effects */}
@@ -131,7 +58,7 @@ export default function FailuresPage() {
                     <div className="lg:col-span-8 w-full">
                         {/* Filter Tabs */}
                         <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2">
-                            {['ALL', 'FAILURES', 'LESSONS', 'RECOMMENDATIONS'].map((filter, i) => (
+                            {filterTabs.map((filter, i) => (
                                 <button
                                     key={filter}
                                     className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-colors ${i === 0
@@ -171,20 +98,20 @@ export default function FailuresPage() {
                             </div>
                             <div className="p-6">
                                 <div className="flex items-end gap-2 mb-2">
-                                    <span className="text-3xl font-bold text-white">12</span>
+                                    <span className="text-3xl font-bold text-white">{stats.entriesThisMonth}</span>
                                     <span className="text-sm text-slate-400 mb-1">entries this month</span>
                                 </div>
                                 <div className="w-full h-1.5 bg-slate-800 rounded-full mb-4 overflow-hidden">
-                                    <div className="h-full bg-gradient-to-r from-[#2b6cee] to-purple-500 w-[65%] rounded-full" />
+                                    <div className="h-full bg-gradient-to-r from-[#2b6cee] to-purple-500 rounded-full" style={{ width: `${stats.progressPercent}%` }} />
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="p-3 rounded bg-white/5 border border-white/5">
                                         <span className="block text-xs text-slate-500 mb-1">Lessons</span>
-                                        <span className="text-lg font-mono text-[#2b6cee] font-bold">8</span>
+                                        <span className="text-lg font-mono text-[#2b6cee] font-bold">{stats.lessons}</span>
                                     </div>
                                     <div className="p-3 rounded bg-white/5 border border-white/5">
                                         <span className="block text-xs text-slate-500 mb-1">Failures</span>
-                                        <span className="text-lg font-mono text-red-500 font-bold">4</span>
+                                        <span className="text-lg font-mono text-red-500 font-bold">{stats.failures}</span>
                                     </div>
                                 </div>
                             </div>

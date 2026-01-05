@@ -1,0 +1,34 @@
+{
+  "currentRead": {
+    "title": "Dune Messiah",
+    "author": "Frank Herbert",
+    "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBuGBrwGg6xsMigXUEL9-4UFxJ4zGrhlFP3D4kEHmPVFQM8ef8zlMZ_T1a-A_LhG0-NMzGYLAjFWsaDiFb3uRnskGjXLMoEUtBQrTftDFU-XMSd6MS93WzLp4CKXdmMjf32w20EHu1HDyDowR2Rsq7647VNF00GsW1AbN1IFru7jzghcwYg6jcTYBN2fx68Mrhql0gFSypND172gcaKhZes-svyBcjicp0e1Q5H6iEivxCMqs-zLrQMojOvz-ZDSu9If9SRF8MB_TjU",
+    "sector": "SCI-FI",
+    "episode": 2,
+    "progress": 74
+  },
+  "currentWatch": {
+    "title": "Cyberpunk: Edgerunners",
+    "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDTukshYEqxfrP4XjqmSOAuf-1cUjdiF0q7kqPT7hvmA1IlFUE9EvNJQhR216CtbhYtlUPNx-kjRFMPRI8eIv4m0DZQlqJUYN80YxYITwaZCJnPqtDOvwaIJd2Ullas49iY-s1hSYeQ7oSS8gwCclRfdABwpYhRiNTyNiQVRJZEXdcsnLzK3rNInSj5ofm0tceDNwpsMCFGU_nULmvaAa-40LoDyEZyBc4-qdhbz8wO4zxtLB4MH9_BzoVvR88df5EQymzEIHPhi0oa",
+    "status": "REWATCHING",
+    "episode": 4
+  },
+  "nowPlaying": {
+    "title": "Starboy",
+    "artist": "The Weeknd",
+    "featuring": "Daft Punk",
+    "albumGradient": "from-[#ff0055] via-[#240046] to-[#000000]",
+    "progress": { "current": "02:01", "remaining": "-01:49", "percent": 65 },
+    "codec": "AAC_256"
+  },
+  "hardware": {
+    "keyboard": "Keychron Q1 Pro",
+    "switches": "BANANA",
+    "mods": "TAPE"
+  },
+  "location": {
+    "city": "Bangalore",
+    "country": "IN",
+    "weather": { "temp": "24°C", "condition": "Clear Night" }
+  }
+}

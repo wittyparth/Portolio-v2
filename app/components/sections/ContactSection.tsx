@@ -3,13 +3,12 @@
  * Combined contact form with guestbook activity - matches contact-form.html design
  */
 
-const guestbookEntries = [
-    { initials: "AM", name: "Alice M.", time: "2m ago", message: "Incredible attention to detail!" },
-    { initials: "DK", name: "David K.", time: "1h ago", message: "Love the dark mode implementation." },
-    { initials: "SL", name: "Sarah L.", time: "4h ago", message: "Great portfolio structure." },
-];
+import { guestbook } from "~/data";
 
 export default function ContactSection() {
+    const { entries, stats } = guestbook;
+    const guestbookEntries = entries.filter(e => e.showOnHomepage);
+
     return (
         <section className="py-20 relative">
             {/* Background Effects */}
@@ -77,7 +76,7 @@ export default function ContactSection() {
                                             <div className="flex flex-col flex-1 min-w-0">
                                                 <div className="flex items-center justify-between">
                                                     <span className="text-sm font-bold text-white truncate">{entry.name}</span>
-                                                    <span className="text-[10px] font-mono text-[#94a3b8]">{entry.time}</span>
+                                                    <span className="text-[10px] font-mono text-[#94a3b8]">{entry.timeDisplay}</span>
                                                 </div>
                                                 <p className="text-xs text-[#94a3b8] truncate italic group-hover/item:text-[#2b6cee]/80 transition-colors">"{entry.message}"</p>
                                             </div>
@@ -91,7 +90,7 @@ export default function ContactSection() {
                                         <div className="absolute inset-0 bg-white/10 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
                                         <div className="flex flex-col items-start relative z-10">
                                             <span className="text-white font-bold text-lg tracking-wide">Sign the Guestbook</span>
-                                            <span className="text-blue-100 text-xs font-normal">Join 1,204 other visitors</span>
+                                            <span className="text-blue-100 text-xs font-normal">Join {stats.totalSignatures.toLocaleString()} other visitors</span>
                                         </div>
                                         <span className="material-symbols-outlined text-white group-hover/btn:translate-x-1 transition-transform relative z-10">arrow_forward</span>
                                     </a>

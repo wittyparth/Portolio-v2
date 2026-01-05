@@ -1,0 +1,76 @@
+{
+  "currently": {
+    "title": "System Design Interview",
+    "author": "Alex Xu",
+    "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBMhjCDUxNuAxpF3DLH5iSzNxunp-e8U9AUlgdQfkjdH8gqAaUiGHfjbAuPBClqnr8AJKYvL0cDzmpwYSzhkhPO0LE8Qgh6vWM3-hJTNLWOf_ORx3Cv8-bs2bie1D7SmeLMywfre_W41Sayz4pPsMkybjlm6EokXUgRxzgwlqqlW8mNOyPgLRme35gFNrSe6pnBXRcGj34QuQ5xCQfp83M5gPNNJNKoagew-f2iFup1yD6-QiSeMzSY9RqQb42vlOXQsnKNhmlO67xr",
+    "badges": ["Technical", "Architecture"],
+    "progress": { "percent": 45, "currentPage": 142, "totalPages": 320, "lastRead": "2 hours ago" },
+    "quote": "Designing a system that scales to millions of users requires looking beyond the code—understanding trade-offs is the real engineering."
+  },
+  "books": [
+    {
+      "id": 1,
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAQ8dQ0nsICIoVnvjy2wDkSCzAHF8-4McI29SwK2lKLWIiESJL0AEP7WP3GSDaAZJW1UzmZqlB1wrUTA3irLnciI7a6vEk4OrpBdjg41ycu2Uui3ap9YM2IOy5H241StMtakttJSxKvcVY6yFezmcbM_0PqmF6a9RUvBZxCaiskDMOvAkB4QZdsiVsTBiEhblVi-DzuuPkchxJExDOz1cKAc65rT8Mlr54RefllFFVusrhjZaJwTjsarHq8HkvHS2iHvAHtxcwEz8uI",
+      "takeaway": "\"Code is read much more often than it is written. Optimize for the reader.\"",
+      "finishedDate": "Oct 12, 2023",
+      "category": "ENGINEERING",
+      "rating": 5,
+      "status": "Finished"
+    },
+    {
+      "id": 2,
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAq-ZFzASV_454IdFG4crRMCR6I6J6BP4LYZP_9BVukusdv-rmdajjr_nhDn8orUQzmySOh2JX3su8ZGbCZr_AvxoDt0pPITdI4kbW3MvSvUzisAyLMVCgk1BVlNXezK0jYwDKGKvhlwdguwP59gAFW3__xvIDQec1bfnwM9mbv3OrN9Zt41rxruycrnKwW0zFWCRxXHEGWS8PZwlx7AulDdMC2RHF-v4HFYHHbjjitoKcVvjcryWiZyWy2_ldPlS93x0EqzpVBFvsV",
+      "takeaway": "\"A masterclass in ecology, politics, and the danger of charismatic leaders.\"",
+      "finishedDate": "Sep 04, 2023",
+      "category": "SCI-FI",
+      "rating": 5,
+      "status": "Finished"
+    },
+    {
+      "id": 3,
+      "title": "The Pragmatic Programmer",
+      "author": "Andrew Hunt",
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuA5FRxZzJy9guatfJojnl0b5yPQcHzrO1S2-rDS6UXoV3teopIWGuZOe_KymbO7B4dyejmSFqWQ0E7wRkQILd04f37T24sDhz_MECsouDHXRZiZpbu4JDRB-V0VzM0aEOv__zrJwmtwAI9hfDK9LZqhNI7YBLwoTjSxzvSm0f9sUs08xBNR7Bvhm4sP9KLAse4kVJpb3KQFhscWEv2_Zuky3x8xbuehR5rvKzTvcCNnVu2DB9swsx8ONnF3KfFFUyy4H0KiG-W65vrV",
+      "takeaway": "\"Don't live with broken windows. Be a catalyst for change.\"",
+      "finishedDate": "Aug 15, 2023",
+      "category": "CAREER",
+      "rating": 4,
+      "status": "Finished"
+    },
+    {
+      "id": 4,
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAFl53ZjQV9LpYWhYaLSb8rbQWxIQwc-B2qvhhCPf--AXNN4ZIhg324AcomUJ4j81B63IuswKKFgTNw0UT7hrRNmRNoSj5DvlvPP4yesIkNvXoYVJTQs_YQTfaPG_G1lGlR73u0I13OVRfTJ2R8KeqY5jRUXKE9sEEukr35Twu7DznhG_4m-lYGbc6fw_7s0wY_a05AcrjcpfQuXwTbv30kef_P1gHHgPbheYr2vboItU89K1erikTNKJiYL4h9XfnlxmQvXe0Gm2yU",
+      "takeaway": "\"You do not rise to the level of your goals. You fall to the level of your systems.\"",
+      "finishedDate": "Jan 10, 2023",
+      "category": "GROWTH",
+      "rating": 5,
+      "status": "Finished"
+    },
+    {
+      "id": 5,
+      "title": "Data Intensive Apps",
+      "author": "Martin Kleppmann",
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAy7_XazDh60NiB7AGqN4m9C45-PRE7WzrW8jRFqKbuYNSjRGHQYrpT1rdONWm70gKRTMi53r5HM5Zzs6OuDkW5ImVo92rk1nTBZrfg7_VX79g6r7BlV4DLqCqQkIAEv_0qzqRPgTFmW9PIvgFaeVPVpVcKm7DUqGoHm839Ii5bSd4EPZKJ9nARfF5PYxdWuX74WgV44psHDkzuGRE6hDLcZ-sQcAVi0eyqHOBBTb4PGMRqJJfRdeoqbbtJQDBkHL4IkuilveCFkm-P",
+      "category": "DATABASE",
+      "status": "Waitlist",
+      "isWaitlist": true
+    }
+  ],
+  "filters": [
+    { "label": "All Books", "value": "all", "isActive": true },
+    { "label": "Finished (38)", "value": "finished" },
+    { "label": "To Read (12)", "value": "to-read" },
+    { "label": "Favorites", "value": "favorites" }
+  ],
+  "stats": {
+    "booksRead": 42,
+    "streak": 12,
+    "pages": "15.4k"
+  }
+}

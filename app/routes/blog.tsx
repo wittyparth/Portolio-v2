@@ -1,5 +1,6 @@
 import type { Route } from "./+types/blog";
 import { useState, useMemo } from 'react';
+import { blog as blogData, profile } from "~/data";
 import {
     Icon,
     Badge,
@@ -8,89 +9,14 @@ import {
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Partha.Dev - Thought Stream" },
+        { title: `${profile.name} - Thought Stream` },
         { name: "description", content: "A curated feed of backend architecture, system design, and industry rants." },
     ];
 }
 
-const navLinks = [
-    { label: 'Work', href: '/projects' },
-    { label: 'Blog', href: '/blog', isActive: true },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
-];
-
-const tabs = [
-    { label: 'All Posts', value: 'all', icon: 'grid_view', isActive: true },
-    { label: 'Blog', value: 'blog', icon: 'article' },
-    { label: 'Medium', value: 'medium', icon: 'post' },
-    { label: 'X (Twitter)', value: 'twitter' },
-    { label: 'LinkedIn', value: 'linkedin' },
-];
-
-const postsData = [
-    {
-        id: 1,
-        title: "Scaling Redis for Millions of Requests",
-        description: "An in-depth look at how we optimized our caching layer to handle massive traffic spikes without breaking a sweat. Includes Lua scripting strategies.",
-        category: "Engineering",
-        categoryColor: "teal",
-        date: "Nov 12, 2023",
-        readTime: "12m",
-        views: "1.2k",
-        type: "blog",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBv9DJSLa_6Vm1V99JTTZajUxm6ph6tvJzUTQDdwjsRRGZBTPcVqYM_Z2OyMgeRLBOiTzzuQiGHaP17Gor9TNj583_J5bpFZ5xWYRmKHuDTtN1tErjuc8W2Cl47aAczh7EAWP2moVHRL4gMvN8caHIxomtEbHM8Pbun4DsUwsXqS2G29M7CrtVI7aW5OR0V072_kRNIvT0otzL7IPljkBRDJN9iPlVqLpuRNzEoGNdFJnbx9TMBuixTbwWT130c0K4piifpK3SmHwIX",
-    },
-    {
-        id: 2,
-        title: "Idempotency in Distributed Systems",
-        description: "How to ensure your APIs handle duplicate requests gracefully without creating inconsistent states in your database.",
-        category: "Case Study",
-        categoryColor: "white",
-        date: "Sep 28, 2023",
-        likes: "342",
-        type: "medium",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuDAxZ6pNVd0EUOq-_7NLeFP-Ycs0btBLB7j_43F9Wr7oiHjWt_-tJnsi-icELM0CR8MMVYz2tNRZnkGNegc0bt75Sy4CAzWpFFbXcl1LMOYor75UaDlzYEAIgWbbRrJMvB3Hf2sUVyUonGxidChBlHeE3zJHcAFukQQgimp20ngLOrNjHFhfmOZVjqhrYSptt2lz7n4jn0BH0VZmsU3ylYCEAP7EzMhl6JTCLcImUg9afQxi_JiBHX9javBtVQFM7jyoFxjVErqp-7U",
-    },
-    {
-        id: 3,
-        title: "Migrating Legacy Monoliths to Serverless",
-        description: "Excited to share that I've successfully migrated our legacy monolith to a serverless architecture, reducing costs by 40%. It was a challenging journey...",
-        category: "Update",
-        categoryColor: "linkedin",
-        date: "Oct 20, 2023",
-        likes: "142",
-        comments: "23",
-        type: "linkedin",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuD4tXML8A8QAawx-h7NIWJEM1ik8k5rOUYD5hiVR_2ctI5qaPGdjWAlVyeRvFb49f_EAx453_Bl4NPUZiWEI_xLTA58-lF4TYpsmcQoxZcP0hFy5Vr7Hff5esHuoN7qJnXowo5wlTyiY5w1YRMvRWl9xaGNXclJXUUIUMGHHmhvCjc4yk6Hcg2oH1C2nu5KIrEkET0Ujo80WXtkGn08tl99w1PF9uHNhTwgeCsk5p_OGXccUJbVe44XVq5NU4sHjyLwPyMT3N3_VFoT",
-    },
-    {
-        id: 4,
-        title: "Microservices vs Monoliths: The Real Cost",
-        description: "Microservices are not always the answer. Sometimes a well-structured monolith is all you need to reach PMF. #SystemDesign #Engineering",
-        category: "Thread",
-        categoryColor: "white",
-        date: "Oct 20, 2023",
-        retweets: "12",
-        likes: "48",
-        type: "twitter",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCq59yrXikHavzIfW0hHmEBDOCjePxv8iIwHqs2Wc9eithMV7y4HzBJKAPZVTgkCbJYPNRGslSrezJ8lmNOnh4IQhruwQYEGm9N_AFQWCzvc5llAuEBPr_Pe67ySu-UWI2pq3Zex3Qj3JRoExFz0483gGJLE4gTG6BaYVfMxYFUhyFMQrkePQU8PtyHLlYeuq4L7OAOtLnem4x-z4cDP8SuU-3O_yrqDv15JSZRxWhszZIUc5ZXGb16W6xi-YfftBRojCIFg9dvrnO8",
-    },
-    {
-        id: 5,
-        title: "The Art of Database Sharding",
-        description: "Understanding when to shard and how to choose a shard key to avoid hotspots. Practical examples with Postgres.",
-        category: "Tutorial",
-        categoryColor: "teal",
-        date: "Oct 15, 2023",
-        readTime: "8m",
-        views: "890",
-        type: "blog",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCz3ZyuztbHToFGVc-jIbaYarh6sj2UJPHk4rL6AVsm8cqfqAkT7QVaJ9fpEH6_hfcvSr0TqmKdqtHxD8emJKbI4DJoUriOqGCb1joqqZoANy39KU9-6mrBL_OMzIInn1JDREfzj5iRyhhq4Lxf0ZOeTlBRzMKfk83n-zXeOIXAdukAyNTt5Vw4BSztLWgGSvO7aWHxZ5vQjD_Tnkx8gLtpjpVza_0-ABl_Q13y87sYg70B5uCYOglmBz12cJ_beW60gNHqf4Uw4B1i",
-    },
-];
-
 export default function BlogPage() {
+    const { posts: postsData, tabs, hero } = blogData;
+
     const [searchQuery, setSearchQuery] = useState('');
     const [activeTab, setActiveTab] = useState('all');
     const [sortOrder, setSortOrder] = useState<'newest' | 'oldest' | 'popular'>('newest');
@@ -132,7 +58,7 @@ export default function BlogPage() {
         }
 
         return result;
-    }, [searchQuery, activeTab, sortOrder]);
+    }, [searchQuery, activeTab, sortOrder, postsData]);
 
     // Tab click handler
     const handleTabClick = (value: string) => {
@@ -177,7 +103,7 @@ export default function BlogPage() {
                         <div
                             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                             style={{
-                                backgroundImage: `linear-gradient(0deg, #0a0a0f 0%, rgba(10, 10, 15, 0.4) 60%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDgBptQLhrVq4KeCsWTszO52j46cTflmf7-uhcEAW2VRrpvJzhmvrjUNfu5JFXqwt2zPEkmsm-juonRXpGtGIx249LtqM_Ksnr-m0LOtLPeZz3TW_prhASgMqqcS20xmXcElpn0RHciKtTZo5o045V5-2KpuEIqhyWZwOBSGqK0Dk_a-fH-KDNx-FUky_zpqZ8s7VEcAF3_JOUXGZULwQtY74KBNgxe6yhEf90kA25sxoi1IUFX4aSwuDPpaNPu9aTQKqY2cwZnTlhf")`
+                                backgroundImage: `linear-gradient(0deg, #0a0a0f 0%, rgba(10, 10, 15, 0.4) 60%, rgba(0, 0, 0, 0) 100%), url("${hero.imageUrl}")`
                             }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/80 to-transparent" />
@@ -192,10 +118,10 @@ export default function BlogPage() {
                                 <span className="text-slate-400 text-xs font-mono">Latest Release</span>
                             </div>
                             <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight max-w-3xl mb-4 tracking-tight drop-shadow-lg">
-                                Thought Stream: <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Architecting for Chaos</span>
+                                {hero.title.split(':')[0]}: <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">{hero.title.split(':')[1]}</span>
                             </h1>
                             <p className="text-slate-400 text-base md:text-lg max-w-2xl font-light leading-relaxed mb-8">
-                                A curated feed of backend architecture, system design, and industry rants. Exploring the depths of distributed systems, one crash at a time.
+                                {hero.description}
                             </p>
                             <div className="flex items-center gap-4">
                                 <Button variant="outline" icon="arrow_forward" iconPosition="right" className="bg-white/10 border-white/10 backdrop-blur-md">

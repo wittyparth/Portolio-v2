@@ -3,42 +3,30 @@
  * Based on social media posts.html reference
  */
 
+import { socialPosts, getHomepageSocialPosts } from "~/data";
+
+// Platform icons as components
+const PlatformIcons: Record<string, JSX.Element> = {
+    medium: (
+        <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+        </svg>
+    ),
+    devto: (
+        <svg className="w-7 h-7 fill-current" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M120.12 208.29c-3.88-2.9-7.77-4.35-11.65-4.35H91.03v104.47h17.45c3.88 0 7.77-1.45 11.65-4.35 3.88-2.9 5.82-7.25 5.82-13.06v-69.65c-.01-5.8-1.96-10.16-5.83-13.06zM404.1 32H43.9C19.7 32 .06 51.59 0 75.8v360.4C.06 460.41 19.7 480 43.9 480h360.2c24.21 0 43.84-19.59 43.9-43.8V75.8c-.06-24.21-19.7-43.8-43.9-43.8zM154.2 291.19c0 18.81-11.61 47.31-48.36 47.25h-46.4V172.98h47.38c35.44 0 47.36 28.46 47.37 47.28l.01 70.93zm100.68-88.66H201.6v38.42h32.57v29.57H201.6v38.41h53.29v29.57h-62.18c-11.16.29-20.44-8.53-20.72-19.69V193.7c-.27-11.15 8.56-20.41 19.71-20.69h63.19l-.01 29.52zm103.64 115.29c-13.2 30.75-36.85 24.63-47.44 0l-38.53-144.8h32.57l29.71 113.72 29.57-113.72h32.58l-38.46 144.8z" />
+        </svg>
+    ),
+    twitter: (
+        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+    ),
+};
+
 export default function SocialPostsSection() {
-    const posts = [
-        {
-            platform: "Medium",
-            title: "Scaling Go Microservices at High Velocity",
-            date: "Oct 24",
-            readTime: "5 min read",
-            icon: (
-                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
-                </svg>
-            ),
-        },
-        {
-            platform: "Dev.to",
-            title: "Why I switched to Rust for Systems",
-            date: "Oct 12",
-            readTime: "8 min read",
-            icon: (
-                <svg className="w-7 h-7 fill-current" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M120.12 208.29c-3.88-2.9-7.77-4.35-11.65-4.35H91.03v104.47h17.45c3.88 0 7.77-1.45 11.65-4.35 3.88-2.9 5.82-7.25 5.82-13.06v-69.65c-.01-5.8-1.96-10.16-5.83-13.06zM404.1 32H43.9C19.7 32 .06 51.59 0 75.8v360.4C.06 460.41 19.7 480 43.9 480h360.2c24.21 0 43.84-19.59 43.9-43.8V75.8c-.06-24.21-19.7-43.8-43.9-43.8zM154.2 291.19c0 18.81-11.61 47.31-48.36 47.25h-46.4V172.98h47.38c35.44 0 47.36 28.46 47.37 47.28l.01 70.93zm100.68-88.66H201.6v38.42h32.57v29.57H201.6v38.41h53.29v29.57h-62.18c-11.16.29-20.44-8.53-20.72-19.69V193.7c-.27-11.15 8.56-20.41 19.71-20.69h63.19l-.01 29.52zm103.64 115.29c-13.2 30.75-36.85 24.63-47.44 0l-38.53-144.8h32.57l29.71 113.72 29.57-113.72h32.58l-38.46 144.8z" />
-                </svg>
-            ),
-        },
-        {
-            platform: "X (Twitter)",
-            title: "Thread: System Design Thoughts",
-            date: "Sep 28",
-            readTime: "14 Tweets",
-            icon: (
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-            ),
-        },
-    ];
+    const posts = getHomepageSocialPosts();
+    const { sectionHeader, ctaCard, stats } = socialPosts;
 
     return (
         <section className="py-20">
@@ -47,13 +35,18 @@ export default function SocialPostsSection() {
                 <div className="flex flex-col gap-2 mb-8">
                     <div className="flex items-center gap-2 mb-1">
                         <span className="h-px w-8 bg-[#2b6cee]" />
-                        <span className="text-[#2b6cee] text-xs font-bold uppercase tracking-widest">Latest Updates</span>
+                        <span className="text-[#2b6cee] text-xs font-bold uppercase tracking-widest">{sectionHeader.badge}</span>
                     </div>
                     <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight tracking-tight">
-                        Engineering Logs &amp; <br className="hidden sm:block" />Social Transmissions
+                        {sectionHeader.title.split('\n').map((line, i) => (
+                            <span key={i}>
+                                {line}
+                                {i === 0 && <br className="hidden sm:block" />}
+                            </span>
+                        ))}
                     </h2>
                     <p className="text-gray-400 max-w-xl mt-2 text-sm md:text-base leading-relaxed">
-                        Thoughts on distributed systems, backend architecture, and the occasional rant about Rust borrow checker.
+                        {sectionHeader.description}
                     </p>
                 </div>
 
@@ -80,7 +73,7 @@ export default function SocialPostsSection() {
                                 <a key={index} href="/blog" className="group flex items-center gap-4 bg-[#161b22]/50 hover:bg-[#1c2128] border border-white/5 hover:border-[#2b6cee]/30 p-4 rounded-xl transition-all duration-300 relative overflow-hidden">
                                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#2b6cee] opacity-0 group-hover:opacity-100 transition-opacity" />
                                     <div className="shrink-0 size-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center text-white group-hover:scale-105 transition-transform">
-                                        {post.icon}
+                                        {PlatformIcons[post.platformIcon] || PlatformIcons.medium}
                                     </div>
                                     <div className="flex flex-col flex-1 min-w-0">
                                         <h4 className="text-white text-base font-semibold leading-snug truncate group-hover:text-[#2b6cee] transition-colors">{post.title}</h4>
@@ -121,15 +114,15 @@ export default function SocialPostsSection() {
                                     </svg>
                                 </div>
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">Deep Dive</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2">{ctaCard.title}</h3>
                             <p className="text-sm text-gray-400 leading-relaxed">
-                                Explore over 50+ articles on engineering, system design, and product scaling.
+                                {ctaCard.description.replace('50+', `${stats.totalArticles}+`)}
                             </p>
                         </div>
 
                         <div className="p-4 z-10">
                             <a href="/blog" className="flex items-center justify-center w-full bg-[#2b6cee] hover:bg-blue-600 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 group/btn shadow-lg shadow-[#2b6cee]/20 hover:shadow-[#2b6cee]/40">
-                                <span>Read the Blog</span>
+                                <span>{ctaCard.buttonText}</span>
                                 <span className="material-symbols-outlined ml-2 group-hover/btn:translate-x-1 transition-transform text-[20px]">arrow_forward</span>
                             </a>
                         </div>

@@ -1,79 +1,16 @@
 import type { Route } from "./+types/logs";
+import { logs as logsData, profile } from "~/data";
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Lessons & Failures - Partha Saradhi" },
+        { title: `Lessons & Failures - ${profile.name}` },
         { name: "description", content: "A transparent log of exceptions, timeouts, and the architectural patches that defined my growth as a backend engineer." },
     ];
 }
 
-const logEntries = [
-    {
-        id: 1,
-        type: 'failure',
-        title: 'Microservices Over-Engineering',
-        description: 'Attempted to split a simple CRUD application into 15 independent microservices prematurely. Resulted in a distributed monolith where every request required 6 internal network hops and debugging became a nightmare.',
-        lesson: "Distributed systems complexity is a tax. Don't pay it until scale demands it. Monolith-first is often the correct architecture.",
-        lessonLabel: 'What I Learned',
-        category: 'Architecture',
-        period: '2019 Q3',
-        tags: ['Node.js', 'K8s'],
-        color: 'error',
-        icon: 'warning',
-        badge: 'System Failure',
-    },
-    {
-        id: 2,
-        type: 'insight',
-        title: 'The Monolith Reformation',
-        description: 'Refactored the distributed mess back into a modular monolith. Latency dropped by 65% and developer velocity tripled because we could run the entire stack on a single laptop again.',
-        lesson: 'Modular Monoliths allow you to define boundaries without the network penalty. Scale via instances, not services, until necessary.',
-        lessonLabel: 'Key Outcome',
-        category: 'Architecture',
-        period: 'Resolved',
-        tags: ['Refactor', 'DevOps'],
-        color: 'primary',
-        icon: 'build_circle',
-        badge: 'Insight & Solution',
-    },
-    {
-        id: 3,
-        type: 'performance',
-        title: 'The Cache Stampede',
-        description: 'Cache expiration was synchronized for 100k keys at exactly midnight. DB CPU spiked to 100% instantly as all requests bypassed cache simultaneously, creating a "thundering herd."',
-        lesson: 'Synchronization of Time-To-Live (TTL) creates predictable failure points. Randomness is a feature, not a bug, in caching strategies.',
-        lessonLabel: 'Root Cause',
-        category: 'Database',
-        period: '2021 Q1',
-        tags: ['Redis', 'PostgreSQL'],
-        color: 'warn',
-        icon: 'hourglass_empty',
-        badge: 'Performance Fail',
-    },
-    {
-        id: 4,
-        type: 'recommendation',
-        title: 'Probabilistic Jitter Strategy',
-        description: 'Implemented random jitter on all TTLs and probabilistic early re-computation. The system now handles traffic spikes gracefully without any "thundering herds" or manual intervention.',
-        lesson: 'Zero downtime since implementation. CPU utilization leveled at 40% even during peak traffic events.',
-        lessonLabel: 'Outcome',
-        category: 'Best Practice',
-        period: 'Adopted',
-        tags: ['Algorithms', 'Scale'],
-        color: 'success',
-        icon: 'science',
-        badge: 'Recommendation',
-    },
-];
-
-const filterButtons = [
-    { label: 'All Entries', icon: 'apps', active: true },
-    { label: 'Architecture', icon: 'dns', active: false },
-    { label: 'Database', icon: 'database', active: false },
-    { label: 'Leadership', icon: 'groups', active: false },
-];
-
 export default function LogsPage() {
+    const { entries: logEntries, stats, filterButtons } = logsData;
+
     return (
         <div className="bg-[#111318] min-h-screen w-full flex flex-col relative z-10">
             <main className="flex-1 flex flex-col items-center">
@@ -103,15 +40,15 @@ export default function LogsPage() {
 
                             {/* Stats Grid */}
                             <div className="grid grid-cols-2 gap-3 md:gap-4">
-                                <StatCard label="EXCEPTIONS_LOGGED" value="42" subtext="12 Critical" icon="bug_report" iconColor="text-red-500" />
-                                <StatCard label="PATCH_RATE" value="100%" subtext="+Learning" icon="check_circle" iconColor="text-emerald-500" />
+                                <StatCard label="EXCEPTIONS_LOGGED" value={String(stats.exceptionsLogged)} subtext={`${stats.criticalCount} Critical`} icon="bug_report" iconColor="text-red-500" />
+                                <StatCard label="PATCH_RATE" value={stats.patchRate} subtext="+Learning" icon="check_circle" iconColor="text-emerald-500" />
                                 <div className="col-span-2 flex flex-col gap-1 rounded-xl border border-white/5 bg-white/5 p-4 backdrop-blur-sm hover:border-[#2b6cee]/30 transition-colors group">
                                     <div className="flex items-center justify-between">
                                         <span className="text-xs font-mono text-gray-400">GROWTH_COEFFICIENT</span>
                                         <span className="material-symbols-outlined text-[#2b6cee] text-[16px] opacity-60 group-hover:opacity-100">trending_up</span>
                                     </div>
                                     <div className="flex items-baseline gap-2">
-                                        <span className="text-2xl font-bold text-white font-mono">10x</span>
+                                        <span className="text-2xl font-bold text-white font-mono">{stats.growthCoefficient}</span>
                                         <span className="text-xs text-gray-500">Since Initial Commit</span>
                                     </div>
                                     <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/10">
@@ -133,7 +70,7 @@ export default function LogsPage() {
                         {filterButtons.map((btn, i) => (
                             <button
                                 key={btn.label}
-                                className={`group relative flex h-9 min-w-fit items-center gap-2 rounded border px-4 text-xs font-bold uppercase tracking-wider transition-all ${btn.active
+                                className={`group relative flex h-9 min-w-fit items-center gap-2 rounded border px-4 text-xs font-bold uppercase tracking-wider transition-all ${i === 0
                                     ? 'border-[#2b6cee] bg-[#2b6cee]/10 text-[#2b6cee] shadow-[0_0_15px_rgba(43,108,238,0.2)] hover:bg-[#2b6cee]/20'
                                     : 'border-white/10 bg-white/5 text-gray-400 hover:border-white/30 hover:bg-white/10 hover:text-white'
                                     }`}

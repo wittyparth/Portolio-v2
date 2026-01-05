@@ -1,0 +1,40 @@
+{
+  "activeBuild": {
+    "title": "Distributed Ledger",
+    "description": "Architecting a high-throughput ledger system with sharding capabilities using Go and gRPC.",
+    "tech": ["Golang", "gRPC", "Docker", "Postgres"],
+    "codePreview": {
+      "filename": "ledger_core.go",
+      "lines": [
+        { "num": 1, "code": "func ProcessTransaction(tx Tx) error {", "highlight": false },
+        { "num": 2, "code": "  // Validate signature", "highlight": false, "isComment": true },
+        { "num": 3, "code": "  if !crypto.Verify(tx.Sig, tx.Pub) {", "highlight": false },
+        { "num": 4, "code": "    return ErrInvalidSig", "highlight": false },
+        { "num": 5, "code": "  shard := s.router.GetShard(tx.Key)", "highlight": true }
+      ]
+    }
+  },
+  "learning": {
+    "topic": "System Design",
+    "description": "Deep dive into Consistency Models & Sharding.",
+    "progress": 75,
+    "resources": ["MIT 6.824", "raft.github.io"]
+  },
+  "obsessed": {
+    "area": "Generative Audio",
+    "description": "Exploring Rust-based audio synthesis engines.",
+    "visualBars": [8, 12, 16, 10, 14, 6]
+  },
+  "nextUp": {
+    "quarter": "Q3 2024",
+    "title": "Open Source",
+    "description": "Contributing to major CNCF projects, specifically focusing on service mesh networking layers.",
+    "avatars": ["K8s", "Ist", "+2"],
+    "tasks": [
+      { "text": "Identify issues in Istio networking", "status": "Scoping", "completed": false },
+      { "text": "Draft proposal for sidecar optimization", "status": null, "completed": false },
+      { "text": "Submit Pull Request", "status": null, "locked": true }
+    ]
+  },
+  "liveUpdates": true
+}

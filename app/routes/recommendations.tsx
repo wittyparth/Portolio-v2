@@ -1,54 +1,16 @@
 import type { Route } from "./+types/recommendations";
+import { recommendations as recommendationsData, profile } from "~/data";
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Partha.Dev - The Knowledge Stack" },
+        { title: `${profile.name} - The Knowledge Stack` },
         { name: "description", content: "A curated collection of the tools, reads, and resources that power my engineering workflow." },
     ];
 }
 
-const featuredItems = [
-    {
-        id: 1,
-        title: 'Designing Data-Intensive Applications',
-        author: 'Martin Kleppmann',
-        description: 'The absolute bible for backend engineering. It bridges the gap between theory and practice for distributed systems.',
-        type: 'Book',
-        tag: 'Essential',
-        tagColor: 'yellow',
-        category: 'System Design',
-        icon: 'menu_book',
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYlAaI8GADJKoV2tW4gqeT95fn-IB-ahbV3Sx7e1Hdx9uD-7vgo38Yguigv_flMF3Zo13G3awieJGJMgbtfRJ9zTeQqHq1IjGxG42Xl7ML99_vckISwnxT8-Y3KS-qfmD6Kd8qUgX_49GTOyJDgkgXSPA7Nohg1YQubkLjIrOxkSb8yEQpTMDe8DD-RBxgz3ySW1YBSovMgONRPHBq80gfP2I8DJgfiHWs6woRbHtuJ_qlBVWqjZB7c-2mx849FR75GixXebP-4EV8',
-        cta: 'Get Book',
-    },
-    {
-        id: 2,
-        title: 'Obsidian',
-        author: 'Knowledge Base',
-        description: 'My second brain. The local-first, markdown-based approach makes it indispensable for engineering notes and long-term knowledge retention.',
-        type: 'Tool',
-        tag: 'Tool',
-        tagColor: 'blue',
-        category: 'Productivity',
-        icon: 'terminal',
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAFnJuyOpsRja6q6C-KC6DsXUcYtgZ1AlrUU1P_ZtG8ilZHc3OsxCD8CPL78xjnQeyh8zNN4LzYw864UfMuoeawV9xsbb6d4mQWml_H-Xf-Sx1rd19VCFhxm4lgv1aT3VfutzUeRS2c9tVpa1UV1Gqn2a9Xk-ACRiB3hBTw5eFwq6X9E7H-35HdQYKePzSPPl9vRDV8ciWxQsQnfiGCTDfWyjpG3NA1ISW6_q6FiINvaNu8W4AfyLI4dGZS6k5J6zcZRja86dTYwskD',
-        cta: 'Download',
-    },
-];
-
-const gridItems = [
-    { title: 'Hussein Nasser', subtitle: 'YouTube Channel', icon: 'smart_display', iconColor: 'red', quote: 'The deepest dives into backend engineering protocols you will find for free. His breakdown of gRPC vs REST is legendary.', desc: 'Covers database internals, networking, proxies, and load balancing with incredible clarity.', tags: ['Networking', 'DBs'] },
-    { title: 'Pragmatic Engineer', subtitle: 'Newsletter', icon: 'rss_feed', iconColor: 'green', quote: 'Gergely Orosz provides the most accurate pulse on the tech market and senior engineering career paths.', tags: ['Career', 'Industry'] },
-    { title: 'Postman', subtitle: 'Dev Tool', icon: 'webhook', iconColor: 'orange', quote: 'Essential for API development. The team collaboration features have saved me countless hours of debugging.', desc: 'API platform for building and using APIs. Simplifies each step of the lifecycle and streamlines collaboration.', tags: ['API', 'Testing'] },
-    { title: 'Three.js Journey', subtitle: 'Course • Bruno Simon', icon: 'school', iconColor: 'blue', quote: 'The most immersive way to learn WebGL. If you want to make websites like this one, start here.', tags: ['Frontend', '3D'] },
-    { title: 'Lex Fridman', subtitle: 'Podcast', icon: 'podcasts', iconColor: 'purple', quote: 'Long-form conversations that actually go deep into AI, physics, and life. A staple for my commute.', desc: 'Conversations about the nature of intelligence, consciousness, love, and power.', tags: ['AI', 'Society'] },
-    { title: 'Warp', subtitle: 'Terminal', icon: 'terminal', iconColor: 'teal', quote: 'The terminal reimagined for the 21st century. The AI command suggestions are surprisingly good.', tags: ['DevEnv', 'Rust'] },
-];
-
-const filterTabs = ['All', 'Courses', 'Tools', 'Reads', 'People'];
-const topicChips = ['All Topics', 'System Design', 'Backend Eng', 'DevOps', 'Productivity', 'AI / ML', 'Frontend', 'Career'];
-
 export default function RecommendationsPage() {
+    const { featuredItems, gridItems, filterTabs, topicChips } = recommendationsData;
+
     return (
         <div className="bg-[#111318] text-white font-display overflow-x-hidden selection:bg-[#2b6cee] selection:text-white">
             {/* Background Decoration */}
@@ -121,7 +83,7 @@ export default function RecommendationsPage() {
                     <div className="w-full">
                         <div className="flex items-center gap-2 mb-6">
                             <span className="material-symbols-outlined text-yellow-500">hotel_class</span>
-                            <h2 className="text-white text-xl font-bold tracking-tight uppercase">Partha's Top Picks</h2>
+                            <h2 className="text-white text-xl font-bold tracking-tight uppercase">{profile.name.split(' ')[0]}'s Top Picks</h2>
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {featuredItems.map((item) => (
@@ -147,11 +109,11 @@ export default function RecommendationsPage() {
 
                     {/* Footer */}
                     <div className="w-full border-t border-[#282e39] mt-10 pt-8 flex flex-col md:flex-row items-center justify-between text-[#9da6b9] text-sm">
-                        <p>© 2024 Partha.Dev. Built with ☕ and Code.</p>
+                        <p>© 2024 {profile.name}. Built with ☕ and Code.</p>
                         <div className="flex gap-4 mt-4 md:mt-0">
-                            <a className="hover:text-[#2b6cee] transition-colors" href="#">Twitter</a>
-                            <a className="hover:text-[#2b6cee] transition-colors" href="#">GitHub</a>
-                            <a className="hover:text-[#2b6cee] transition-colors" href="#">LinkedIn</a>
+                            <a className="hover:text-[#2b6cee] transition-colors" href={profile.social.twitter}>Twitter</a>
+                            <a className="hover:text-[#2b6cee] transition-colors" href={profile.social.github}>GitHub</a>
+                            <a className="hover:text-[#2b6cee] transition-colors" href={profile.social.linkedin}>LinkedIn</a>
                         </div>
                     </div>
                 </div>

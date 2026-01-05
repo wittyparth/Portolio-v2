@@ -1,0 +1,59 @@
+{
+  "typingVelocity": {
+    "wpm": 125,
+    "percentile": "Top 1% Global",
+    "isLive": true
+  },
+  "latency": {
+    "avg": 35,
+    "unit": "ms",
+    "trend": "-12% vs last month"
+  },
+  "locPerMonth": {
+    "current": "12.4k",
+    "growth": "+2.4k",
+    "progressPercent": 75
+  },
+  "contributions": {
+    "total": 5502,
+    "year": 2024
+  },
+  "caffeineLevel": {
+    "cups": 42,
+    "fillPercent": 65
+  },
+  "shippedProjects": [
+    {
+      "name": "Hydra API Gateway",
+      "version": "v2.4.0 • release-prod",
+      "icon": "api",
+      "status": "LIVE",
+      "statusColor": "emerald",
+      "description": "High-performance gateway with improved rate limiting and Rust backend.",
+      "tags": ["Rust", "gRPC"]
+    },
+    {
+      "name": "ScaleDB Proxy",
+      "version": "v1.1.2 • Oct 12",
+      "icon": "database",
+      "status": "LIVE",
+      "statusColor": "emerald",
+      "description": "Intelligent connection pooling for PostgreSQL clusters."
+    },
+    {
+      "name": "Auth Service V3",
+      "version": "v3.0.0 • Sep 28",
+      "icon": "lock",
+      "status": "BETA",
+      "statusColor": "amber"
+    },
+    {
+      "name": "CLI Toolchain",
+      "version": "v0.9.4 • Sep 15",
+      "icon": "terminal",
+      "status": "ARCHIVED",
+      "statusColor": "gray"
+    }
+  ],
+  "shippedCount": 12
+}

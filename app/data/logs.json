@@ -1,0 +1,72 @@
+{
+  "entries": [
+    {
+      "id": 1,
+      "type": "failure",
+      "title": "Microservices Over-Engineering",
+      "description": "Attempted to split a simple CRUD application into 15 independent microservices prematurely. Resulted in a distributed monolith where every request required 6 internal network hops and debugging became a nightmare.",
+      "lesson": "Distributed systems complexity is a tax. Don't pay it until scale demands it. Monolith-first is often the correct architecture.",
+      "lessonLabel": "What I Learned",
+      "category": "Architecture",
+      "period": "2019 Q3",
+      "tags": ["Node.js", "K8s"],
+      "color": "error",
+      "icon": "warning",
+      "badge": "System Failure"
+    },
+    {
+      "id": 2,
+      "type": "insight",
+      "title": "The Monolith Reformation",
+      "description": "Refactored the distributed mess back into a modular monolith. Latency dropped by 65% and developer velocity tripled because we could run the entire stack on a single laptop again.",
+      "lesson": "Modular Monoliths allow you to define boundaries without the network penalty. Scale via instances, not services, until necessary.",
+      "lessonLabel": "Key Outcome",
+      "category": "Architecture",
+      "period": "Resolved",
+      "tags": ["Refactor", "DevOps"],
+      "color": "primary",
+      "icon": "build_circle",
+      "badge": "Insight & Solution"
+    },
+    {
+      "id": 3,
+      "type": "performance",
+      "title": "The Cache Stampede",
+      "description": "Cache expiration was synchronized for 100k keys at exactly midnight. DB CPU spiked to 100% instantly as all requests bypassed cache simultaneously, creating a \"thundering herd.\"",
+      "lesson": "Synchronization of Time-To-Live (TTL) creates predictable failure points. Randomness is a feature, not a bug, in caching strategies.",
+      "lessonLabel": "Root Cause",
+      "category": "Database",
+      "period": "2021 Q1",
+      "tags": ["Redis", "PostgreSQL"],
+      "color": "warn",
+      "icon": "hourglass_empty",
+      "badge": "Performance Fail"
+    },
+    {
+      "id": 4,
+      "type": "recommendation",
+      "title": "Probabilistic Jitter Strategy",
+      "description": "Implemented random jitter on all TTLs and probabilistic early re-computation. The system now handles traffic spikes gracefully without any \"thundering herds\" or manual intervention.",
+      "lesson": "Zero downtime since implementation. CPU utilization leveled at 40% even during peak traffic events.",
+      "lessonLabel": "Outcome",
+      "category": "Best Practice",
+      "period": "Adopted",
+      "tags": ["Algorithms", "Scale"],
+      "color": "success",
+      "icon": "science",
+      "badge": "Recommendation"
+    }
+  ],
+  "stats": {
+    "exceptionsLogged": 42,
+    "criticalCount": 12,
+    "patchRate": "100%",
+    "growthCoefficient": "10x"
+  },
+  "filterButtons": [
+    { "label": "All Entries", "icon": "apps", "value": "all" },
+    { "label": "Architecture", "icon": "dns", "value": "architecture" },
+    { "label": "Database", "icon": "database", "value": "database" },
+    { "label": "Leadership", "icon": "groups", "value": "leadership" }
+  ]
+}

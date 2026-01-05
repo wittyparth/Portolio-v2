@@ -1,4 +1,5 @@
 import type { Route } from "./+types/books";
+import { books as booksData, profile } from "~/data";
 import {
     Badge,
     Button,
@@ -12,82 +13,14 @@ import {
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Partha Saradhi - The Library" },
+        { title: `${profile.name} - The Library` },
         { name: "description", content: "Curating knowledge, one page at a time. An immersive timeline of my intellectual journey." },
     ];
 }
 
-const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Projects', href: '/projects' },
-    { label: 'Library', href: '/books', isActive: true },
-    { label: 'About', href: '/about' },
-];
-
-const filters = [
-    { label: 'All Books', value: 'all', isActive: true },
-    { label: 'Finished (38)', value: 'finished' },
-    { label: 'To Read (12)', value: 'to-read' },
-    { label: 'Favorites', value: 'favorites' },
-];
-
-const booksData = [
-    {
-        id: 1,
-        title: "Clean Code",
-        author: "Robert C. Martin",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAQ8dQ0nsICIoVnvjy2wDkSCzAHF8-4McI29SwK2lKLWIiESJL0AEP7WP3GSDaAZJW1UzmZqlB1wrUTA3irLnciI7a6vEk4OrpBdjg41ycu2Uui3ap9YM2IOy5H241StMtakttJSxKvcVY6yFezmcbM_0PqmF6a9RUvBZxCaiskDMOvAkB4QZdsiVsTBiEhblVi-DzuuPkchxJExDOz1cKAc65rT8Mlr54RefllFFVusrhjZaJwTjsarHq8HkvHS2iHvAHtxcwEz8uI",
-        takeaway: '"Code is read much more often than it is written. Optimize for the reader."',
-        finishedDate: "Oct 12, 2023",
-        category: "ENGINEERING",
-        rating: 5,
-        status: "Finished",
-    },
-    {
-        id: 2,
-        title: "Dune",
-        author: "Frank Herbert",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAq-ZFzASV_454IdFG4crRMCR6I6J6BP4LYZP_9BVukusdv-rmdajjr_nhDn8orUQzmySOh2JX3su8ZGbCZr_AvxoDt0pPITdI4kbW3MvSvUzisAyLMVCgk1BVlNXezK0jYwDKGKvhlwdguwP59gAFW3__xvIDQec1bfnwM9mbv3OrN9Zt41rxruycrnKwW0zFWCRxXHEGWS8PZwlx7AulDdMC2RHF-v4HFYHHbjjitoKcVvjcryWiZyWy2_ldPlS93x0EqzpVBFvsV",
-        takeaway: '"A masterclass in ecology, politics, and the danger of charismatic leaders."',
-        finishedDate: "Sep 04, 2023",
-        category: "SCI-FI",
-        rating: 5,
-        status: "Finished",
-    },
-    {
-        id: 3,
-        title: "The Pragmatic Programmer",
-        author: "Andrew Hunt",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuA5FRxZzJy9guatfJojnl0b5yPQcHzrO1S2-rDS6UXoV3teopIWGuZOe_KymbO7B4dyejmSFqWQ0E7wRkQILd04f37T24sDhz_MECsouDHXRZiZpbu4JDRB-V0VzM0aEOv__zrJwmtwAI9hfDK9LZqhNI7YBLwoTjSxzvSm0f9sUs08xBNR7Bvhm4sP9KLAse4kVJpb3KQFhscWEv2_Zuky3x8xbuehR5rvKzTvcCNnVu2DB9swsx8ONnF3KfFFUyy4H0KiG-W65vrV",
-        takeaway: '"Don\'t live with broken windows. Be a catalyst for change."',
-        finishedDate: "Aug 15, 2023",
-        category: "CAREER",
-        rating: 4,
-        status: "Finished",
-    },
-    {
-        id: 4,
-        title: "Atomic Habits",
-        author: "James Clear",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAFl53ZjQV9LpYWhYaLSb8rbQWxIQwc-B2qvhhCPf--AXNN4ZIhg324AcomUJ4j81B63IuswKKFgTNw0UT7hrRNmRNoSj5DvlvPP4yesIkNvXoYVJTQs_YQTfaPG_G1lGlR73u0I13OVRfTJ2R8KeqY5jRUXKE9sEEukr35Twu7DznhG_4m-lYGbc6fw_7s0wY_a05AcrjcpfQuXwTbv30kef_P1gHHgPbheYr2vboItU89K1erikTNKJiYL4h9XfnlxmQvXe0Gm2yU",
-        takeaway: '"You do not rise to the level of your goals. You fall to the level of your systems."',
-        finishedDate: "Jan 10, 2023",
-        category: "GROWTH",
-        rating: 5,
-        status: "Finished",
-    },
-    {
-        id: 5,
-        title: "Data Intensive Apps",
-        author: "Martin Kleppmann",
-        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAy7_XazDh60NiB7AGqN4m9C45-PRE7WzrW8jRFqKbuYNSjRGHQYrpT1rdONWm70gKRTMi53r5HM5Zzs6OuDkW5ImVo92rk1nTBZrfg7_VX79g6r7BlV4DLqCqQkIAEv_0qzqRPgTFmW9PIvgFaeVPVpVcKm7DUqGoHm839Ii5bSd4EPZKJ9nARfF5PYxdWuX74WgV44psHDkzuGRE6hDLcZ-sQcAVi0eyqHOBBTb4PGMRqJJfRdeoqbbtJQDBkHL4IkuilveCFkm-P",
-        category: "DATABASE",
-        status: "Waitlist",
-        isWaitlist: true,
-    },
-];
-
 export default function BooksPage() {
+    const { currently, books, filters, stats } = booksData;
+
     return (
         <div className="bg-[#101622] min-h-screen text-white font-display">
             {/* Main Content Area */}
@@ -106,9 +39,9 @@ export default function BooksPage() {
                         </div>
 
                         <StatHUD stats={[
-                            { label: 'Books Read', value: 42 },
-                            { label: 'Streak', value: 12, suffix: 'days' },
-                            { label: 'Pages', value: '15.4k' },
+                            { label: 'Books Read', value: stats.booksRead },
+                            { label: 'Streak', value: stats.streak, suffix: 'days' },
+                            { label: 'Pages', value: stats.pages },
                         ]} />
                     </div>
 
@@ -129,8 +62,8 @@ export default function BooksPage() {
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
                                         <img
                                             className="w-full h-full object-cover"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMhjCDUxNuAxpF3DLH5iSzNxunp-e8U9AUlgdQfkjdH8gqAaUiGHfjbAuPBClqnr8AJKYvL0cDzmpwYSzhkhPO0LE8Qgh6vWM3-hJTNLWOf_ORx3Cv8-bs2bie1D7SmeLMywfre_W41Sayz4pPsMkybjlm6EokXUgRxzgwlqqlW8mNOyPgLRme35gFNrSe6pnBXRcGj34QuQ5xCQfp83M5gPNNJNKoagew-f2iFup1yD6-QiSeMzSY9RqQb42vlOXQsnKNhmlO67xr"
-                                            alt="System Design Interview Book Cover"
+                                            src={currently.imageUrl}
+                                            alt={`${currently.title} Book Cover`}
                                         />
                                         <div className="absolute top-3 right-3 z-20 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 flex items-center gap-1.5">
                                             <span className="block size-2 rounded-full bg-green-500 animate-pulse" />
@@ -144,28 +77,29 @@ export default function BooksPage() {
                                     <div className="space-y-4">
                                         <div>
                                             <div className="flex items-center gap-3 mb-2">
-                                                <Badge variant="primary">Technical</Badge>
-                                                <Badge>Architecture</Badge>
+                                                {currently.badges.map((badge) => (
+                                                    <Badge key={badge} variant={badge === 'Technical' ? 'primary' : 'default'}>{badge}</Badge>
+                                                ))}
                                             </div>
-                                            <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight">System Design Interview</h3>
-                                            <p className="text-xl text-slate-400 font-medium">Alex Xu</p>
+                                            <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight">{currently.title}</h3>
+                                            <p className="text-xl text-slate-400 font-medium">{currently.author}</p>
                                         </div>
 
                                         <div className="p-6 rounded-xl bg-[#101622]/50 border border-[#282e39]">
                                             <div className="flex justify-between items-end mb-2">
                                                 <div className="flex flex-col">
                                                     <span className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Current Progress</span>
-                                                    <span className="text-white text-2xl font-bold tabular-nums">45%</span>
+                                                    <span className="text-white text-2xl font-bold tabular-nums">{currently.progress.percent}%</span>
                                                 </div>
-                                                <span className="text-slate-500 text-xs font-mono">Page 142 / 320</span>
+                                                <span className="text-slate-500 text-xs font-mono">Page {currently.progress.currentPage} / {currently.progress.totalPages}</span>
                                             </div>
 
-                                            <ProgressBar value={45} variant="gradient" showIndicator />
+                                            <ProgressBar value={currently.progress.percent} variant="gradient" showIndicator />
 
                                             <div className="mt-4 flex items-center justify-between">
                                                 <div className="flex items-center gap-2 text-slate-400 text-sm">
                                                     <Icon name="schedule" size="sm" className="!text-[16px]" />
-                                                    Last read: 2 hours ago
+                                                    Last read: {currently.progress.lastRead}
                                                 </div>
                                                 <button className="text-xs font-bold text-[#2b6cee] hover:text-white transition-colors flex items-center gap-1">
                                                     UPDATE LOG <Icon name="arrow_forward" size="sm" className="!text-[14px]" />
@@ -175,7 +109,7 @@ export default function BooksPage() {
                                     </div>
 
                                     <p className="text-slate-300 italic border-l-2 border-[#2b6cee] pl-4 py-1 leading-relaxed">
-                                        "Designing a system that scales to millions of users requires looking beyond the code—understanding trade-offs is the real engineering."
+                                        "{currently.quote}"
                                     </p>
                                 </div>
                             </div>
@@ -200,7 +134,7 @@ export default function BooksPage() {
 
                         {/* Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-                            {booksData.map((book) => (
+                            {books.map((book) => (
                                 <BookCard key={book.id} {...book} />
                             ))}
                         </div>

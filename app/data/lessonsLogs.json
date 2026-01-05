@@ -1,0 +1,34 @@
+{
+  "sectionHeader": {
+    "badge": "Knowledge Base",
+    "title": "Intellectual Growth",
+    "description": "A transparent window into my engineering journey. Failures, resources, and daily logs."
+  },
+  "failuresLessons": {
+    "badge": "DEBUGGING LIFE",
+    "title": "Failures & Lessons",
+    "description": "Navigating the bugs in code and life. A transparent look at what went wrong, the root cause analysis, and the patches I applied.",
+    "ctaText": "Explore Journey",
+    "href": "/failures"
+  },
+  "curatedRecs": {
+    "title": "Curated Recs",
+    "description": "The books, dev tools, podcasts, and mental models that shaped my engineering philosophy.",
+    "totalItems": 12,
+    "updateFrequency": "Updated Weekly",
+    "href": "/recommendations"
+  },
+  "devLog": {
+    "title": "Dev Log",
+    "description": "Daily commits to my personal knowledge base.",
+    "terminalPath": "user@partha:~/learning-log",
+    "codeLines": [
+      { "num": 1, "code": "const today = new Date();", "highlight": "purple" },
+      { "num": 2, "code": "await learn(\"System Design Patterns\");", "highlight": "yellow" },
+      { "num": 3, "code": "// TODO: Refactor the cache layer implementation", "isComment": true },
+      { "num": 4, "code": "_", "isCursor": true }
+    ],
+    "liveUpdates": true,
+    "href": "/logs"
+  }
+}

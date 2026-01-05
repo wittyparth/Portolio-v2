@@ -4,7 +4,11 @@
  * Based on current focus.html reference
  */
 
+import { currentFocus } from "~/data";
+
 export default function CurrentFocusSection() {
+    const { activeBuild, learning, obsessed, nextUp, liveUpdates } = currentFocus;
+
     return (
         <section className="py-20 bg-[#050505]">
             <div className="max-w-[1200px] mx-auto px-6">
@@ -13,7 +17,7 @@ export default function CurrentFocusSection() {
                     <div>
                         <div className="flex items-center gap-2 mb-3 text-emerald-400 text-xs font-mono uppercase tracking-widest font-semibold">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <span>Live Updates</span>
+                            <span>{liveUpdates ? 'Live Updates' : 'Updates'}</span>
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
                             Current Focus
@@ -41,10 +45,10 @@ export default function CurrentFocusSection() {
                                     </span>
                                     Active Build
                                 </span>
-                                <h3 className="text-3xl font-bold text-white mt-4 group-hover:text-emerald-400 transition-colors duration-300">Distributed Ledger</h3>
-                                <p className="text-gray-400 max-w-md mt-1 font-light leading-relaxed">Architecting a high-throughput ledger system with sharding capabilities using Go and gRPC.</p>
+                                <h3 className="text-3xl font-bold text-white mt-4 group-hover:text-emerald-400 transition-colors duration-300">{activeBuild.title}</h3>
+                                <p className="text-gray-400 max-w-md mt-1 font-light leading-relaxed">{activeBuild.description}</p>
                                 <div className="flex flex-wrap gap-2 mt-5">
-                                    {["Golang", "gRPC", "Docker", "Postgres"].map(tech => (
+                                    {activeBuild.tech.map(tech => (
                                         <span key={tech} className="px-3 py-1.5 rounded-lg bg-[#1a1a1c] border border-white/5 text-[11px] text-gray-300 font-mono font-medium hover:bg-white/5 transition-colors">{tech}</span>
                                     ))}
                                 </div>
@@ -61,7 +65,7 @@ export default function CurrentFocusSection() {
                                     <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56] opacity-80" />
                                     <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] opacity-80" />
                                     <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f] opacity-80" />
-                                    <div className="ml-4 text-[10px] text-gray-600 font-mono font-medium tracking-wide">ledger_core.go</div>
+                                    <div className="ml-4 text-[10px] text-gray-600 font-mono font-medium tracking-wide">{activeBuild.codePreview.filename}</div>
                                 </div>
                                 <div className="p-5 font-mono text-xs leading-relaxed text-gray-400">
                                     <div className="flex gap-4 hover:bg-white/5 px-2 -mx-2 rounded">
@@ -102,16 +106,16 @@ export default function CurrentFocusSection() {
                                 <div className="relative size-36">
                                     <svg className="size-full -rotate-90 transform group-hover:scale-105 transition-transform duration-500 ease-out" viewBox="0 0 36 36">
                                         <path className="text-white/5" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                                        <path className="text-indigo-500 drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray="75, 100" strokeLinecap="round" strokeWidth="1.5" />
+                                        <path className="text-indigo-500 drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray={`${learning.progress}, 100`} strokeLinecap="round" strokeWidth="1.5" />
                                     </svg>
                                     <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span className="text-4xl font-bold text-white tracking-tighter">75<span className="text-base font-normal text-indigo-400">%</span></span>
+                                        <span className="text-4xl font-bold text-white tracking-tighter">{learning.progress}<span className="text-base font-normal text-indigo-400">%</span></span>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-white mb-1.5 group-hover:text-indigo-400 transition-colors">System Design</h3>
-                                <p className="text-sm text-gray-500 font-medium">Deep dive into Consistency Models & Sharding.</p>
+                                <h3 className="text-xl font-bold text-white mb-1.5 group-hover:text-indigo-400 transition-colors">{learning.topic}</h3>
+                                <p className="text-sm text-gray-500 font-medium">{learning.description}</p>
                             </div>
                         </div>
                     </div>
@@ -127,13 +131,13 @@ export default function CurrentFocusSection() {
                                 <span className="material-symbols-outlined text-white/20 group-hover:text-fuchsia-400 transition-colors">graphic_eq</span>
                             </div>
                             <div className="flex-1 flex items-center justify-center gap-2 py-8 h-32">
-                                {[8, 12, 16, 10, 14, 6].map((h, i) => (
+                                {obsessed.visualBars.map((h, i) => (
                                     <div key={i} className={`w-1.5 bg-gradient-to-t from-violet-900 to-fuchsia-400 rounded-full shadow-[0_0_8px_rgba(217,70,239,0.4)] animate-pulse`} style={{ height: `${h * 4}px`, animationDelay: `${i * 0.1}s` }} />
                                 ))}
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-white mb-1.5 group-hover:text-fuchsia-400 transition-colors">Generative Audio</h3>
-                                <p className="text-sm text-gray-500 font-medium">Exploring Rust-based audio synthesis engines.</p>
+                                <h3 className="text-xl font-bold text-white mb-1.5 group-hover:text-fuchsia-400 transition-colors">{obsessed.area}</h3>
+                                <p className="text-sm text-gray-500 font-medium">{obsessed.description}</p>
                             </div>
                         </div>
                     </div>
@@ -144,12 +148,12 @@ export default function CurrentFocusSection() {
                         <div className="relative z-10 p-8 h-full flex flex-col md:flex-row gap-10 items-start md:items-center">
                             <div className="flex-shrink-0 max-w-[260px]">
                                 <span className="inline-flex px-3 py-1.5 mb-5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-mono font-medium shadow-[0_0_10px_-3px_rgba(245,158,11,0.2)]">
-                                    Next Up • Q3 2024
+                                    Next Up • {nextUp.quarter}
                                 </span>
-                                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">Open Source</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">Contributing to major CNCF projects, specifically focusing on service mesh networking layers.</p>
+                                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">{nextUp.title}</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed">{nextUp.description}</p>
                                 <div className="mt-8 flex items-center -space-x-3">
-                                    {["K8s", "Ist", "+2"].map((label, i) => (
+                                    {nextUp.avatars.map((label, i) => (
                                         <div key={i} className="size-9 rounded-full border-2 border-[#121212] bg-[#222] flex items-center justify-center overflow-hidden shadow-lg transition-transform hover:scale-110 hover:z-10">
                                             <span className={`text-[10px] font-bold ${i < 2 ? 'text-white' : 'text-gray-400 font-mono'}`}>{label}</span>
                                         </div>
@@ -159,19 +163,17 @@ export default function CurrentFocusSection() {
                             <div className="flex-grow w-full bg-[#0a0a0c]/80 rounded-2xl border border-white/5 p-5 backdrop-blur-sm shadow-inner relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/5 to-transparent opacity-20 pointer-events-none" />
                                 <div className="space-y-3 relative z-10">
-                                    <div className="flex items-center gap-3 p-3 rounded-xl bg-[#1a1a1c] border border-white/5 shadow-sm group/item transition-colors hover:border-amber-500/30">
-                                        <span className="material-symbols-outlined text-amber-400 text-[20px] group-hover/item:scale-110 transition-transform">radio_button_unchecked</span>
-                                        <span className="text-sm text-gray-200 font-medium">Identify issues in Istio networking</span>
-                                        <span className="ml-auto text-[10px] font-bold text-amber-300 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/10">Scoping</span>
-                                    </div>
-                                    <div className="flex items-center gap-3 p-3 rounded-xl border border-transparent opacity-60">
-                                        <span className="material-symbols-outlined text-gray-600 text-[20px]">radio_button_unchecked</span>
-                                        <span className="text-sm text-gray-400">Draft proposal for sidecar optimization</span>
-                                    </div>
-                                    <div className="flex items-center gap-3 p-3 rounded-xl border border-transparent opacity-30">
-                                        <span className="material-symbols-outlined text-gray-700 text-[20px]">lock</span>
-                                        <span className="text-sm text-gray-500">Submit Pull Request</span>
-                                    </div>
+                                    {nextUp.tasks.map((task, idx) => (
+                                        <div key={idx} className={`flex items-center gap-3 p-3 rounded-xl ${idx === 0 ? 'bg-[#1a1a1c] border border-white/5 shadow-sm group/item transition-colors hover:border-amber-500/30' : idx === 1 ? 'border border-transparent opacity-60' : 'border border-transparent opacity-30'}`}>
+                                            <span className={`material-symbols-outlined text-[20px] ${idx === 0 ? 'text-amber-400 group-hover/item:scale-110 transition-transform' : idx === 2 ? 'text-gray-700' : 'text-gray-600'}`}>
+                                                {task.locked ? 'lock' : 'radio_button_unchecked'}
+                                            </span>
+                                            <span className={`text-sm ${idx === 0 ? 'text-gray-200 font-medium' : 'text-gray-400'}`}>{task.text}</span>
+                                            {task.status && (
+                                                <span className="ml-auto text-[10px] font-bold text-amber-300 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/10">{task.status}</span>
+                                            )}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>

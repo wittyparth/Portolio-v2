@@ -1,0 +1,20 @@
+{
+  "row1": [
+    { "name": "Next.js", "icon": "Zap", "color": "#ffffff" },
+    { "name": "Node.js", "icon": "Server", "color": "#68a063" },
+    { "name": "Python", "icon": "Code2", "color": "#3776ab" },
+    { "name": "CSS", "icon": "Palette", "color": "#264de4" },
+    { "name": "Tailwind", "icon": "Wind", "color": "#06b6d4" },
+    { "name": "JavaScript", "icon": "Braces", "color": "#f7df1e" },
+    { "name": "React", "icon": "Atom", "color": "#61dafb" }
+  ],
+  "row2": [
+    { "name": "Bun", "icon": "Package", "color": "#fbf0df" },
+    { "name": "Rust", "icon": "Cog", "color": "#dea584" },
+    { "name": "Vercel", "icon": "Triangle", "color": "#ffffff" },
+    { "name": "Figma", "icon": "Figma", "color": "#f24e1e" },
+    { "name": "Docker", "icon": "Container", "color": "#2496ed" },
+    { "name": "Solidity", "icon": "Diamond", "color": "#7b3fe4" },
+    { "name": "PostgreSQL", "icon": "Database", "color": "#336791" }
+  ]
+}

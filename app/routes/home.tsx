@@ -6,6 +6,9 @@ import {
   type LucideIcon
 } from "lucide-react";
 
+// Import data
+import { profile, technologies } from "~/data";
+
 // Import section components (clean, no headers/footers)
 import CurrentFocusSection from "~/components/sections/CurrentFocusSection";
 import PersonalSection from "~/components/sections/PersonalSection";
@@ -17,34 +20,20 @@ import SocialPostsSection from "~/components/sections/SocialPostsSection";
 
 export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "Partha Saradhi - Backend Engineer & System Architect" },
-    { name: "description", content: "Backend Engineer specializing in scalable systems, high-performance APIs, and distributed architectures." },
+    { title: `${profile.name} - ${profile.role} & System Architect` },
+    { name: "description", content: `${profile.role} specializing in scalable systems, high-performance APIs, and distributed architectures.` },
   ];
 }
 
-// Technology data for the scrolling sections with Lucide icons
-const techRow1: { name: string; IconComponent: LucideIcon; color: string }[] = [
-  { name: 'Next.js', IconComponent: Zap, color: '#ffffff' },
-  { name: 'Node.js', IconComponent: Server, color: '#68a063' },
-  { name: 'Python', IconComponent: Code2, color: '#3776ab' },
-  { name: 'CSS', IconComponent: Palette, color: '#264de4' },
-  { name: 'Tailwind', IconComponent: Wind, color: '#06b6d4' },
-  { name: 'JavaScript', IconComponent: Braces, color: '#f7df1e' },
-  { name: 'React', IconComponent: Atom, color: '#61dafb' },
-];
-
-const techRow2: { name: string; IconComponent: LucideIcon; color: string }[] = [
-  { name: 'Bun', IconComponent: Package, color: '#fbf0df' },
-  { name: 'Rust', IconComponent: Cog, color: '#dea584' },
-  { name: 'Vercel', IconComponent: Triangle, color: '#ffffff' },
-  { name: 'Figma', IconComponent: Figma, color: '#f24e1e' },
-  { name: 'Docker', IconComponent: Container, color: '#2496ed' },
-  { name: 'Solidity', IconComponent: Diamond, color: '#7b3fe4' },
-  { name: 'PostgreSQL', IconComponent: Database, color: '#336791' },
-];
+// Icon mapping for dynamic data
+const iconMap: Record<string, LucideIcon> = {
+  Zap, Server, Code2, Palette, Wind, Braces, Atom,
+  Package, Cog, Triangle, Figma, Container, Diamond, Database,
+};
 
 // Tech Card Component with Lucide Icons
-function TechCard({ name, IconComponent, color }: { name: string; IconComponent: LucideIcon; color: string }) {
+function TechCard({ name, icon, color }: { name: string; icon: string; color: string }) {
+  const IconComponent = iconMap[icon] || Zap;
   return (
     <div className="flex-shrink-0 group">
       <div className="flex flex-col items-center justify-center w-28 h-24 rounded-xl bg-[#12121a] border border-white/5 hover:border-white/20 transition-all duration-300 hover:scale-105 cursor-default">
@@ -63,10 +52,10 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20 w-full">
           {/* Profile Intro Row */}
           <div className="flex flex-wrap items-center gap-4 mb-12">
-            <span className="text-gray-400 text-lg">Partha is</span>
+            <span className="text-gray-400 text-lg">{profile.name.split(' ')[0]} is</span>
             <div className="relative">
               <div className="w-10 h-10 rounded-full bg-[#0a0a0f] flex items-center justify-center overflow-hidden ring-2 ring-white/10">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXbRbB2RYxtT7SPBVFZZHoKhje0RDUO06s6y8efWqyjS5MMMGKdE-j8Y_o45gVtHXkctCH1AWHlQ8JpxNwesJUz2b2zfeT9c-eL_CXEOUwt3O96mETSKFs1h0MP_tFvPYvv-s_GeIrwqviJf-TSRGrVNOSYeIK6v-5EBsd4pBx1LFcWHjVVzQxewv9wEypCb6aRVW7LtGhNRZUTk0fFxy8a2RK_1UXC8GfQD0SdNK-Jem7_FbpYpIx_wfs9xnNQ02u1q-qoVFm3nWB" alt="Partha Saradhi" className="w-full h-full object-cover" />
+                <img src={profile.avatar} alt={profile.name} className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-[#0a0a0f] flex items-center justify-center">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -74,44 +63,44 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#2b6cee]/10 border border-[#2b6cee]/30">
               <div className="w-2 h-2 rounded-full bg-[#2b6cee] animate-pulse" />
-              <span className="text-[#2b6cee] text-xs font-bold uppercase tracking-wider">Open to Work</span>
+              <span className="text-[#2b6cee] text-xs font-bold uppercase tracking-wider">{profile.status}</span>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-white font-bold text-lg">Backend Engineer</span>
+              <span className="text-white font-bold text-lg">{profile.role}</span>
               <span className="text-gray-500">–</span>
-              <span className="text-gray-400 text-lg">Building scalable systems for 1→1M users.</span>
+              <span className="text-gray-400 text-lg">{profile.tagline}</span>
             </div>
           </div>
 
           {/* Main Headline */}
           <div className=" mb-16">
             <h1 className="text-[clamp(3rem,12vw,9rem)] font-black italic leading-[0.85] tracking-tight text-white">
-              <span className="block text-left"><span className="text-[#2b6cee]">ASYNC</span> BACKEND</span>
+              <span className="block text-left"><span className="text-[#2b6cee]">{profile.heroTitle.line1.highlight}</span> {profile.heroTitle.line1.text}</span>
             </h1>
             <h1 className="text-[clamp(3rem,12vw,9rem)] font-black italic leading-[0.85] tracking-tight text-white">
-              <span className="block text-right pr-[5%]">ENGINEER FOR</span>
+              <span className="block text-right pr-[5%]">{profile.heroTitle.line2}</span>
             </h1>
             <h1 className="text-[clamp(3rem,12vw,9rem)] font-black italic leading-[0.85] tracking-tight text-white">
               <span className="block text-left">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">SCALE-UPS</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">{profile.heroTitle.line3}</span>
               </span>
             </h1>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap items-center gap-4">
-            <a href="/contact" className="group flex items-center gap-3 h-14 px-8 rounded-full bg-white text-black font-bold text-base hover:bg-gray-100 transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-              <Icon name="calendar_today" size="sm" className="text-gray-600" />
-              <span>Book intro</span>
+            <a href={profile.cta.primary.href} className="group flex items-center gap-3 h-14 px-8 rounded-full bg-white text-black font-bold text-base hover:bg-gray-100 transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+              <Icon name={profile.cta.primary.icon} size="sm" className="text-gray-600" />
+              <span>{profile.cta.primary.label}</span>
             </a>
-            <a href="/projects" className="group flex items-center gap-3 h-14 px-8 rounded-full bg-transparent border border-white/20 text-white font-bold text-base hover:bg-white/5 hover:border-white/40 transition-all">
-              <Icon name="grid_view" size="sm" className="text-[#2b6cee]" />
-              <span>View work</span>
+            <a href={profile.cta.secondary.href} className="group flex items-center gap-3 h-14 px-8 rounded-full bg-transparent border border-white/20 text-white font-bold text-base hover:bg-white/5 hover:border-white/40 transition-all">
+              <Icon name={profile.cta.secondary.icon} size="sm" className="text-[#2b6cee]" />
+              <span>{profile.cta.secondary.label}</span>
             </a>
-            <a href="https://github.com/parthasaradhi" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center size-14 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all">
+            <a href={profile.social.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center size-14 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all">
               <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
             </a>
-            <a href="https://linkedin.com/in/parthasaradhi" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center size-14 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all">
+            <a href={profile.social.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center size-14 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all">
               <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
             </a>
           </div>
@@ -133,12 +122,12 @@ export default function Home() {
           </div>
           <div className=" mb-6 overflow-hidden">
             <div className="flex gap-4 animate-scrol~l-left">
-              {[...techRow1, ...techRow1].map((tech, index) => <TechCard key={`${tech.name}-${index}`} {...tech} />)}
+              {[...technologies.row1, ...technologies.row1].map((tech, index) => <TechCard key={`${tech.name}-${index}`} {...tech} />)}
             </div>
           </div>
           <div className=" overflow-hidden">
             <div className="flex gap-4 animate-scroll-right">
-              {[...techRow2, ...techRow2].map((tech, index) => <TechCard key={`${tech.name}-${index}`} {...tech} />)}
+              {[...technologies.row2, ...technologies.row2].map((tech, index) => <TechCard key={`${tech.name}-${index}`} {...tech} />)}
             </div>
           </div>
         </div>
