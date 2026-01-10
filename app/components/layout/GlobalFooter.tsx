@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { useVisitorAnalytics } from '~/lib/supabase/useVisitorAnalytics';
 
 /**
  * Global Footer Component - Exact match to footer.html
@@ -6,6 +7,7 @@ import { Link } from 'react-router';
  */
 export function GlobalFooter() {
     const currentYear = new Date().getFullYear();
+    const { visitorCount, todayCount, onlineNow, loading } = useVisitorAnalytics();
 
     return (
         <footer className="relative w-full border-t border-[#293338] bg-[#111518] z-10">
@@ -100,25 +102,44 @@ export function GlobalFooter() {
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#19a1e6]/5 to-transparent w-full h-full -translate-x-full animate-[scan_8s_linear_infinite] pointer-events-none" />
 
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-[10px] uppercase font-bold tracking-widest text-[#9dafb8]">Traffic Monitor</span>
-                                <span className="flex h-1.5 w-1.5 rounded-full bg-[#19a1e6] animate-pulse" />
+                                <span className="text-[10px] uppercase font-bold tracking-widest text-[#9dafb8]">Live Traffic</span>
+                                <div className="flex items-center gap-1.5">
+                                    {onlineNow > 0 && (
+                                        <span className="text-[9px] text-green-400 bg-green-400/10 px-1.5 py-0.5 rounded font-mono">
+                                            {onlineNow} online
+                                        </span>
+                                    )}
+                                    <span className="flex h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+                                </div>
                             </div>
 
                             <div className="grid grid-cols-2 gap-4 border-t border-[#293338]/50 pt-2">
                                 <div>
                                     <p className="text-[10px] text-[#9dafb8] uppercase mb-0.5">Total Visits</p>
                                     <p className="font-mono text-xl font-bold text-white tabular-nums tracking-tight group-hover:text-[#19a1e6] transition-colors">
-                                        12,405
+                                        {loading ? (
+                                            <span className="inline-block w-16 h-6 bg-[#293338] animate-pulse rounded" />
+                                        ) : (
+                                            visitorCount.toLocaleString()
+                                        )}
                                     </p>
                                 </div>
                                 <div>
                                     <p className="text-[10px] text-[#9dafb8] uppercase mb-0.5">Today</p>
                                     <p className="font-mono text-xl font-bold text-white tabular-nums tracking-tight flex items-center gap-1">
-                                        42
-                                        <span className="text-[10px] text-green-400 bg-green-400/10 px-1 rounded flex items-center">
-                                            <span className="material-symbols-outlined text-[10px]">arrow_drop_up</span>
-                                            12%
-                                        </span>
+                                        {loading ? (
+                                            <span className="inline-block w-10 h-6 bg-[#293338] animate-pulse rounded" />
+                                        ) : (
+                                            <>
+                                                {todayCount}
+                                                {todayCount > 0 && (
+                                                    <span className="text-[10px] text-green-400 bg-green-400/10 px-1 rounded flex items-center">
+                                                        <span className="material-symbols-outlined text-[10px]">arrow_drop_up</span>
+                                                        live
+                                                    </span>
+                                                )}
+                                            </>
+                                        )}
                                     </p>
                                 </div>
                             </div>

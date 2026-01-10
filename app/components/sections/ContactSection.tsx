@@ -10,37 +10,35 @@ export default function ContactSection() {
     const guestbookEntries = entries.filter(e => e.showOnHomepage);
 
     return (
-        <section className="py-20 relative">
+        <section className="py-16 relative">
             {/* Background Effects */}
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-[#020408] via-[#050a14] to-[#020408] opacity-90" />
-                <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-30">
-                    <div className="absolute -top-[10%] -left-[10%] w-[70vw] h-[70vw] bg-blue-900/40 rounded-full mix-blend-screen filter blur-[120px] animate-blob" />
-                    <div className="absolute top-[20%] -right-[10%] w-[60vw] h-[60vw] bg-indigo-900/40 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-2000" />
-                    <div className="absolute -bottom-[20%] left-[20%] w-[60vw] h-[60vw] bg-violet-900/40 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-4000" />
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
+                    <div className="absolute -top-[10%] -left-[10%] w-[60vw] h-[60vw] bg-blue-900/40 rounded-full mix-blend-screen filter blur-[100px] animate-blob" />
+                    <div className="absolute top-[20%] -right-[10%] w-[50vw] h-[50vw] bg-indigo-900/40 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000" />
                 </div>
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(43,108,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(43,108,238,0.03)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_100%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(43,108,238,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(43,108,238,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]" />
             </div>
 
-            <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-8 lg:px-16">
-                <div className="flex flex-col gap-8">
+            <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-8">
+                <div className="flex flex-col gap-6">
                     {/* Header */}
-                    <div className="flex items-center justify-between w-full border-b border-[#2a3449] pb-4 mb-4 backdrop-blur-sm">
-                        <div className="flex items-center gap-3">
-                            <span className="material-symbols-outlined text-[#2b6cee] animate-pulse">terminal</span>
-                            <h2 className="text-2xl md:text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                    <div className="flex items-center justify-between w-full border-b border-[#2a3449] pb-3 mb-2 backdrop-blur-sm">
+                        <div className="flex items-center gap-2">
+                            <span className="material-symbols-outlined text-[#2b6cee] animate-pulse text-xl">terminal</span>
+                            <h2 className="text-xl md:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
                                 TRANSMISSION &amp; LOGS
                             </h2>
                         </div>
-                        <div className="hidden md:flex items-center gap-2 text-xs font-mono text-[#94a3b8] bg-[#151c2f]/80 px-3 py-1 rounded-full border border-[#2a3449] backdrop-blur-sm shadow-lg">
-                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            SYSTEM ONLINE
+                        <div className="hidden md:flex items-center gap-2 text-xs font-mono text-[#94a3b8] bg-[#151c2f]/80 px-2.5 py-1 rounded-full border border-[#2a3449] backdrop-blur-sm">
+                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                            ONLINE
                         </div>
                     </div>
 
                     {/* Main Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 w-full">
                         {/* Guestbook Activity Card */}
                         <div className="lg:col-span-5 flex flex-col gap-6">
                             <div className="relative flex-1 group rounded-xl border border-[#2a3449] bg-[#151c2f]/60 backdrop-blur-xl p-6 lg:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-[#2b6cee]/50 shadow-2xl">

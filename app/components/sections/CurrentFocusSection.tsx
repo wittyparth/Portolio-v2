@@ -10,26 +10,26 @@ export default function CurrentFocusSection() {
     const { activeBuild, learning, obsessed, nextUp, liveUpdates } = currentFocus;
 
     return (
-        <section className="py-20 bg-[#050505]">
-            <div className="max-w-[1200px] mx-auto px-6">
+        <section className="py-16 bg-[#050505]">
+            <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
                     <div>
-                        <div className="flex items-center gap-2 mb-3 text-emerald-400 text-xs font-mono uppercase tracking-widest font-semibold">
+                        <div className="flex items-center gap-2 mb-2 text-emerald-400 text-xs font-mono uppercase tracking-widest font-semibold">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                             <span>{liveUpdates ? 'Live Updates' : 'Updates'}</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+                        <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
                             Current Focus
                         </h2>
                     </div>
-                    <p className="text-gray-500 max-w-sm text-sm md:text-right leading-relaxed font-medium">
-                        A live look at what I'm building, learning, and exploring in the backend ecosystem right now.
+                    <p className="text-gray-500 max-w-sm text-sm md:text-right leading-relaxed">
+                        A live look at what I'm building, learning, and exploring right now.
                     </p>
                 </div>
 
                 {/* Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(340px,auto)]">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-[minmax(300px,auto)]">
 
                     {/* Active Build Card - Large */}
                     <div className="group relative md:col-span-2 lg:col-span-2 rounded-3xl bg-gradient-to-b from-[#121214] to-[#080808] border border-white/[0.06] overflow-hidden flex flex-col justify-between hover:border-emerald-500/20 transition-all duration-500 hover:-translate-y-1 shadow-2xl shadow-black/30">

@@ -22,10 +22,10 @@ export default function ProjectsSection() {
     };
 
     return (
-        <section className="py-20">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
+        <section className="py-16">
+            <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="mb-12 flex flex-col items-start gap-4">
+                <div className="mb-10 flex flex-col items-start gap-3">
                     <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur-sm">
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2b6cee] opacity-75" />
@@ -33,16 +33,16 @@ export default function ProjectsSection() {
                         </span>
                         <span className="text-xs font-medium uppercase tracking-wider text-gray-300">Selected Works</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
+                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
                         Engineering <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Impact</span>
                     </h2>
-                    <p className="max-w-2xl text-lg text-gray-400 leading-relaxed">
+                    <p className="max-w-xl text-sm md:text-base text-gray-400 leading-relaxed">
                         A curated selection of backend architectures, high-performance APIs, and developer tools built for scale.
                     </p>
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {projects.map((project, index) => (
                         <div key={index} className="group relative flex flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#16181D] hover:shadow-[0_0_40px_-10px_rgba(43,108,238,0.15)] hover:border-[rgba(43,108,238,0.3)] hover:-translate-y-1 transition-all duration-400">
                             {/* Video/Image Area */}

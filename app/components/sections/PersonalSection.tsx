@@ -4,40 +4,40 @@ export default function PersonalSection() {
     const { currentRead, currentWatch, nowPlaying, hardware, location } = personal;
 
     return (
-        <main className="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-6 px-4 lg:px-8 py-8">
+        <main className="relative z-10 w-full max-w-[1200px] mx-auto flex flex-col gap-5 px-6 lg:px-8 py-16">
             {/* Header */}
-            <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 px-2">
+            <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
                 <div>
                     <div className="flex items-center gap-2 mb-1">
-                        <div className="w-2 h-2 rounded-full bg-[#2b6cee] animate-pulse" />
-                        <h2 className="text-[#2b6cee] text-xs font-bold tracking-[0.2em] uppercase">System Vibe Check</h2>
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#2b6cee] animate-pulse" />
+                        <span className="text-[#2b6cee] text-xs font-bold tracking-wider uppercase">System Vibe Check</span>
                     </div>
-                    <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-white/90">PERSONAL RUNTIME</h1>
+                    <h2 className="text-2xl md:text-3xl font-bold leading-tight tracking-tight text-white/90">Personal Runtime</h2>
                 </div>
 
                 {/* Weather Widget */}
-                <div className="group flex items-center gap-4 bg-[#1c1f27]/80 backdrop-blur-md px-5 py-2.5 rounded-lg border border-white/5 hover:border-[#2b6cee]/30 transition-colors cursor-default shadow-lg shadow-black/20">
+                <div className="group flex items-center gap-3 bg-[#1c1f27]/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/5 hover:border-[#2b6cee]/30 transition-colors cursor-default">
                     <div className="flex flex-col items-end">
-                        <div className="flex items-center gap-2 text-[11px] text-gray-400 uppercase tracking-wider font-mono">
-                            <span className="material-symbols-outlined text-[14px]">my_location</span>
+                        <div className="flex items-center gap-1.5 text-[10px] text-gray-400 uppercase tracking-wider font-mono">
+                            <span className="material-symbols-outlined text-[12px]">my_location</span>
                             <span>{location.city}, {location.country}</span>
                         </div>
-                        <div className="flex items-center gap-2 text-sm font-medium">
+                        <div className="flex items-center gap-1.5 text-sm font-medium">
                             <span className="text-white group-hover:text-[#2b6cee] transition-colors">{location.weather.temp}</span>
                             <span className="text-gray-600">//</span>
                             <span className="text-gray-300">{location.weather.condition}</span>
                         </div>
                     </div>
-                    <div className="h-9 w-9 rounded-md bg-gradient-to-br from-[#2b6cee]/20 to-transparent border border-white/5 flex items-center justify-center text-[#2b6cee]">
-                        <span className="material-symbols-outlined">partly_cloudy_day</span>
+                    <div className="h-8 w-8 rounded-md bg-gradient-to-br from-[#2b6cee]/20 to-transparent border border-white/5 flex items-center justify-center text-[#2b6cee]">
+                        <span className="material-symbols-outlined text-lg">partly_cloudy_day</span>
                     </div>
                 </div>
             </div>
 
             {/* Main Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 h-auto lg:h-[620px]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-auto lg:h-[550px]">
                 {/* Current Read Card */}
-                <div className="lg:col-span-5 glass-panel rounded-2xl p-6 md:p-8 flex flex-col relative overflow-hidden group hover:border-[#2b6cee]/20 transition-all duration-300 border border-white/5">
+                <div className="lg:col-span-5 glass-panel rounded-2xl p-5 md:p-6 flex flex-col relative overflow-hidden group hover:border-[#2b6cee]/20 transition-all duration-300 border border-white/5">
                     <div className="flex justify-between items-center mb-6 z-10">
                         <div className="flex items-center gap-2.5">
                             <div className="p-1.5 rounded bg-[#2b6cee]/10 text-[#2b6cee]">

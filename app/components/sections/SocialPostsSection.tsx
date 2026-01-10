@@ -6,7 +6,7 @@
 import { socialPosts, getHomepageSocialPosts } from "~/data";
 
 // Platform icons as components
-const PlatformIcons: Record<string, JSX.Element> = {
+const PlatformIcons: Record<string, React.ReactNode> = {
     medium: (
         <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
@@ -29,15 +29,15 @@ export default function SocialPostsSection() {
     const { sectionHeader, ctaCard, stats } = socialPosts;
 
     return (
-        <section className="py-20">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <section className="py-16">
+            <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="flex flex-col gap-2 mb-8">
+                <div className="flex flex-col gap-1 mb-6">
                     <div className="flex items-center gap-2 mb-1">
-                        <span className="h-px w-8 bg-[#2b6cee]" />
+                        <span className="h-px w-6 bg-[#2b6cee]" />
                         <span className="text-[#2b6cee] text-xs font-bold uppercase tracking-widest">{sectionHeader.badge}</span>
                     </div>
-                    <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight tracking-tight">
+                    <h2 className="text-white text-2xl md:text-3xl font-bold leading-tight tracking-tight">
                         {sectionHeader.title.split('\n').map((line, i) => (
                             <span key={i}>
                                 {line}
@@ -45,7 +45,7 @@ export default function SocialPostsSection() {
                             </span>
                         ))}
                     </h2>
-                    <p className="text-gray-400 max-w-xl mt-2 text-sm md:text-base leading-relaxed">
+                    <p className="text-gray-400 max-w-lg mt-1 text-sm leading-relaxed">
                         {sectionHeader.description}
                     </p>
                 </div>

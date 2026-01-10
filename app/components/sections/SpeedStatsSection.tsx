@@ -4,47 +4,30 @@
  */
 
 import { speedStats } from "~/data";
-
-// Generate contribution grid data
-const generateContributions = () => {
-    const levels = ['bg-[#161b22]', 'bg-[#0e4429]', 'bg-[#006d32]', 'bg-[#26a641]', 'bg-[#39d353]'];
-    const contributions = [];
-    for (let i = 0; i < 140; i++) {
-        const rand = Math.random();
-        let level = 0;
-        if (rand > 0.95) level = 4;
-        else if (rand > 0.85) level = 3;
-        else if (rand > 0.70) level = 2;
-        else if (rand > 0.40) level = 1;
-        contributions.push(levels[level]);
-    }
-    return contributions;
-};
-
-const contributions = generateContributions();
+import GitHubHeatmap from "~/components/ui/GitHubHeatmap";
 
 export default function SpeedStatsSection() {
-    const { typingVelocity, latency, locPerMonth, contributions: contribData, caffeineLevel, shippedProjects, shippedCount } = speedStats;
+    const { typingVelocity, latency, locPerMonth, shippedProjects, shippedCount } = speedStats;
 
     return (
-        <section className="py-20">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <section className="py-16">
+            <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="mb-8 flex flex-col md:flex-row justify-between items-end gap-6">
-                    <div className="flex flex-col gap-2">
-                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white/90">Speed Stats</h2>
-                        <p className="text-gray-400 max-w-lg text-sm md:text-base">
-                            Real-time engineering metrics and productivity insights. Data aggregated from GitHub, WakaTime, and typing benchmarks.
+                <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                    <div className="flex flex-col gap-1">
+                        <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white/90">Speed Stats</h2>
+                        <p className="text-gray-400 max-w-md text-sm leading-relaxed">
+                            Real-time engineering metrics and productivity insights.
                         </p>
                     </div>
                     <div className="flex gap-2 items-center">
                         <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="text-xs text-emerald-500 font-bold uppercase tracking-widest">Live Updates</span>
+                        <span className="text-xs text-emerald-500 font-bold uppercase tracking-widest">Live</span>
                     </div>
                 </div>
 
                 {/* Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[minmax(180px,auto)] gap-4 md:gap-5 lg:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[minmax(160px,auto)] gap-4">
 
                     {/* Typing Velocity - Large Card */}
                     <div className="lg:col-span-2 lg:row-span-2 relative overflow-hidden rounded-2xl border border-white/10 bg-[#161b22] p-6 md:p-8 flex flex-col justify-between group hover:border-[#2b6cee]/50 transition-all duration-500 shadow-2xl shadow-black/20">
@@ -215,81 +198,20 @@ export default function SpeedStatsSection() {
                                 <div className="bg-sky-500 h-full rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" style={{ width: `${locPerMonth.progressPercent}%` }} />
                             </div>
                             <div className="flex justify-between mt-2">
-                                <p className="text-[10px] text-gray-500">Current Progress</p>
+                                <p className="text-[10px] text-gray-500">Progress</p>
                                 <p className="text-[10px] text-white font-medium">{locPerMonth.progressPercent}%</p>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* Contribution Graph - Wide */}
-                    <div className="lg:col-span-3 lg:row-span-1 relative overflow-hidden rounded-2xl border border-white/10 bg-[#161b22] flex flex-col hover:border-emerald-500/30 transition-all duration-500 group shadow-lg">
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-emerald-500/5 blur-[80px] rounded-full pointer-events-none group-hover:bg-emerald-500/10 transition-colors duration-700" />
-
-                        <div className="p-5 pb-2 flex justify-between items-center z-10 border-b border-white/5 bg-[#161b22]/50 backdrop-blur-sm">
-                            <div className="flex items-center gap-2">
-                                <div className="p-1.5 rounded-md bg-[#21262d] border border-white/5">
-                                    <span className="material-symbols-outlined text-white text-sm leading-none">commit</span>
-                                </div>
-                                <div>
-                                    <h3 className="text-xs font-bold uppercase tracking-widest text-gray-300">Contribution Graph</h3>
-                                    <p className="text-[10px] text-emerald-400 font-mono">{contribData.total.toLocaleString()} contributions in {contribData.year}</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <div className="hidden sm:flex items-center gap-1">
-                                    <span className="text-[10px] text-gray-500">Less</span>
-                                    <div className="w-2.5 h-2.5 rounded-[2px] bg-[#161b22]" />
-                                    <div className="w-2.5 h-2.5 rounded-[2px] bg-[#0e4429]" />
-                                    <div className="w-2.5 h-2.5 rounded-[2px] bg-[#006d32]" />
-                                    <div className="w-2.5 h-2.5 rounded-[2px] bg-[#26a641]" />
-                                    <div className="w-2.5 h-2.5 rounded-[2px] bg-[#39d353]" />
-                                    <span className="text-[10px] text-gray-500">More</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex-1 w-full relative p-5 flex items-center overflow-x-auto">
-                            <div className="flex flex-col justify-between text-[9px] text-gray-500 font-mono mr-2 h-[88px] py-1 select-none">
-                                <span>Mon</span>
-                                <span>Wed</span>
-                                <span>Fri</span>
-                            </div>
-                            <div className="grid grid-rows-7 grid-flow-col gap-[3px] h-[96px] w-full min-w-[700px]">
-                                {contributions.map((level, i) => (
-                                    <div key={i} className={`w-3 h-3 rounded-[2px] ${level} hover:scale-[1.4] hover:z-10 hover:shadow-[0_0_8px_rgba(57,211,83,0.8)] transition-all cursor-pointer`} />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Caffeine Card */}
-                    <div className="lg:col-span-1 lg:row-span-1 relative overflow-hidden rounded-2xl border border-white/10 bg-[#161b22] p-6 flex items-center justify-between hover:border-orange-600/30 transition-all duration-300">
-                        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(#6b7280 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-                        <div className="relative z-10 flex flex-col gap-1 pl-2">
-                            <div className="flex items-center gap-2 mb-1">
-                                <span className="material-symbols-outlined text-orange-500 text-lg">local_cafe</span>
-                                <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Caffeine Level</h3>
-                            </div>
-                            <div className="flex items-baseline gap-2">
-                                <span className="text-4xl md:text-5xl font-bold text-white tracking-tight">{caffeineLevel.cups}</span>
-                                <span className="text-base text-gray-500 font-medium">Cups</span>
-                            </div>
-                            <p className="text-xs text-orange-400 mt-1 font-medium tracking-wide">Fueling backend architecture</p>
-                        </div>
-                        {/* Coffee Cup Visual */}
-                        <div className="relative w-20 h-24 mr-6 group">
-                            <div className="absolute bottom-0 w-full h-[85%] bg-[#21262d] rounded-b-2xl rounded-t-sm border border-gray-700 overflow-hidden shadow-lg z-10">
-                                <div className="absolute bottom-0 left-0 w-full bg-orange-900/60 group-hover:h-[75%] transition-all duration-1000" style={{ height: `${caffeineLevel.fillPercent}%` }}>
-                                    <div className="w-full h-full animate-pulse bg-gradient-to-t from-orange-950 to-orange-800" />
-                                </div>
-                                <div className="absolute top-0 right-2 w-2 h-full bg-white/5 skew-x-[-10deg]" />
-                            </div>
-                            <div className="absolute top-[15%] w-full h-1.5 bg-gray-600 rounded-full z-20 shadow-sm" />
-                            <div className="absolute top-[35%] -right-3 w-6 h-10 border-[3px] border-gray-700 rounded-r-xl z-0" />
-                        </div>
-                    </div>
+                {/* GitHub Contribution Graph - Full Width */}
+                <div className="mt-6">
+                    <GitHubHeatmap username="wittyparth" />
                 </div>
             </div>
         </section>
     );
 }
+
+

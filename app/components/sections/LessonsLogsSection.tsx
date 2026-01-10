@@ -10,22 +10,22 @@ export default function LessonsLogsSection() {
     const { sectionHeader, failuresLessons, curatedRecs, devLog } = lessonsLogs;
 
     return (
-        <section className="py-20">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <section className="py-16">
+            <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="flex items-end justify-between px-2 mb-8">
-                    <div className="flex flex-col gap-2">
+                <div className="flex items-end justify-between px-1 mb-6">
+                    <div className="flex flex-col gap-1">
                         <span className="text-[#2b6cee] text-xs font-bold tracking-wider uppercase">{sectionHeader.badge}</span>
-                        <h2 className="text-3xl font-bold text-white tracking-tight">{sectionHeader.title}</h2>
-                        <p className="text-gray-400 max-w-lg text-sm leading-relaxed">
+                        <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{sectionHeader.title}</h2>
+                        <p className="text-gray-400 max-w-md text-sm leading-relaxed">
                             {sectionHeader.description}
                         </p>
                     </div>
-                    <div className="hidden sm:block h-[1px] flex-1 bg-gradient-to-r from-[#282e39] to-transparent ml-8 mb-4" />
+                    <div className="hidden sm:block h-[1px] flex-1 bg-gradient-to-r from-[#282e39] to-transparent ml-6 mb-3" />
                 </div>
 
                 {/* Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 auto-rows-[minmax(200px,auto)]">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(180px,auto)]">
 
                     {/* Failures & Lessons Card */}
                     <a href={failuresLessons.href} className="group md:col-span-8 relative overflow-hidden rounded-2xl bg-[#161b22] border border-[#30363d] hover:border-[#2b6cee]/50 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-10px_rgba(43,108,238,0.15)] transition-all duration-400 flex flex-col md:flex-row">

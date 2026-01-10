@@ -1,4 +1,15 @@
 import { Link } from 'react-router';
+import { useState, useEffect } from 'react';
+
+// Rotating taglines about me
+const taglines = [
+    'Backend Engineer',
+    'Building 1→1M user systems',
+    'IIT Dhanbad',
+    'System Architecture',
+    'API Designer',
+    'Performance Optimizer',
+];
 
 /**
  * Global Header Component - Exact match to headers.html
@@ -38,7 +49,7 @@ export function GlobalHeader() {
                                 <h1 className="text-base font-bold tracking-tight text-white leading-none">
                                     PARTHA<span className="text-[#19a1e6]">.DEV</span>
                                 </h1>
-                                <span className="text-[10px] text-slate-400 font-mono tracking-widest uppercase mt-1">Backend Engineer</span>
+                                <RotatingTagline />
                             </div>
                         </Link>
 
@@ -120,4 +131,35 @@ function NavLink({ href, label, isHome = false, hasIndicator = false }: { href: 
 // Header spacer for fixed header
 export function HeaderSpacer() {
     return <div className="h-24 w-full" />;
+}
+
+// Rotating Tagline Component with smooth animation
+function RotatingTagline() {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isAnimating, setIsAnimating] = useState(false);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIsAnimating(true);
+            setTimeout(() => {
+                setCurrentIndex((prev) => (prev + 1) % taglines.length);
+                setIsAnimating(false);
+            }, 300); // Half of the transition time
+        }, 3000); // Change every 3 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <div className="relative h-4 overflow-hidden mt-1">
+            <span
+                className={`absolute text-[10px] text-slate-400 font-mono tracking-widest uppercase transition-all duration-300 ease-out ${isAnimating
+                        ? 'opacity-0 -translate-y-2'
+                        : 'opacity-100 translate-y-0'
+                    }`}
+            >
+                {taglines[currentIndex]}
+            </span>
+        </div>
+    );
 }
